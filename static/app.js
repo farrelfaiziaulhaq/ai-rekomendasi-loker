@@ -1,4 +1,4 @@
-// KarirAI: Antarmuka Pencarian & Rekomendasi Lowongan Kerja (Rust + Google Firebase)
+// KarirAI v2.0: Master-Detail Editorial Job Portal (Rust + Google Firebase)
 
 const state = {
   users: [],
@@ -6,9 +6,9 @@ const state = {
   activeUserId: "USR-01",
   quickMode: "all",
   lastResponse: null,
-  activeModalRec: null,
-  lastFocusedEl: null,
-  evalLoaded: false,
+  selectedJobId: null,
+  detailTab: "overview",
+  lastTriggerEl: null,
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -36,78 +36,67 @@ function showToast(msg) {
   const el = $("#toast");
   el.textContent = msg;
   el.classList.remove("hidden");
-  clearTimeout(showToast._timer);
-  showToast._timer = setTimeout(() => el.classList.add("hidden"), 3000);
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => el.classList.add("hidden"), 2800);
 }
 
 // ---------------- TEMA TERANG / GELAP (R-21 & R-34) ----------------
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("karir_ai_theme", theme);
-  const isDark = theme === "dark";
+  const dark = theme === "dark";
   const btn = $("#btn-theme");
-  btn.setAttribute("aria-pressed", String(isDark));
-  btn.setAttribute("aria-label", isDark ? "Ubah ke mode terang" : "Ubah ke mode gelap");
-  $("#icon-moon").classList.toggle("hidden", isDark);
-  $("#icon-sun").classList.toggle("hidden", !isDark);
+  btn.setAttribute("aria-pressed", String(dark));
+  btn.setAttribute("aria-label", dark ? "Aktifkan mode terang" : "Aktifkan mode gelap");
+  $("#icon-moon").classList.toggle("hidden", dark);
+  $("#icon-sun").classList.toggle("hidden", !dark);
 }
 
 function initTheme() {
-  const saved = localStorage.getItem("karir_ai_theme") || "light";
-  applyTheme(saved);
+  applyTheme(localStorage.getItem("karir_ai_theme") || "light");
   $("#btn-theme").addEventListener("click", () => {
     const cur = document.documentElement.getAttribute("data-theme");
     applyTheme(cur === "dark" ? "light" : "dark");
   });
 }
 
-// ---------------- NAVIGASI 3 HALAMAN UTAMA ----------------
+// ---------------- NAVIGASI ----------------
 function switchView(viewId) {
-  $$(".nav-link").forEach((btn) => {
-    const isTarget = btn.getAttribute("data-view") === viewId;
-    btn.classList.toggle("active", isTarget);
-    if (isTarget) {
-      btn.setAttribute("aria-current", "page");
-    } else {
-      btn.removeAttribute("aria-current");
-    }
+  closeMobileDetail();
+  $$(".nav-item").forEach((btn) => {
+    const on = btn.getAttribute("data-view") === viewId;
+    btn.classList.toggle("active", on);
+    if (on) btn.setAttribute("aria-current", "page");
+    else btn.removeAttribute("aria-current");
   });
-
   $$(".view-section").forEach((sec) => {
     sec.classList.toggle("active", sec.id === viewId);
   });
 
-  if (viewId === "view-activity") {
-    loadActivityView();
-  } else if (viewId === "view-lab") {
-    loadLabView();
-  }
+  if (viewId === "view-activity") loadActivityView();
+  if (viewId === "view-lab") loadLabView();
 }
 
 function initNavigation() {
-  $$(".nav-link").forEach((btn) => {
+  $$(".nav-item").forEach((btn) => {
     btn.addEventListener("click", () => switchView(btn.getAttribute("data-view")));
   });
+  $(".brand-wordmark").addEventListener("click", (e) => {
+    e.preventDefault();
+    switchView("view-jobs");
+  });
 
-  const wordmark = $(".wordmark");
-  if (wordmark) {
-    wordmark.addEventListener("click", (e) => {
-      e.preventDefault();
-      switchView("view-jobs");
-    });
-  }
-
-  const toggleBtn = $("#btn-toggle-filters");
-  const filterPanel = $("#filter-panel");
-  toggleBtn.addEventListener("click", () => {
-    const nextOpen = !filterPanel.classList.contains("open");
-    filterPanel.classList.toggle("open", nextOpen);
-    toggleBtn.setAttribute("aria-expanded", String(nextOpen));
+  const prefsBtn = $("#btn-toggle-prefs");
+  const prefsDrawer = $("#prefs-drawer");
+  prefsBtn.addEventListener("click", () => {
+    const nextOpen = prefsDrawer.classList.contains("hidden");
+    prefsDrawer.classList.toggle("hidden", !nextOpen);
+    prefsBtn.setAttribute("aria-expanded", String(nextOpen));
   });
 }
 
-// ---------------- BOBOT & FILTER ----------------
-function readNormalizedWeights() {
+// ---------------- BOBOT & SYARAT ----------------
+function readWeights() {
   const w1 = Number($("#rng-w1").value);
   const w2 = Number($("#rng-w2").value);
   const w3 = Number($("#rng-w3").value);
@@ -122,7 +111,7 @@ function readNormalizedWeights() {
 }
 
 function renderWeightBar() {
-  const w = readNormalizedWeights();
+  const w = readWeights();
   const p1 = Math.round(w.c1_role_clarity * 100);
   const p2 = Math.round(w.c2_technical_challenge * 100);
   const p3 = Math.round(w.c3_compensation * 100);
@@ -139,14 +128,13 @@ function renderWeightBar() {
     <div class="wb-3" style="width:${p3}%"></div>
     <div class="wb-4" style="width:${p4}%"></div>
   `;
+  updateFilterSummaryText();
 }
 
 function readConstraints() {
   const user = state.users.find((u) => u.id === state.activeUserId);
   let allowedModes = user?.constraints?.allowed_work_modes || ["Remote", "Hybrid", "Onsite"];
-  if (state.quickMode !== "all") {
-    allowedModes = [state.quickMode];
-  }
+  if (state.quickMode !== "all") allowedModes = [state.quickMode];
   return {
     min_salary_idr_millions: Number($("#inp-min-salary").value) || 0,
     max_required_experience_years: Number($("#inp-max-exp").value) || 0,
@@ -156,7 +144,18 @@ function readConstraints() {
   };
 }
 
-function syncQuickModeButtons(mode) {
+function updateFilterSummaryText() {
+  const active = $("#chk-constraints").checked;
+  if (!active) {
+    $("#active-filter-summary").textContent = "Filter syarat wajib nonaktif";
+    return;
+  }
+  const sal = Number($("#inp-min-salary").value) || 0;
+  const exp = Number($("#inp-max-exp").value) || 0;
+  $("#active-filter-summary").textContent = `Min Rp ${sal} Jt, maks ${exp} thn`;
+}
+
+function syncQuickMode(mode) {
   state.quickMode = mode;
   $$("[data-quick-mode]").forEach((btn) => {
     btn.classList.toggle("active", btn.getAttribute("data-quick-mode") === mode);
@@ -166,13 +165,12 @@ function syncQuickModeButtons(mode) {
 function populateUserControls(user) {
   if (!user) return;
   $("#active-profile-line").textContent =
-    `${user.name} (${user.role_headline}, pengalaman ${user.experience_years} tahun)`;
+    `${user.name}: ${user.role_headline} (${user.experience_years} thn)`;
 
   $("#rng-w1").value = Math.round(user.weights.c1_role_clarity * 100);
   $("#rng-w2").value = Math.round(user.weights.c2_technical_challenge * 100);
   $("#rng-w3").value = Math.round(user.weights.c3_compensation * 100);
   $("#rng-w4").value = Math.round(user.weights.c4_flexibility * 100);
-  renderWeightBar();
 
   $("#inp-min-salary").value = user.constraints.min_salary_idr_millions;
   $("#inp-max-exp").value = user.constraints.max_required_experience_years;
@@ -181,22 +179,16 @@ function populateUserControls(user) {
   $("#inp-skills").value = (user.preferred_skills || []).join(", ");
 
   const modes = user.constraints.allowed_work_modes || [];
-  if (modes.length === 1) {
-    syncQuickModeButtons(modes[0]);
-  } else {
-    syncQuickModeButtons("all");
-  }
+  syncQuickMode(modes.length === 1 ? modes[0] : "all");
+  renderWeightBar();
 }
 
-// ---------------- FETCH & RENDER LOWONGAN (WITH LOADING / ERROR / EMPTY STATES R-27) ----------------
+// ---------------- FETCH REKOMENDASI & RENDER MASTER-DETAIL ----------------
 async function fetchRecommendations() {
-  const loadingEl = $("#feed-loading");
-  const errorEl = $("#feed-error");
-  const listEl = $("#jobs-list");
-
-  errorEl.classList.add("hidden");
-  loadingEl.classList.remove("hidden");
-  listEl.innerHTML = "";
+  const errBox = $("#feed-error");
+  const loadBox = $("#feed-loading");
+  errBox.classList.add("hidden");
+  loadBox.classList.remove("hidden");
 
   try {
     const res = await fetch("/api/recommend", {
@@ -206,165 +198,327 @@ async function fetchRecommendations() {
         user_id: state.activeUserId,
         mode: $("#select-mode").value,
         apply_hard_constraints: $("#chk-constraints").checked,
-        top_k: 12,
+        top_k: 15,
         exclude_interacted: true,
         search_query: $("#inp-query").value.trim() || null,
         category_filter: $("#sel-category").value || null,
-        override_weights: readNormalizedWeights(),
+        override_weights: readWeights(),
         override_constraints: readConstraints(),
       }),
     });
-
-    if (!res.ok) {
-      throw new Error(`Server mengembalikan status ${res.status}`);
-    }
-
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     state.lastResponse = data;
-    renderJobFeed(data);
+
+    // Pertahankan pilihan aktif jika masih ada, kalau tidak pilih lowongan teratas
+    const exists = data.recommendations.some((r) => r.job.id === state.selectedJobId);
+    if (!exists) {
+      state.selectedJobId = data.recommendations[0]?.job.id || null;
+      state.detailTab = "overview";
+    }
+    renderBoard(data);
   } catch (err) {
     $("#feed-error-text").textContent = `Gagal memuat daftar lowongan: ${err.message}`;
-    errorEl.classList.remove("hidden");
-    $("#results-count").textContent = "Tidak dapat terhubung ke server.";
+    errBox.classList.remove("hidden");
   } finally {
-    loadingEl.classList.add("hidden");
+    loadBox.classList.add("hidden");
   }
 }
 
-function renderJobFeed(data) {
-  const count = data.recommendations.length;
+function renderBoard(data) {
+  const list = data.recommendations;
   const q = $("#inp-query").value.trim();
-  const queryLabel = q ? ` untuk "${q}"` : "";
-  $("#results-count").textContent =
-    count > 0
-      ? `Menampilkan ${count} lowongan cocok${queryLabel}`
-      : `Tidak ada lowongan yang cocok${queryLabel}`;
-
-  const ms = (data.execution_time_micros / 1000).toFixed(2);
-  $("#latency-readout").textContent = `Komputasi Rust ${ms} ms`;
+  $("#results-count").textContent = list.length
+    ? `${list.length} lowongan cocok${q ? ` untuk "${q}"` : ""}`
+    : `Tidak ada lowongan cocok${q ? ` untuk "${q}"` : ""}`;
+  $("#latency-readout").textContent = `${(data.execution_time_micros / 1000).toFixed(2)} ms`;
 
   const listEl = $("#jobs-list");
-  if (!count) {
+  if (!list.length) {
     listEl.innerHTML = `
-      <div class="empty-state">
-        <h3>Belum ada lowongan yang sesuai filter saat ini</h3>
-        <p>Coba hapus kata kunci pencarian atau longgarkan batas syarat wajib (gaji minimal, pengalaman, atau mode kerja).</p>
-        <button type="button" id="btn-relax-filter" class="btn btn-outline">Tampilkan tanpa syarat ketat</button>
+      <div class="empty-box">
+        <h3>Belum ada lowongan sesuai kriteria ini</h3>
+        <p>Coba ubah kata kunci pencarian atau longgarkan filter syarat wajib Anda.</p>
+        <button type="button" id="btn-relax-filter" class="btn-outline btn-sm">Tampilkan semua kandidat</button>
       </div>`;
     $("#btn-relax-filter").addEventListener("click", () => {
       $("#inp-query").value = "";
       $("#sel-category").value = "";
       $("#chk-constraints").checked = false;
-      syncQuickModeButtons("all");
+      syncQuickMode("all");
+      updateFilterSummaryText();
       fetchRecommendations();
     });
+    renderDetailPane(null);
   } else {
-    listEl.innerHTML = data.recommendations
-      .map((rec, idx) => {
+    listEl.innerHTML = list
+      .map((rec) => {
         const j = rec.job;
+        const isSel = j.id === state.selectedJobId;
         const matched = new Set(rec.content_based.matched_skills.map((s) => s.toLowerCase()));
-        const skillTags = j.skills
-          .slice(0, 5)
+        const skillsHtml = j.skills
+          .slice(0, 3)
           .map((sk) => {
-            const cls = matched.has(sk.toLowerCase()) ? "skill-tag matched" : "skill-tag";
+            const cls = matched.has(sk.toLowerCase()) ? "tag-plain hit" : "tag-plain";
             return `<span class="${cls}">${esc(sk)}</span>`;
           })
           .join("");
 
         return `
-        <article class="job-item">
-          <div class="job-item-head">
-            <div class="job-head-left">
-              <div class="company-monogram" aria-hidden="true">${esc(initials(j.company))}</div>
-              <div>
-                <button type="button" class="job-title-btn btn-open-detail" data-idx="${idx}" data-tab="overview">
-                  ${esc(j.title)}
-                </button>
-                <p class="job-company">${esc(j.company)} &middot; ${esc(j.location)}</p>
-              </div>
-            </div>
-
-            <div class="job-head-right">
-              <span class="match-label">${Math.round(rec.match_percentage)}% cocok</span>
-              <div class="salary-label">Rp ${j.salary_idr_millions.toFixed(1)} Jt/bln</div>
-            </div>
-          </div>
-
-          <div class="job-facts">
-            <span class="fact-dot">${esc(j.work_mode)}</span>
-            <span class="fact-dot">${esc(j.category)}</span>
-            <span class="fact-dot">Min ${j.min_experience_years} thn pengalaman</span>
-            <span class="fact-dot">Kejelasan ${j.criteria.c1_role_clarity.toFixed(1)}/5</span>
-            <span class="fact-dot">Tantangan ${j.criteria.c2_technical_challenge.toFixed(1)}/5</span>
-          </div>
-
-          <div class="job-skills">${skillTags}</div>
-
-          <p class="job-reason">${esc(rec.human_explanation)}.</p>
-
-          <div class="job-actions">
-            <button type="button" class="btn btn-text btn-open-detail" data-idx="${idx}" data-tab="math">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-              Lihat hitungan AI
+        <article class="job-row ${isSel ? "selected" : ""}" role="listitem">
+          <div class="job-row-top">
+            <button type="button" class="job-row-btn" data-select-job="${j.id}">
+              ${esc(j.title)}
             </button>
-
-            <div class="job-actions-right">
-              <button type="button" class="btn btn-outline btn-sm btn-act" data-job="${j.id}" data-rating="4" data-action="bookmarked">
-                Simpan
-              </button>
-              <button type="button" class="btn btn-primary btn-sm btn-act" data-job="${j.id}" data-rating="5" data-action="applied">
-                Lamar
-              </button>
-            </div>
+            <span class="match-tag tabular">${Math.round(rec.match_percentage)}% cocok</span>
+          </div>
+          <p class="job-row-company">${esc(j.company)} &middot; ${esc(j.location)}</p>
+          <div class="job-row-meta tabular">
+            Rp ${j.salary_idr_millions.toFixed(1)} Jt/bln &middot; ${esc(j.work_mode)} &middot; Min ${j.min_experience_years} thn
+          </div>
+          <div class="job-row-foot">
+            <div class="mini-skills">${skillsHtml}</div>
+            <button
+              type="button"
+              class="bookmark-btn"
+              data-quick-save="${j.id}"
+              aria-label="Simpan lowongan ${esc(j.title)}"
+              title="Simpan lowongan"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
           </div>
         </article>`;
       })
       .join("");
+
+    const selectedRec = list.find((r) => r.job.id === state.selectedJobId) || list[0];
+    renderDetailPane(selectedRec);
+
+    $$("[data-select-job]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.selectedJobId = btn.getAttribute("data-select-job");
+        state.lastTriggerEl = btn;
+        $$(".job-row").forEach((el) => el.classList.remove("selected"));
+        btn.closest(".job-row").classList.add("selected");
+        const rec = state.lastResponse.recommendations.find((r) => r.job.id === state.selectedJobId);
+        renderDetailPane(rec);
+        if (window.innerWidth <= 980) {
+          $("#detail-pane").classList.add("mobile-open");
+          $("#btn-close-mobile-detail").focus();
+        }
+      });
+    });
+
+    $$("[data-quick-save]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        submitInteraction(btn.getAttribute("data-quick-save"), 4, "bookmarked");
+      });
+    });
   }
 
-  // Accordion lowongan yang gugur syarat wajib (bukti Slide 14 tetap mudah diakses tanpa mengotori feed)
+  // Accordion kandidat yang gugur syarat wajib
   const drawer = $("#filtered-drawer");
   if (data.apply_hard_constraints && data.filtered_out_count > 0) {
     drawer.classList.remove("hidden");
     $("#filtered-summary-label").textContent =
-      `Lihat ${data.filtered_out_count} lowongan yang tidak memenuhi syarat wajib Anda`;
+      `${data.filtered_out_count} lowongan tidak memenuhi syarat wajib Anda`;
     $("#filtered-out-list").innerHTML = data.filtered_out_examples
       .map(
         (rec) => `
-      <div class="filtered-row">
-        <div class="filtered-row-title">
-          ${esc(rec.job.title)} (${esc(rec.job.company)}, Rp ${rec.job.salary_idr_millions.toFixed(1)} Jt/bln, ${esc(rec.job.work_mode)})
-          <span class="meta-text">Skor potensial ${Math.round(rec.match_percentage)}%</span>
-        </div>
-        <p class="violation-list">Alasan disaring: ${esc(rec.constraints.violations.join("; "))}</p>
+      <div class="filtered-item">
+        <strong>${esc(rec.job.title)} (${esc(rec.job.company)}, Rp ${rec.job.salary_idr_millions.toFixed(1)} Jt)</strong>
+        <span>${esc(rec.constraints.violations.join("; "))}</span>
       </div>`
       )
       .join("");
   } else {
     drawer.classList.add("hidden");
   }
+}
 
-  $$(".btn-open-detail").forEach((btn) => {
+function closeMobileDetail() {
+  const pane = $("#detail-pane");
+  if (!pane.classList.contains("mobile-open")) return;
+  pane.classList.remove("mobile-open");
+  if (state.lastTriggerEl && typeof state.lastTriggerEl.focus === "function") {
+    state.lastTriggerEl.focus();
+  }
+}
+
+function renderDetailPane(rec) {
+  const body = $("#detail-pane-body");
+  if (!rec) {
+    body.innerHTML = `
+      <div class="empty-box" style="border:none;padding:48px 16px;">
+        <h3>Pilih lowongan untuk melihat detail</h3>
+        <p>Ringkasan pekerjaan, syarat kualifikasi, dan bukti perhitungan kecocokan AI akan tampil di sini.</p>
+      </div>`;
+    return;
+  }
+
+  const j = rec.job;
+  const cb = rec.content_based;
+  const cf = rec.collaborative;
+  const mc = rec.multi_criteria;
+  const matched = new Set(cb.matched_skills.map((s) => s.toLowerCase()));
+
+  const skillsMarkup = j.skills
+    .map((sk) => `<span class="tag-plain ${matched.has(sk.toLowerCase()) ? "hit" : ""}">${esc(sk)}</span>`)
+    .join("");
+
+  const overviewHtml = `
+    <div class="detail-reason">
+      <strong>Alasan kecocokan:</strong> ${esc(rec.human_explanation)}.
+    </div>
+
+    <div class="detail-block">
+      <h3>Deskripsi peran</h3>
+      <p>${esc(j.description)}</p>
+    </div>
+
+    <div class="detail-block">
+      <h3>Keahlian (${cb.matched_skills.length} dari ${j.skills.length} cocok dengan profil Anda)</h3>
+      <div class="mini-skills">${skillsMarkup}</div>
+    </div>
+
+    <div class="detail-block">
+      <h3>Penilaian 4 aspek lowongan (skala 1-5)</h3>
+      <div class="aspect-meters">
+        ${meterItem("Kejelasan peran", j.criteria.c1_role_clarity)}
+        ${meterItem("Tantangan teknis", j.criteria.c2_technical_challenge)}
+        ${meterItem("Kompensasi gaji", j.criteria.c3_compensation)}
+        ${meterItem("Fleksibilitas kerja", j.criteria.c4_flexibility)}
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <h3>Kesesuaian syarat wajib</h3>
+      <ul class="check-list">
+        ${rec.constraints.passed_checks.map((c) => `<li>${esc(c)}</li>`).join("")}
+      </ul>
+    </div>
+  `;
+
+  const termRows = cb.top_matched_terms.length
+    ? cb.top_matched_terms
+        .map(
+          (t) => `
+      <tr>
+        <td><code>${esc(t.term)}</code></td>
+        <td class="tabular">${t.tfidf_user.toFixed(4)}</td>
+        <td class="tabular">${t.tfidf_job.toFixed(4)}</td>
+        <td class="tabular"><strong>${t.product.toFixed(4)}</strong></td>
+      </tr>`
+        )
+        .join("")
+    : `<tr><td colspan="4">Tidak ada irisan token kata kunci langsung.</td></tr>`;
+
+  const cfRows = cf.neighbors_used.length
+    ? cf.neighbors_used
+        .map(
+          (n) => `
+      <tr>
+        <td>${esc(n.neighbor_name)} (${n.neighbor_id})</td>
+        <td class="tabular"><strong>${n.similarity.toFixed(4)}</strong></td>
+        <td class="tabular">${n.shared_jobs_count} item</td>
+        <td class="tabular">${n.neighbor_rating_on_job.toFixed(1)} / 5.0</td>
+      </tr>`
+        )
+        .join("")
+    : `<tr><td colspan="4">Belum ada tetangga serupa pada lowongan ini (otomatis memakai redistribusi Cold-Start).</td></tr>`;
+
+  const mathHtml = `
+    <div class="detail-block" style="margin-top:0;padding-top:0;border-top:none;">
+      <h3>1. Content-Based Filtering (TF-IDF &amp; Cosine Similarity)</h3>
+      <div class="formula-box">Cosine(u, j) = ${cb.dot_product.toFixed(4)} / (${cb.user_norm.toFixed(4)} * ${cb.job_norm.toFixed(4)}) = ${cb.tfidf_cosine.toFixed(4)} | S_CB = ${cb.final_cb_score.toFixed(4)}</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kata kunci</th><th>TF-IDF Profil</th><th>TF-IDF Lowongan</th><th>Kontribusi</th></tr></thead>
+          <tbody>${termRows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <h3>2. Collaborative Filtering (User-Based Pearson)</h3>
+      <div class="formula-box">Rata-rata user = ${cf.target_user_mean.toFixed(2)} | Prediksi rating = ${cf.predicted_rating_1_to_5.toFixed(2)} / 5.00 | S_CF = ${cf.normalized_cf_score.toFixed(4)}</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tetangga serupa</th><th>Pearson</th><th>Irisan</th><th>Rating</th></tr></thead>
+          <tbody>${cfRows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <h3>3. Skor Multikriteria (4 Aspek Berbobot)</h3>
+      <div class="formula-box">${esc(mc.formula_trace)}</div>
+    </div>
+
+    <div class="detail-block">
+      <h3>4. Skor Akhir Hybrid</h3>
+      <div class="formula-box">S_Final = (${rec.alpha_cb_weight.toFixed(4)} * ${cb.final_cb_score.toFixed(4)}) + (${rec.beta_cf_weight.toFixed(4)} * ${cf.normalized_cf_score.toFixed(4)}) + (${rec.gamma_mc_weight.toFixed(4)} * ${mc.normalized_mc_score.toFixed(4)}) = ${rec.final_score.toFixed(4)} (${rec.match_percentage.toFixed(1)}%)</div>
+    </div>
+  `;
+
+  body.innerHTML = `
+    <div class="detail-header">
+      <div class="detail-id-block">
+        <div class="monogram" aria-hidden="true">${esc(initials(j.company))}</div>
+        <div>
+          <h2 class="detail-title">${esc(j.title)}</h2>
+          <p class="detail-company">${esc(j.company)} &middot; ${esc(j.location)}</p>
+        </div>
+      </div>
+      <span class="match-tag tabular">${Math.round(rec.match_percentage)}% cocok</span>
+    </div>
+
+    <div class="detail-facts-row tabular">
+      <div class="fact-pair"><strong>Rp ${j.salary_idr_millions.toFixed(1)} Jt/bln</strong></div>
+      <div class="fact-pair"><span>Mode:</span> <strong>${esc(j.work_mode)}</strong></div>
+      <div class="fact-pair"><span>Pengalaman:</span> <strong>Min ${j.min_experience_years} thn</strong></div>
+      <div class="fact-pair"><span>Bidang:</span> <strong>${esc(j.category)}</strong></div>
+    </div>
+
+    <div class="detail-cta-row">
+      <div class="cta-left">
+        <button type="button" id="btn-detail-apply" class="btn-solid">Lamar lowongan</button>
+        <button type="button" id="btn-detail-save" class="btn-outline">Simpan</button>
+      </div>
+
+      <div class="segment-group" role="tablist" aria-label="Tampilan detail lowongan">
+        <button type="button" class="seg-btn ${state.detailTab === "overview" ? "active" : ""}" role="tab" aria-selected="${state.detailTab === "overview"}" data-dtab="overview">Ringkasan</button>
+        <button type="button" class="seg-btn ${state.detailTab === "math" ? "active" : ""}" role="tab" aria-selected="${state.detailTab === "math"}" data-dtab="math">Hitungan AI</button>
+      </div>
+    </div>
+
+    ${state.detailTab === "overview" ? overviewHtml : mathHtml}
+  `;
+
+  $("#btn-detail-apply").addEventListener("click", () => submitInteraction(j.id, 5, "applied"));
+  $("#btn-detail-save").addEventListener("click", () => submitInteraction(j.id, 4, "bookmarked"));
+  $$("[data-dtab]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const idx = Number(btn.getAttribute("data-idx"));
-      const tab = btn.getAttribute("data-tab") || "overview";
-      openDetailModal(data.recommendations[idx], tab, btn);
+      state.detailTab = btn.getAttribute("data-dtab");
+      renderDetailPane(rec);
     });
   });
+}
 
-  $$(".btn-act").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      submitInteraction(
-        btn.getAttribute("data-job"),
-        Number(btn.getAttribute("data-rating")),
-        btn.getAttribute("data-action")
-      );
-    });
-  });
+function meterItem(label, val) {
+  const pct = Math.min(100, Math.max(0, (val / 5) * 100));
+  return `
+    <div class="meter-row">
+      <div class="meter-top">
+        <span>${label}</span>
+        <strong class="tabular">${val.toFixed(1)} / 5</strong>
+      </div>
+      <div class="meter-track"><div class="meter-fill" style="width:${pct}%"></div></div>
+    </div>`;
 }
 
 async function submitInteraction(jobId, rating, action) {
@@ -379,155 +533,17 @@ async function submitInteraction(jobId, rating, action) {
         action,
       }),
     });
-    if (!res.ok) throw new Error("Gagal menyimpan interaksi");
-    state.evalLoaded = false;
-    const label = action === "applied" ? "Lamaran tercatat" : "Lowongan disimpan";
-    showToast(`${label} dan rekomendasi diperbarui.`);
-    closeDetailModal();
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    showToast(action === "applied" ? "Lamaran tercatat ke Firebase." : "Lowongan disimpan.");
+    closeMobileDetail();
     await fetchRecommendations();
     await loadFirebaseStatus();
   } catch (err) {
-    showToast(`Terjadi kesalahan: ${err.message}`);
+    showToast(`Gagal menyimpan: ${err.message}`);
   }
 }
 
-// ---------------- MODAL DETAIL & WHITE-BOX HITUNGAN AI (R-32 ESC + FOCUS RETURN) ----------------
-function setModalTab(tabName) {
-  $$(".modal-tab").forEach((btn) => {
-    const active = btn.getAttribute("data-mtab") === tabName;
-    btn.classList.toggle("active", active);
-    btn.setAttribute("aria-selected", String(active));
-  });
-  $("#modal-panel-overview").classList.toggle("hidden", tabName !== "overview");
-  $("#modal-panel-math").classList.toggle("hidden", tabName !== "math");
-}
-
-function openDetailModal(rec, initialTab, triggerEl) {
-  if (!rec) return;
-  state.activeModalRec = rec;
-  state.lastFocusedEl = triggerEl || document.activeElement;
-
-  const j = rec.job;
-  const cb = rec.content_based;
-  const cf = rec.collaborative;
-  const mc = rec.multi_criteria;
-
-  $("#modal-title").textContent = j.title;
-  $("#modal-subtitle").textContent =
-    `${j.company} | ${j.location} (${j.work_mode}) | Rp ${j.salary_idr_millions.toFixed(1)} Jt/bln | Kecocokan ${Math.round(rec.match_percentage)}%`;
-
-  const matchedSet = new Set(cb.matched_skills.map((s) => s.toLowerCase()));
-  const skillsMarkup = j.skills
-    .map((sk) => {
-      const cls = matchedSet.has(sk.toLowerCase()) ? "skill-tag matched" : "skill-tag";
-      return `<span class="${cls}">${esc(sk)}</span>`;
-    })
-    .join("");
-
-  $("#modal-panel-overview").innerHTML = `
-    <div class="detail-section">
-      <h3>Deskripsi pekerjaan</h3>
-      <p>${esc(j.description)}</p>
-    </div>
-
-    <div class="detail-section">
-      <h3>Keahlian dibutuhkan (${cb.matched_skills.length} dari ${j.skills.length} sesuai profil Anda)</h3>
-      <div class="job-skills">${skillsMarkup}</div>
-    </div>
-
-    <div class="detail-section">
-      <h3>Penilaian 4 aspek lowongan (skala 1 sampai 5)</h3>
-      <div class="criteria-grid">
-        <div class="criteria-box">Kejelasan peran<strong>${j.criteria.c1_role_clarity.toFixed(1)}</strong></div>
-        <div class="criteria-box">Tantangan teknis<strong>${j.criteria.c2_technical_challenge.toFixed(1)}</strong></div>
-        <div class="criteria-box">Kompensasi gaji<strong>${j.criteria.c3_compensation.toFixed(1)}</strong></div>
-        <div class="criteria-box">Fleksibilitas<strong>${j.criteria.c4_flexibility.toFixed(1)}</strong></div>
-      </div>
-    </div>
-
-    <div class="detail-section">
-      <h3>Pemeriksaan syarat wajib Anda</h3>
-      <p class="muted-text">${esc(rec.constraints.passed_checks.join(" | "))}</p>
-    </div>
-  `;
-
-  const termRows = cb.top_matched_terms.length
-    ? cb.top_matched_terms
-        .map(
-          (t) => `
-      <tr>
-        <td><code>${esc(t.term)}</code></td>
-        <td>${t.tfidf_user.toFixed(4)}</td>
-        <td>${t.tfidf_job.toFixed(4)}</td>
-        <td><strong>${t.product.toFixed(4)}</strong></td>
-      </tr>`
-        )
-        .join("")
-    : `<tr><td colspan="4">Tidak ada irisan kata kunci langsung.</td></tr>`;
-
-  const cfRows = cf.neighbors_used.length
-    ? cf.neighbors_used
-        .map(
-          (n) => `
-      <tr>
-        <td>${esc(n.neighbor_name)} (${n.neighbor_id})</td>
-        <td><strong>${n.similarity.toFixed(4)}</strong></td>
-        <td>${n.shared_jobs_count} lowongan</td>
-        <td>${n.neighbor_rating_on_job.toFixed(1)} / 5.0</td>
-      </tr>`
-        )
-        .join("")
-    : `<tr><td colspan="4">Belum ada tetangga mirip yang menilai lowongan ini (otomatis ditangani bobot Cold-Start).</td></tr>`;
-
-  $("#modal-panel-math").innerHTML = `
-    <div class="detail-section">
-      <h3>1. Content-Based Filtering (TF-IDF &amp; Cosine Similarity)</h3>
-      <div class="formula-line">Cosine(u, j) = ${cb.dot_product.toFixed(4)} / (${cb.user_norm.toFixed(4)} * ${cb.job_norm.toFixed(4)}) = ${cb.tfidf_cosine.toFixed(4)} | S_CB = ${cb.final_cb_score.toFixed(4)}</div>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Kata kunci</th><th>TF-IDF Profil</th><th>TF-IDF Lowongan</th><th>Kontribusi</th></tr></thead>
-          <tbody>${termRows}</tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="detail-section">
-      <h3>2. Collaborative Filtering (User-Based Pearson)</h3>
-      <div class="formula-line">Rata-rata user = ${cf.target_user_mean.toFixed(2)} | Prediksi rating = ${cf.predicted_rating_1_to_5.toFixed(2)} / 5.00 | S_CF = ${cf.normalized_cf_score.toFixed(4)}</div>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Pengguna serupa</th><th>Kemiripan Pearson</th><th>Irisan riwayat</th><th>Rating pada lowongan ini</th></tr></thead>
-          <tbody>${cfRows}</tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="detail-section">
-      <h3>3. Skor Multikriteria (4 Aspek Berbobot)</h3>
-      <div class="formula-line">${esc(mc.formula_trace)}</div>
-    </div>
-
-    <div class="detail-section">
-      <h3>4. Skor Akhir Hybrid</h3>
-      <div class="formula-line">S_Final = (${rec.alpha_cb_weight.toFixed(4)} * ${cb.final_cb_score.toFixed(4)}) + (${rec.beta_cf_weight.toFixed(4)} * ${cf.normalized_cf_score.toFixed(4)}) + (${rec.gamma_mc_weight.toFixed(4)} * ${mc.normalized_mc_score.toFixed(4)}) = ${rec.final_score.toFixed(4)} (${rec.match_percentage.toFixed(1)}%)</div>
-    </div>
-  `;
-
-  setModalTab(initialTab);
-  $("#detail-modal").classList.remove("hidden");
-  $("#btn-close-modal").focus();
-}
-
-function closeDetailModal() {
-  const modal = $("#detail-modal");
-  if (modal.classList.contains("hidden")) return;
-  modal.classList.add("hidden");
-  if (state.lastFocusedEl && typeof state.lastFocusedEl.focus === "function") {
-    state.lastFocusedEl.focus();
-  }
-}
-
-// ---------------- VIEW 2: AKTIVITAS & COLLABORATIVE ----------------
+// ---------------- VIEW 2: AKTIVITAS ----------------
 async function loadActivityView() {
   const [histRes, cfRes] = await Promise.all([
     fetch(`/api/users/${state.activeUserId}/interactions`),
@@ -536,26 +552,26 @@ async function loadActivityView() {
   const history = await histRes.json();
   const neighbors = await cfRes.json();
 
-  $("#history-count").textContent = `${history.length} aktivitas`;
+  $("#history-count").textContent = `${history.length} item`;
   if (!history.length) {
-    $("#user-history-wrap").innerHTML = `<p class="muted-text">Belum ada lamaran atau lowongan yang disimpan.</p>`;
+    $("#user-history-wrap").innerHTML = `<p class="subtle-copy">Belum ada lowongan yang dilamar atau disimpan.</p>`;
   } else {
     $("#user-history-wrap").innerHTML = `
-      <div class="table-scroll">
+      <div class="table-wrap">
         <table>
-          <thead><tr><th>Posisi &amp; perusahaan</th><th>Status</th><th>Rating</th></tr></thead>
+          <thead><tr><th>Lowongan</th><th>Status</th><th>Rating</th></tr></thead>
           <tbody>
             ${history
               .slice()
               .reverse()
               .map((h) => {
-                const act = h.interaction.action;
-                const actLabel = act === "applied" ? "Dilamar" : act === "bookmarked" ? "Disimpan" : "Dilihat";
+                const a = h.interaction.action;
+                const label = a === "applied" ? "Dilamar" : a === "bookmarked" ? "Disimpan" : "Dilihat";
                 return `
                 <tr>
-                  <td><strong>${esc(h.job_title)}</strong><br/><span class="muted-text">${esc(h.company)} (${esc(h.work_mode)})</span></td>
-                  <td><span class="status-chip ${esc(act)}">${actLabel}</span></td>
-                  <td><strong>${h.interaction.rating.toFixed(1)}</strong> / 5</td>
+                  <td><strong>${esc(h.job_title)}</strong><br/><span class="subtle-note">${esc(h.company)} (${esc(h.work_mode)})</span></td>
+                  <td><span class="state-pill ${esc(a)}">${label}</span></td>
+                  <td class="tabular"><strong>${h.interaction.rating.toFixed(1)}</strong> / 5</td>
                 </tr>`;
               })
               .join("")}
@@ -565,17 +581,17 @@ async function loadActivityView() {
   }
 
   $("#cf-neighbors-wrap").innerHTML = `
-    <div class="table-scroll">
+    <div class="table-wrap">
       <table>
         <thead><tr><th>Pengguna</th><th>Irisan</th><th>Pearson</th></tr></thead>
         <tbody>
           ${neighbors
             .map(
               (n, i) => `
-            <tr class="${i < 3 && n.similarity > 0.1 ? "row-accent" : ""}">
-              <td><strong>${esc(n.neighbor_name)}</strong><br/><span class="muted-text">${esc(n.role_headline)}</span></td>
-              <td>${n.shared_jobs_count} item</td>
-              <td><strong>${n.similarity.toFixed(4)}</strong></td>
+            <tr class="${i < 3 && n.similarity > 0.1 ? "row-best" : ""}">
+              <td><strong>${esc(n.neighbor_name)}</strong><br/><span class="subtle-note">${esc(n.role_headline)}</span></td>
+              <td class="tabular">${n.shared_jobs_count} item</td>
+              <td class="tabular"><strong>${n.similarity.toFixed(4)}</strong></td>
             </tr>`
             )
             .join("")}
@@ -593,32 +609,31 @@ async function loadLabView() {
 async function loadEvaluation() {
   const res = await fetch("/api/evaluate");
   const rep = await res.json();
-  state.evalLoaded = true;
 
-  $("#eval-meta").textContent = `Indeks dibangun dalam ${(rep.index_build_micros / 1000).toFixed(2)} ms`;
+  $("#eval-meta").textContent = `Indeks dibangun ${(rep.index_build_micros / 1000).toFixed(2)} ms`;
   $("#eval-desc").textContent =
-    `Pengujian pada ${rep.evaluated_users_count} profil pencari kerja, ${rep.catalog_jobs_count} lowongan riil, dan ${rep.total_interactions_count} interaksi (${rep.train_interactions_count} train / ${rep.test_interactions_count} test hold-out).`;
+    `Diuji pada ${rep.evaluated_users_count} profil, ${rep.catalog_jobs_count} lowongan riil, dan ${rep.total_interactions_count} interaksi (${rep.train_interactions_count} train / ${rep.test_interactions_count} test hold-out).`;
 
   $("#eval-bars").innerHTML = rep.methods
     .map(
       (m) => `
-    <div class="eval-bar-item">
-      <div class="eval-bar-top">
+    <div class="metric-bar-row">
+      <div class="metric-bar-head">
         <span>${esc(m.method_label)}</span>
-        <span class="meta-text">${m.avg_latency_micros} us (${(m.avg_latency_micros / 1000).toFixed(2)} ms)</span>
+        <span class="subtle-note tabular">${m.avg_latency_micros} us (${(m.avg_latency_micros / 1000).toFixed(2)} ms)</span>
       </div>
-      <div class="eval-bar-tracks">
+      <div class="metric-bar-cols tabular">
         <div>
           Precision@3: <strong>${(m.precision_at_3 * 100).toFixed(1)}%</strong>
-          <div class="track-bg"><div class="track-fill" style="width:${(m.precision_at_3 * 100).toFixed(1)}%"></div></div>
+          <div class="meter-track"><div class="meter-fill" style="width:${(m.precision_at_3 * 100).toFixed(1)}%"></div></div>
         </div>
         <div>
           NDCG@5: <strong>${(m.ndcg_at_5 * 100).toFixed(1)}%</strong>
-          <div class="track-bg"><div class="track-fill" style="width:${(m.ndcg_at_5 * 100).toFixed(1)}%"></div></div>
+          <div class="meter-track"><div class="meter-fill accent" style="width:${(m.ndcg_at_5 * 100).toFixed(1)}%"></div></div>
         </div>
         <div>
-          Lolos syarat wajib: <strong>${(m.constraint_satisfaction_rate * 100).toFixed(1)}%</strong>
-          <div class="track-bg"><div class="track-fill green" style="width:${(m.constraint_satisfaction_rate * 100).toFixed(1)}%"></div></div>
+          Syarat wajib: <strong>${(m.constraint_satisfaction_rate * 100).toFixed(1)}%</strong>
+          <div class="meter-track"><div class="meter-fill ok" style="width:${(m.constraint_satisfaction_rate * 100).toFixed(1)}%"></div></div>
         </div>
       </div>
     </div>`
@@ -628,22 +643,13 @@ async function loadEvaluation() {
   $("#eval-table-wrap").innerHTML = `
     <table>
       <thead>
-        <tr>
-          <th>Metode</th>
-          <th>P@3</th>
-          <th>P@5</th>
-          <th>Recall@5</th>
-          <th>F1@5</th>
-          <th>NDCG@5</th>
-          <th>Syarat wajib</th>
-          <th>Latensi</th>
-        </tr>
+        <tr><th>Metode</th><th>P@3</th><th>P@5</th><th>R@5</th><th>F1@5</th><th>NDCG@5</th><th>Syarat</th><th>Latensi</th></tr>
       </thead>
-      <tbody>
+      <tbody class="tabular">
         ${rep.methods
           .map(
             (m) => `
-          <tr class="${m.method_id === "proposed_hmc_cf" ? "row-accent" : ""}">
+          <tr class="${m.method_id === "proposed_hmc_cf" ? "row-best" : ""}">
             <td>${esc(m.method_label)}</td>
             <td>${(m.precision_at_3 * 100).toFixed(2)}%</td>
             <td>${(m.precision_at_5 * 100).toFixed(2)}%</td>
@@ -672,17 +678,17 @@ async function loadLecturerSimulation() {
   const d = await res.json();
 
   $("#slide-cards").innerHTML = `
-    <div class="case-card">
-      <h4>Dua lowongan rata-rata sama (4.0)</h4>
+    <div class="mini-case">
+      <h4>Rata-rata identik (4.0)</h4>
       <p><strong>Lowongan A:</strong> Kejelasan ${d.item_a_clarity}, Tantangan ${d.item_a_practice}</p>
       <p><strong>Lowongan B:</strong> Kejelasan ${d.item_b_clarity}, Tantangan ${d.item_b_practice}</p>
     </div>
-    <div class="case-card">
+    <div class="mini-case">
       <h4>Prioritas Dina (70% Kejelasan)</h4>
       <p>Skor A = <strong>${d.dina_70_30_score_a.toFixed(1)}</strong>, Skor B = ${d.dina_70_30_score_b.toFixed(1)}</p>
       <p>Terpilih: <strong>${esc(d.dina_winner)}</strong></p>
     </div>
-    <div class="case-card">
+    <div class="mini-case">
       <h4>Prioritas Bima (70% Tantangan)</h4>
       <p>Skor A = ${d.bima_30_70_score_a.toFixed(1)}, Skor B = <strong>${d.bima_30_70_score_b.toFixed(1)}</strong></p>
       <p>Terpilih: <strong>${esc(d.bima_winner)}</strong></p>
@@ -691,8 +697,8 @@ async function loadLecturerSimulation() {
 
   $("#sim-result").innerHTML = `
     <p style="margin:0 0 6px;">
-      <strong>Lowongan A:</strong> ${d.pair_exercise_50_50_score_a.toFixed(2)} (${d.item_a_passes_requirement ? "Lolos syarat" : "Gugur syarat"}) &middot;
-      <strong>Lowongan B:</strong> ${d.pair_exercise_50_50_score_b.toFixed(2)} (${d.item_b_passes_requirement ? "Lolos syarat" : "Gugur syarat"})
+      <strong>Lowongan A:</strong> ${d.pair_exercise_50_50_score_a.toFixed(2)} (${d.item_a_passes_requirement ? "Lolos" : "Gugur"}) &middot;
+      <strong>Lowongan B:</strong> ${d.pair_exercise_50_50_score_b.toFixed(2)} (${d.item_b_passes_requirement ? "Lolos" : "Gugur"})
     </p>
     <p style="margin:0;"><strong>Keputusan: ${esc(d.pair_exercise_final_choice)}.</strong> ${esc(d.pair_exercise_explanation)}</p>
   `;
@@ -701,18 +707,15 @@ async function loadLecturerSimulation() {
 async function loadFirebaseStatus() {
   const res = await fetch("/api/firebase/status");
   const st = await res.json();
-
-  const footerStatus = $("#footer-fb-status");
-  footerStatus.textContent = st.connected
-    ? `Firebase terhubung (${st.project_id})`
-    : "Penyimpanan lokal aktif";
-  footerStatus.classList.toggle("connected", st.connected);
+  const fs = $("#footer-fb-status");
+  fs.textContent = st.connected ? `Firebase aktif (${st.project_id})` : "Penyimpanan lokal aktif";
+  fs.classList.toggle("connected", st.connected);
 
   $("#firebase-info-grid").innerHTML = `
-    <div class="info-cell"><span>Mode penyimpanan</span><strong>${esc(st.mode)}</strong></div>
-    <div class="info-cell"><span>Project ID</span><strong><code>${esc(st.project_id)}</code></strong></div>
-    <div class="info-cell"><span>Endpoint Cloud Firestore</span><strong><code>${esc(st.firestore_endpoint)}</code></strong></div>
-    <div class="info-cell"><span>Data tersinkron</span><strong>${st.synced_jobs} lowongan, ${st.synced_users} pengguna, ${st.synced_interactions} interaksi</strong></div>
+    <div class="kv-cell"><span>Mode basis data</span><strong>${esc(st.mode)}</strong></div>
+    <div class="kv-cell"><span>Project ID</span><strong><code>${esc(st.project_id)}</code></strong></div>
+    <div class="kv-cell"><span>Endpoint Firestore</span><strong><code>${esc(st.firestore_endpoint)}</code></strong></div>
+    <div class="kv-cell"><span>Koleksi tersinkron</span><strong>${st.synced_jobs} lowongan, ${st.synced_users} pengguna, ${st.synced_interactions} interaksi</strong></div>
   `;
 }
 
@@ -726,13 +729,7 @@ function renderCatalogTable() {
   $("#catalog-table-wrap").innerHTML = `
     <table>
       <thead>
-        <tr>
-          <th>ID</th>
-          <th>Posisi &amp; perusahaan</th>
-          <th>Mode &amp; gaji</th>
-          <th>Skor (C1 / C2 / C3 / C4)</th>
-          <th>Sumber dataset</th>
-        </tr>
+        <tr><th>ID</th><th>Lowongan</th><th>Mode &amp; gaji</th><th>Aspek (C1/C2/C3/C4)</th><th>Dataset</th></tr>
       </thead>
       <tbody>
         ${rows
@@ -740,9 +737,9 @@ function renderCatalogTable() {
             (j) => `
           <tr>
             <td><code>${j.id}</code></td>
-            <td><strong>${esc(j.title)}</strong><br/><span class="muted-text">${esc(j.company)}</span></td>
-            <td>${esc(j.work_mode)}, Rp ${j.salary_idr_millions.toFixed(1)} Jt</td>
-            <td><code>${j.criteria.c1_role_clarity.toFixed(1)} / ${j.criteria.c2_technical_challenge.toFixed(1)} / ${j.criteria.c3_compensation.toFixed(1)} / ${j.criteria.c4_flexibility.toFixed(1)}</code></td>
+            <td><strong>${esc(j.title)}</strong><br/><span class="subtle-note">${esc(j.company)}</span></td>
+            <td class="tabular">${esc(j.work_mode)}, Rp ${j.salary_idr_millions.toFixed(1)} Jt</td>
+            <td class="tabular"><code>${j.criteria.c1_role_clarity.toFixed(1)} / ${j.criteria.c2_technical_challenge.toFixed(1)} / ${j.criteria.c3_compensation.toFixed(1)} / ${j.criteria.c4_flexibility.toFixed(1)}</code></td>
             <td><code>${esc(j.source_dataset)}</code></td>
           </tr>`
           )
@@ -761,7 +758,7 @@ async function bootstrap() {
     state.users = await usersRes.json();
     state.jobs = await jobsRes.json();
   } catch (err) {
-    $("#feed-error-text").textContent = "Server lokal belum siap. Pastikan karir-ai sedang berjalan.";
+    $("#feed-error-text").textContent = "Server tidak dapat dijangkau.";
     $("#feed-error").classList.remove("hidden");
     return;
   }
@@ -780,8 +777,8 @@ async function bootstrap() {
 
   selUser.addEventListener("change", () => {
     state.activeUserId = selUser.value;
-    const u = state.users.find((x) => x.id === state.activeUserId);
-    populateUserControls(u);
+    state.selectedJobId = null;
+    populateUserControls(state.users.find((x) => x.id === state.activeUserId));
     fetchRecommendations();
     if ($("#view-activity").classList.contains("active")) loadActivityView();
   });
@@ -791,19 +788,22 @@ async function bootstrap() {
     fetchRecommendations();
   });
 
-  let searchDebounce = null;
+  let debounce = null;
   $("#inp-query").addEventListener("input", () => {
-    clearTimeout(searchDebounce);
-    searchDebounce = setTimeout(fetchRecommendations, 180);
+    clearTimeout(debounce);
+    debounce = setTimeout(fetchRecommendations, 180);
   });
 
   $("#sel-category").addEventListener("change", fetchRecommendations);
   $("#select-mode").addEventListener("change", fetchRecommendations);
-  $("#chk-constraints").addEventListener("change", fetchRecommendations);
+  $("#chk-constraints").addEventListener("change", () => {
+    updateFilterSummaryText();
+    fetchRecommendations();
+  });
 
   $$("[data-quick-mode]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      syncQuickModeButtons(btn.getAttribute("data-quick-mode"));
+      syncQuickMode(btn.getAttribute("data-quick-mode"));
       fetchRecommendations();
     });
   });
@@ -816,10 +816,17 @@ async function bootstrap() {
   });
 
   ["#inp-min-salary", "#inp-max-exp", "#inp-min-c1", "#inp-min-c2"].forEach((id) => {
-    $(id).addEventListener("change", fetchRecommendations);
+    $(id).addEventListener("change", () => {
+      updateFilterSummaryText();
+      fetchRecommendations();
+    });
   });
 
   $("#btn-retry-feed").addEventListener("click", fetchRecommendations);
+  $("#btn-close-mobile-detail").addEventListener("click", closeMobileDetail);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMobileDetail();
+  });
 
   $("#btn-save-prefs").addEventListener("click", async () => {
     const u = state.users.find((x) => x.id === state.activeUserId);
@@ -836,7 +843,7 @@ async function bootstrap() {
         preferred_skills: skills,
         preferred_categories: u.preferred_categories,
         experience_years: u.experience_years,
-        weights: readNormalizedWeights(),
+        weights: readWeights(),
         constraints: readConstraints(),
       }),
     });
@@ -844,7 +851,7 @@ async function bootstrap() {
       const updated = await res.json();
       const idx = state.users.findIndex((x) => x.id === updated.id);
       if (idx >= 0) state.users[idx] = updated;
-      showToast("Preferensi berhasil disimpan.");
+      showToast("Preferensi disimpan.");
       await fetchRecommendations();
     } else {
       showToast("Gagal menyimpan preferensi.");
@@ -858,8 +865,8 @@ async function bootstrap() {
     $("#inp-query").value = "";
     $("#sel-category").value = "";
     $("#chk-constraints").checked = true;
-    const cur = state.users.find((x) => x.id === state.activeUserId) || state.users[0];
-    populateUserControls(cur);
+    state.selectedJobId = null;
+    populateUserControls(state.users.find((x) => x.id === state.activeUserId) || state.users[0]);
     await fetchRecommendations();
     await loadFirebaseStatus();
     showToast("Pengaturan dikembalikan ke kondisi awal.");
@@ -869,28 +876,10 @@ async function bootstrap() {
     const res = await fetch("/api/firebase/sync", { method: "POST" });
     if (res.ok) {
       await loadFirebaseStatus();
-      showToast("Koleksi berhasil disinkronkan ke Cloud Firestore.");
+      showToast("Koleksi disinkronkan ke Cloud Firestore.");
     } else {
       showToast("Firebase Emulator (:8088) belum aktif.");
     }
-  });
-
-  // Modal events + keyboard Escape (R-32)
-  $("#btn-close-modal").addEventListener("click", closeDetailModal);
-  $("#detail-modal").addEventListener("click", (e) => {
-    if (e.target.id === "detail-modal") closeDetailModal();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeDetailModal();
-  });
-  $$(".modal-tab").forEach((btn) => {
-    btn.addEventListener("click", () => setModalTab(btn.getAttribute("data-mtab")));
-  });
-  $("#btn-modal-bookmark").addEventListener("click", () => {
-    if (state.activeModalRec) submitInteraction(state.activeModalRec.job.id, 4, "bookmarked");
-  });
-  $("#btn-modal-apply").addEventListener("click", () => {
-    if (state.activeModalRec) submitInteraction(state.activeModalRec.job.id, 5, "applied");
   });
 
   $("#sim-w-clarity").addEventListener("input", loadLecturerSimulation);

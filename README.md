@@ -61,7 +61,7 @@ Disusun selaras penuh dengan materi perkuliahan [`references/materi-dosen/AI_Sis
 ### Opsi A — Paling Mudah untuk Kelompok di Windows: Unduh ZIP Release (Tanpa Install Rust!)
 
 1. Buka halaman **[GitHub Releases Terbaru](https://github.com/farrelfaiziaulhaq/ai-rekomendasi-loker/releases/latest)**.
-2. Unduh **`karir-ai-v1.1.0-windows-x86_64.zip`**, klik kanan -> **Extract All...**
+2. Unduh **`karir-ai-v1.2.0-windows-x86_64.zip`**, klik kanan -> **Extract All...**
 3. Klik dua kali **`start.bat`** → server langsung aktif dan otomatis membuka **`http://127.0.0.1:3000`** di browser!
    - Tersedia juga **`start-firebase-emulator.bat`** (menyalakan dashboard Firebase Firestore Emulator di `http://127.0.0.1:4040`) dan **`cek-evaluasi-ai.bat`** (mencetak tabel metrik evaluasi AI di Command Prompt).
 

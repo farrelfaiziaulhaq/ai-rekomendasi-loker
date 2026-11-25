@@ -97,7 +97,7 @@ jobs:
           Dirancang khusus agar seluruh anggota kelompok (khususnya pengguna **Windows 10/11**) maupun dosen penguji dapat langsung menjalankan aplikasi dalam **1 klik**:
 
           #### 1. Windows 10 / 11 (`x86_64`)
-          1. Unduh **`karir-ai-v1.1.0-windows-x86_64.zip`** lalu klik kanan -> **Extract All...**
+          1. Unduh **`karir-ai-v1.2.0-windows-x86_64.zip`** lalu klik kanan -> **Extract All...**
           2. Buka folder hasil ekstrak, lalu klik dua kali **`start.bat`** -> server langsung menyala dan membuka **`http://127.0.0.1:3000`** di browser!
           3. Tersedia juga:
              - **`start-firebase-emulator.bat`**: menyalakan Firebase Auth & Cloud Firestore Emulator lokal beserta Dashboard UI di `http://127.0.0.1:4040`.
