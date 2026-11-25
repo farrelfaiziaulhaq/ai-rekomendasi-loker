@@ -1,4 +1,4 @@
-// KarirAI v2.0: Master-Detail Editorial Job Portal (Rust + Google Firebase)
+// KarirAI v1.3: Dark Luminous Dashboard + Master-Detail Job Portal (Rust + Google Firebase)
 
 const state = {
   users: [],
@@ -40,20 +40,20 @@ function showToast(msg) {
   showToast._t = setTimeout(() => el.classList.add("hidden"), 2800);
 }
 
-// ---------------- TEMA TERANG / GELAP (R-21 & R-34) ----------------
+// ---------------- TEMA GELAP (DEFAULT) / TERANG (R-21 & R-34) ----------------
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("karir_ai_theme", theme);
+  localStorage.setItem("karir_ai_theme_v3", theme);
   const dark = theme === "dark";
   const btn = $("#btn-theme");
   btn.setAttribute("aria-pressed", String(dark));
-  btn.setAttribute("aria-label", dark ? "Aktifkan mode terang" : "Aktifkan mode gelap");
-  $("#icon-moon").classList.toggle("hidden", dark);
+  btn.setAttribute("aria-label", dark ? "Ubah ke mode terang" : "Ubah ke mode gelap");
   $("#icon-sun").classList.toggle("hidden", !dark);
+  $("#icon-moon").classList.toggle("hidden", dark);
 }
 
 function initTheme() {
-  applyTheme(localStorage.getItem("karir_ai_theme") || "light");
+  applyTheme(localStorage.getItem("karir_ai_theme_v3") || "dark");
   $("#btn-theme").addEventListener("click", () => {
     const cur = document.documentElement.getAttribute("data-theme");
     applyTheme(cur === "dark" ? "light" : "dark");
@@ -63,7 +63,7 @@ function initTheme() {
 // ---------------- NAVIGASI ----------------
 function switchView(viewId) {
   closeMobileDetail();
-  $$(".nav-item").forEach((btn) => {
+  $$(".dock-link").forEach((btn) => {
     const on = btn.getAttribute("data-view") === viewId;
     btn.classList.toggle("active", on);
     if (on) btn.setAttribute("aria-current", "page");
@@ -78,10 +78,10 @@ function switchView(viewId) {
 }
 
 function initNavigation() {
-  $$(".nav-item").forEach((btn) => {
+  $$(".dock-link").forEach((btn) => {
     btn.addEventListener("click", () => switchView(btn.getAttribute("data-view")));
   });
-  $(".brand-wordmark").addEventListener("click", (e) => {
+  $(".brand").addEventListener("click", (e) => {
     e.preventDefault();
     switchView("view-jobs");
   });
@@ -165,7 +165,7 @@ function syncQuickMode(mode) {
 function populateUserControls(user) {
   if (!user) return;
   $("#active-profile-line").textContent =
-    `${user.name}: ${user.role_headline} (${user.experience_years} thn)`;
+    `Profil aktif: ${user.name} (${user.role_headline}, ${user.experience_years} thn)`;
 
   $("#rng-w1").value = Math.round(user.weights.c1_role_clarity * 100);
   $("#rng-w2").value = Math.round(user.weights.c2_technical_challenge * 100);
@@ -183,7 +183,7 @@ function populateUserControls(user) {
   renderWeightBar();
 }
 
-// ---------------- FETCH REKOMENDASI & RENDER MASTER-DETAIL ----------------
+// ---------------- FETCH & RENDER MASTER-DETAIL ----------------
 async function fetchRecommendations() {
   const errBox = $("#feed-error");
   const loadBox = $("#feed-loading");
@@ -210,7 +210,6 @@ async function fetchRecommendations() {
     const data = await res.json();
     state.lastResponse = data;
 
-    // Pertahankan pilihan aktif jika masih ada, kalau tidak pilih lowongan teratas
     const exists = data.recommendations.some((r) => r.job.id === state.selectedJobId);
     if (!exists) {
       state.selectedJobId = data.recommendations[0]?.job.id || null;
@@ -228,10 +227,12 @@ async function fetchRecommendations() {
 function renderBoard(data) {
   const list = data.recommendations;
   const q = $("#inp-query").value.trim();
+  const msText = `${(data.execution_time_micros / 1000).toFixed(2)} ms`;
   $("#results-count").textContent = list.length
     ? `${list.length} lowongan cocok${q ? ` untuk "${q}"` : ""}`
     : `Tidak ada lowongan cocok${q ? ` untuk "${q}"` : ""}`;
-  $("#latency-readout").textContent = `${(data.execution_time_micros / 1000).toFixed(2)} ms`;
+  $("#latency-readout").textContent = msText;
+  $("#stat-latency").textContent = msText.replace(".", ",");
 
   const listEl = $("#jobs-list");
   if (!list.length) {
@@ -258,26 +259,23 @@ function renderBoard(data) {
         const matched = new Set(rec.content_based.matched_skills.map((s) => s.toLowerCase()));
         const skillsHtml = j.skills
           .slice(0, 3)
-          .map((sk) => {
-            const cls = matched.has(sk.toLowerCase()) ? "tag-plain hit" : "tag-plain";
-            return `<span class="${cls}">${esc(sk)}</span>`;
-          })
+          .map((sk) => `<span class="skill-chip ${matched.has(sk.toLowerCase()) ? "hit" : ""}">${esc(sk)}</span>`)
           .join("");
 
         return `
-        <article class="job-row ${isSel ? "selected" : ""}" role="listitem">
-          <div class="job-row-top">
-            <button type="button" class="job-row-btn" data-select-job="${j.id}">
+        <article class="job-card ${isSel ? "selected" : ""}" role="listitem">
+          <div class="job-card-top">
+            <button type="button" class="job-select-btn" data-select-job="${j.id}">
               ${esc(j.title)}
             </button>
-            <span class="match-tag tabular">${Math.round(rec.match_percentage)}% cocok</span>
+            <span class="match-badge tabular">${Math.round(rec.match_percentage)}% cocok</span>
           </div>
-          <p class="job-row-company">${esc(j.company)} &middot; ${esc(j.location)}</p>
-          <div class="job-row-meta tabular">
+          <p class="job-card-sub">${esc(j.company)} &middot; ${esc(j.location)}</p>
+          <div class="job-card-meta tabular">
             Rp ${j.salary_idr_millions.toFixed(1)} Jt/bln &middot; ${esc(j.work_mode)} &middot; Min ${j.min_experience_years} thn
           </div>
-          <div class="job-row-foot">
-            <div class="mini-skills">${skillsHtml}</div>
+          <div class="job-card-foot">
+            <div class="skills-inline">${skillsHtml}</div>
             <button
               type="button"
               class="bookmark-btn"
@@ -301,8 +299,8 @@ function renderBoard(data) {
       btn.addEventListener("click", () => {
         state.selectedJobId = btn.getAttribute("data-select-job");
         state.lastTriggerEl = btn;
-        $$(".job-row").forEach((el) => el.classList.remove("selected"));
-        btn.closest(".job-row").classList.add("selected");
+        $$(".job-card").forEach((el) => el.classList.remove("selected"));
+        btn.closest(".job-card").classList.add("selected");
         const rec = state.lastResponse.recommendations.find((r) => r.job.id === state.selectedJobId);
         renderDetailPane(rec);
         if (window.innerWidth <= 980) {
@@ -320,7 +318,6 @@ function renderBoard(data) {
     });
   }
 
-  // Accordion kandidat yang gugur syarat wajib
   const drawer = $("#filtered-drawer");
   if (data.apply_hard_constraints && data.filtered_out_count > 0) {
     drawer.classList.remove("hidden");
@@ -367,25 +364,25 @@ function renderDetailPane(rec) {
   const matched = new Set(cb.matched_skills.map((s) => s.toLowerCase()));
 
   const skillsMarkup = j.skills
-    .map((sk) => `<span class="tag-plain ${matched.has(sk.toLowerCase()) ? "hit" : ""}">${esc(sk)}</span>`)
+    .map((sk) => `<span class="skill-chip ${matched.has(sk.toLowerCase()) ? "hit" : ""}">${esc(sk)}</span>`)
     .join("");
 
   const overviewHtml = `
-    <div class="detail-reason">
+    <div class="reason-box">
       <strong>Alasan kecocokan:</strong> ${esc(rec.human_explanation)}.
     </div>
 
-    <div class="detail-block">
+    <div class="detail-sec">
       <h3>Deskripsi peran</h3>
       <p>${esc(j.description)}</p>
     </div>
 
-    <div class="detail-block">
+    <div class="detail-sec">
       <h3>Keahlian (${cb.matched_skills.length} dari ${j.skills.length} cocok dengan profil Anda)</h3>
-      <div class="mini-skills">${skillsMarkup}</div>
+      <div class="skills-inline">${skillsMarkup}</div>
     </div>
 
-    <div class="detail-block">
+    <div class="detail-sec">
       <h3>Penilaian 4 aspek lowongan (skala 1-5)</h3>
       <div class="aspect-meters">
         ${meterItem("Kejelasan peran", j.criteria.c1_role_clarity)}
@@ -395,7 +392,7 @@ function renderDetailPane(rec) {
       </div>
     </div>
 
-    <div class="detail-block">
+    <div class="detail-sec">
       <h3>Kesesuaian syarat wajib</h3>
       <ul class="check-list">
         ${rec.constraints.passed_checks.map((c) => `<li>${esc(c)}</li>`).join("")}
@@ -432,7 +429,7 @@ function renderDetailPane(rec) {
     : `<tr><td colspan="4">Belum ada tetangga serupa pada lowongan ini (otomatis memakai redistribusi Cold-Start).</td></tr>`;
 
   const mathHtml = `
-    <div class="detail-block" style="margin-top:0;padding-top:0;border-top:none;">
+    <div class="detail-sec" style="margin-top:0;padding-top:0;border-top:none;">
       <h3>1. Content-Based Filtering (TF-IDF &amp; Cosine Similarity)</h3>
       <div class="formula-box">Cosine(u, j) = ${cb.dot_product.toFixed(4)} / (${cb.user_norm.toFixed(4)} * ${cb.job_norm.toFixed(4)}) = ${cb.tfidf_cosine.toFixed(4)} | S_CB = ${cb.final_cb_score.toFixed(4)}</div>
       <div class="table-wrap">
@@ -443,7 +440,7 @@ function renderDetailPane(rec) {
       </div>
     </div>
 
-    <div class="detail-block">
+    <div class="detail-sec">
       <h3>2. Collaborative Filtering (User-Based Pearson)</h3>
       <div class="formula-box">Rata-rata user = ${cf.target_user_mean.toFixed(2)} | Prediksi rating = ${cf.predicted_rating_1_to_5.toFixed(2)} / 5.00 | S_CF = ${cf.normalized_cf_score.toFixed(4)}</div>
       <div class="table-wrap">
@@ -454,45 +451,45 @@ function renderDetailPane(rec) {
       </div>
     </div>
 
-    <div class="detail-block">
+    <div class="detail-sec">
       <h3>3. Skor Multikriteria (4 Aspek Berbobot)</h3>
       <div class="formula-box">${esc(mc.formula_trace)}</div>
     </div>
 
-    <div class="detail-block">
+    <div class="detail-sec">
       <h3>4. Skor Akhir Hybrid</h3>
       <div class="formula-box">S_Final = (${rec.alpha_cb_weight.toFixed(4)} * ${cb.final_cb_score.toFixed(4)}) + (${rec.beta_cf_weight.toFixed(4)} * ${cf.normalized_cf_score.toFixed(4)}) + (${rec.gamma_mc_weight.toFixed(4)} * ${mc.normalized_mc_score.toFixed(4)}) = ${rec.final_score.toFixed(4)} (${rec.match_percentage.toFixed(1)}%)</div>
     </div>
   `;
 
   body.innerHTML = `
-    <div class="detail-header">
-      <div class="detail-id-block">
+    <div class="detail-top">
+      <div class="detail-id">
         <div class="monogram" aria-hidden="true">${esc(initials(j.company))}</div>
         <div>
           <h2 class="detail-title">${esc(j.title)}</h2>
           <p class="detail-company">${esc(j.company)} &middot; ${esc(j.location)}</p>
         </div>
       </div>
-      <span class="match-tag tabular">${Math.round(rec.match_percentage)}% cocok</span>
+      <span class="match-badge tabular">${Math.round(rec.match_percentage)}% cocok</span>
     </div>
 
-    <div class="detail-facts-row tabular">
-      <div class="fact-pair"><strong>Rp ${j.salary_idr_millions.toFixed(1)} Jt/bln</strong></div>
-      <div class="fact-pair"><span>Mode:</span> <strong>${esc(j.work_mode)}</strong></div>
-      <div class="fact-pair"><span>Pengalaman:</span> <strong>Min ${j.min_experience_years} thn</strong></div>
-      <div class="fact-pair"><span>Bidang:</span> <strong>${esc(j.category)}</strong></div>
+    <div class="facts-bar tabular">
+      <div><strong>Rp ${j.salary_idr_millions.toFixed(1)} Jt/bln</strong></div>
+      <div><span>Mode:</span> <strong>${esc(j.work_mode)}</strong></div>
+      <div><span>Pengalaman:</span> <strong>Min ${j.min_experience_years} thn</strong></div>
+      <div><span>Bidang:</span> <strong>${esc(j.category)}</strong></div>
     </div>
 
-    <div class="detail-cta-row">
-      <div class="cta-left">
-        <button type="button" id="btn-detail-apply" class="btn-solid">Lamar lowongan</button>
+    <div class="detail-actions">
+      <div class="action-btns">
+        <button type="button" id="btn-detail-apply" class="btn-primary">Lamar lowongan</button>
         <button type="button" id="btn-detail-save" class="btn-outline">Simpan</button>
       </div>
 
-      <div class="segment-group" role="tablist" aria-label="Tampilan detail lowongan">
-        <button type="button" class="seg-btn ${state.detailTab === "overview" ? "active" : ""}" role="tab" aria-selected="${state.detailTab === "overview"}" data-dtab="overview">Ringkasan</button>
-        <button type="button" class="seg-btn ${state.detailTab === "math" ? "active" : ""}" role="tab" aria-selected="${state.detailTab === "math"}" data-dtab="math">Hitungan AI</button>
+      <div class="segment-control" role="tablist" aria-label="Tampilan detail lowongan">
+        <button type="button" class="seg-item ${state.detailTab === "overview" ? "active" : ""}" role="tab" aria-selected="${state.detailTab === "overview"}" data-dtab="overview">Ringkasan</button>
+        <button type="button" class="seg-item ${state.detailTab === "math" ? "active" : ""}" role="tab" aria-selected="${state.detailTab === "math"}" data-dtab="math">Hitungan AI</button>
       </div>
     </div>
 
@@ -512,8 +509,8 @@ function renderDetailPane(rec) {
 function meterItem(label, val) {
   const pct = Math.min(100, Math.max(0, (val / 5) * 100));
   return `
-    <div class="meter-row">
-      <div class="meter-top">
+    <div class="meter-item">
+      <div class="meter-head">
         <span>${label}</span>
         <strong class="tabular">${val.toFixed(1)} / 5</strong>
       </div>
@@ -554,7 +551,7 @@ async function loadActivityView() {
 
   $("#history-count").textContent = `${history.length} item`;
   if (!history.length) {
-    $("#user-history-wrap").innerHTML = `<p class="subtle-copy">Belum ada lowongan yang dilamar atau disimpan.</p>`;
+    $("#user-history-wrap").innerHTML = `<p class="meta-muted">Belum ada lowongan yang dilamar atau disimpan.</p>`;
   } else {
     $("#user-history-wrap").innerHTML = `
       <div class="table-wrap">
@@ -569,7 +566,7 @@ async function loadActivityView() {
                 const label = a === "applied" ? "Dilamar" : a === "bookmarked" ? "Disimpan" : "Dilihat";
                 return `
                 <tr>
-                  <td><strong>${esc(h.job_title)}</strong><br/><span class="subtle-note">${esc(h.company)} (${esc(h.work_mode)})</span></td>
+                  <td><strong>${esc(h.job_title)}</strong><br/><span class="meta-muted">${esc(h.company)} (${esc(h.work_mode)})</span></td>
                   <td><span class="state-pill ${esc(a)}">${label}</span></td>
                   <td class="tabular"><strong>${h.interaction.rating.toFixed(1)}</strong> / 5</td>
                 </tr>`;
@@ -589,7 +586,7 @@ async function loadActivityView() {
             .map(
               (n, i) => `
             <tr class="${i < 3 && n.similarity > 0.1 ? "row-best" : ""}">
-              <td><strong>${esc(n.neighbor_name)}</strong><br/><span class="subtle-note">${esc(n.role_headline)}</span></td>
+              <td><strong>${esc(n.neighbor_name)}</strong><br/><span class="meta-muted">${esc(n.role_headline)}</span></td>
               <td class="tabular">${n.shared_jobs_count} item</td>
               <td class="tabular"><strong>${n.similarity.toFixed(4)}</strong></td>
             </tr>`
@@ -600,7 +597,7 @@ async function loadActivityView() {
     </div>`;
 }
 
-// ---------------- VIEW 3: LAB EVALUASI AI ----------------
+// ---------------- VIEW 3: EVALUASI AI ----------------
 async function loadLabView() {
   await Promise.all([loadEvaluation(), loadLecturerSimulation(), loadFirebaseStatus()]);
   renderCatalogTable();
@@ -609,6 +606,11 @@ async function loadLabView() {
 async function loadEvaluation() {
   const res = await fetch("/api/evaluate");
   const rep = await res.json();
+
+  const best = rep.methods.find((m) => m.method_id === "proposed_hmc_cf");
+  if (best) {
+    $("#stat-p3").textContent = `${(best.precision_at_3 * 100).toFixed(1).replace(".", ",")}%`;
+  }
 
   $("#eval-meta").textContent = `Indeks dibangun ${(rep.index_build_micros / 1000).toFixed(2)} ms`;
   $("#eval-desc").textContent =
@@ -620,7 +622,7 @@ async function loadEvaluation() {
     <div class="metric-bar-row">
       <div class="metric-bar-head">
         <span>${esc(m.method_label)}</span>
-        <span class="subtle-note tabular">${m.avg_latency_micros} us (${(m.avg_latency_micros / 1000).toFixed(2)} ms)</span>
+        <span class="meta-muted tabular">${m.avg_latency_micros} us (${(m.avg_latency_micros / 1000).toFixed(2)} ms)</span>
       </div>
       <div class="metric-bar-cols tabular">
         <div>
@@ -629,7 +631,7 @@ async function loadEvaluation() {
         </div>
         <div>
           NDCG@5: <strong>${(m.ndcg_at_5 * 100).toFixed(1)}%</strong>
-          <div class="meter-track"><div class="meter-fill accent" style="width:${(m.ndcg_at_5 * 100).toFixed(1)}%"></div></div>
+          <div class="meter-track"><div class="meter-fill" style="width:${(m.ndcg_at_5 * 100).toFixed(1)}%"></div></div>
         </div>
         <div>
           Syarat wajib: <strong>${(m.constraint_satisfaction_rate * 100).toFixed(1)}%</strong>
@@ -737,7 +739,7 @@ function renderCatalogTable() {
             (j) => `
           <tr>
             <td><code>${j.id}</code></td>
-            <td><strong>${esc(j.title)}</strong><br/><span class="subtle-note">${esc(j.company)}</span></td>
+            <td><strong>${esc(j.title)}</strong><br/><span class="meta-muted">${esc(j.company)}</span></td>
             <td class="tabular">${esc(j.work_mode)}, Rp ${j.salary_idr_millions.toFixed(1)} Jt</td>
             <td class="tabular"><code>${j.criteria.c1_role_clarity.toFixed(1)} / ${j.criteria.c2_technical_challenge.toFixed(1)} / ${j.criteria.c3_compensation.toFixed(1)} / ${j.criteria.c4_flexibility.toFixed(1)}</code></td>
             <td><code>${esc(j.source_dataset)}</code></td>
@@ -762,6 +764,8 @@ async function bootstrap() {
     $("#feed-error").classList.remove("hidden");
     return;
   }
+
+  $("#stat-jobs-count").textContent = String(state.jobs.length);
 
   const selUser = $("#select-user");
   selUser.innerHTML = state.users
@@ -886,7 +890,7 @@ async function bootstrap() {
   $("#sim-min-practice").addEventListener("input", loadLecturerSimulation);
   $("#inp-catalog-search").addEventListener("input", renderCatalogTable);
 
-  await Promise.all([loadFirebaseStatus(), fetchRecommendations()]);
+  await Promise.all([loadFirebaseStatus(), fetchRecommendations(), loadEvaluation()]);
 }
 
 document.addEventListener("DOMContentLoaded", bootstrap);

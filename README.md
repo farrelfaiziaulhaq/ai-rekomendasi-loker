@@ -12,29 +12,31 @@ Disusun selaras penuh dengan materi perkuliahan [`references/materi-dosen/AI_Sis
 
 ---
 
-## Demo Visual Proyek (Animasi Walkthrough & Video)
+## Demo Visual Proyek (Showcase Banner, Walkthrough GIF & Video)
+
+![Showcase Banner KarirAI](docs/media/showcase-banner.png)
 
 ![Demo Walkthrough KarirAI](docs/media/demo-walkthrough.gif)
 
-> 🎬 **Rekaman Video HD Lengkap (`.webm`):** [`docs/media/demo-karir-ai.webm`](docs/media/demo-karir-ai.webm)
+> **Rekaman Video HD Lengkap (`.webm`):** [`docs/media/demo-karir-ai.webm`](docs/media/demo-karir-ai.webm)
 
 ### Cuplikan Antarmuka & Pembuktian Algoritma AI
 
-| 1. Rekomendasi Persona Dina (Prioritas Kejelasan) | 2. White-Box AI Inspector (Bukti Vektor TF-IDF & Pearson) |
+| 1. Dashboard Utama Dark Luminous (Persona Dina) | 2. Bukti Hitungan AI Inline (Vektor TF-IDF & Pearson) |
 |---|---|
 | ![Rekomendasi Dina](docs/media/01-rekomendasi-dina.png) | ![White-Box Inspector](docs/media/03-whitebox-inspector-rumus.png) |
 
-| 3. Kontras Persona Bima (Prioritas Tantangan & Gaji) | 4. Bukti Filter Syarat Wajib / Hard Constraints (Slide 14) |
+| 3. Kontras Persona Bima (Prioritas Tantangan & Gaji) | 4. Laci Prioritas & Bukti Filter Syarat Wajib (Slide 14) |
 |---|---|
 | ![Rekomendasi Bima](docs/media/04-rekomendasi-bima-kontras.png) | ![Filter Syarat Wajib](docs/media/02-bukti-filter-syarat-wajib.png) |
 
-| 5. Simulasi Interaktif Materi PDF Dosen (Slide 09–17) | 6. Pengujian Ablasi Precision@K, NDCG@K & Latensi Rust |
+| 5. Simulasi Interaktif Materi PDF Dosen (Slide 09-17) | 6. Pengujian Ablasi Precision@K, NDCG@K & Latensi Rust |
 |---|---|
 | ![Simulasi Materi Dosen](docs/media/06-simulasi-materi-pdf-dosen.png) | ![Evaluasi AI](docs/media/07-evaluasi-precision-ndcg.png) |
 
-| 7. Matriks Kemiripan Pengguna (Collaborative Filtering) | 8. Tampilan Mode Gelap (Warm Obsidian) |
+| 7. Matriks Kemiripan Pengguna (Collaborative Filtering) | 8. Tampilan Mode Terang (Light Theme Toggle) |
 |---|---|
-| ![Matriks Collaborative](docs/media/05-collaborative-matriks.png) | ![Mode Gelap KarirAI](docs/media/08-firebase-status-katalog-dark.png) |
+| ![Matriks Collaborative](docs/media/05-collaborative-matriks.png) | ![Mode Terang KarirAI](docs/media/08-firebase-status-katalog-dark.png) |
 
 | 9. Tampilan Mobile Responsif (375px) | 10. Koleksi Live di Firebase Emulator Suite (`:4040`) |
 |---|---|
@@ -61,7 +63,7 @@ Disusun selaras penuh dengan materi perkuliahan [`references/materi-dosen/AI_Sis
 ### Opsi A: Paling Mudah untuk Kelompok di Windows, Unduh ZIP Release (Tanpa Install Rust!)
 
 1. Buka halaman **[GitHub Releases Terbaru](https://github.com/farrelfaiziaulhaq/ai-rekomendasi-loker/releases/latest)**.
-2. Unduh **`karir-ai-v1.2.0-windows-x86_64.zip`**, klik kanan -> **Extract All...**
+2. Unduh **`karir-ai-v1.3.0-windows-x86_64.zip`**, klik kanan -> **Extract All...**
 3. Klik dua kali **`start.bat`** → server langsung aktif dan otomatis membuka **`http://127.0.0.1:3000`** di browser!
    - Tersedia juga **`start-firebase-emulator.bat`** (menyalakan dashboard Firebase Firestore Emulator di `http://127.0.0.1:4040`) dan **`cek-evaluasi-ai.bat`** (mencetak tabel metrik evaluasi AI di Command Prompt).
 

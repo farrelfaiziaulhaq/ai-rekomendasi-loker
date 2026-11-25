@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KarirAI: Lowongan Kerja Terkurasi</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141413'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='17' font-weight='700' fill='%23f6f4ef'%3EK%3C/text%3E%3Ccircle cx='25' cy='23' r='2.5' fill='%23c2410c'/%3E%3C/svg%3E" />
+  <title>KarirAI: Rekomendasi Lowongan Kerja Hybrid AI</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0d17'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='17' font-weight='700' fill='%23ffffff'%3EK%3C/text%3E%3Ccircle cx='25' cy='23' r='2.5' fill='%236366f1'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     media="print"
     onload="this.media='all'"
   />
@@ -18,23 +18,21 @@
 <body>
   <a href="#main-content" class="skip-link">Langsung ke daftar lowongan</a>
 
-  <!-- TOP NAVIGATION -->
+  <!-- FLOATING TOPBAR -->
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="topbar-left">
-        <a href="#lowongan" class="brand-wordmark" data-nav="view-jobs">
-          KarirAI<span class="brand-dot" aria-hidden="true"></span>
-        </a>
+      <a href="#lowongan" class="brand" data-nav="view-jobs">
+        Karir<span class="brand-accent">AI</span>
+      </a>
 
-        <nav class="nav-list" aria-label="Navigasi utama">
-          <button type="button" class="nav-item active" data-view="view-jobs" aria-current="page">Lowongan</button>
-          <button type="button" class="nav-item" data-view="view-activity">Aktivitas</button>
-          <button type="button" class="nav-item" data-view="view-lab">Evaluasi AI</button>
-        </nav>
-      </div>
+      <nav class="nav-dock" aria-label="Navigasi utama">
+        <button type="button" class="dock-link active" data-view="view-jobs" aria-current="page">Lowongan</button>
+        <button type="button" class="dock-link" data-view="view-activity">Aktivitas</button>
+        <button type="button" class="dock-link" data-view="view-lab">Evaluasi AI</button>
+      </nav>
 
-      <div class="topbar-right">
-        <div class="profile-select-wrap">
+      <div class="topbar-actions">
+        <div class="persona-wrap">
           <label for="select-user" class="sr-only">Profil pencari kerja</label>
           <select id="select-user" aria-label="Profil pencari kerja"></select>
         </div>
@@ -43,14 +41,11 @@
           id="btn-theme"
           type="button"
           class="btn-icon"
-          aria-label="Aktifkan mode gelap"
-          aria-pressed="false"
-          title="Ubah tema"
+          aria-label="Ubah ke mode terang"
+          aria-pressed="true"
+          title="Ubah mode terang / gelap"
         >
-          <svg id="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <svg id="icon-sun" class="hidden" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg id="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -61,25 +56,28 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
+          <svg id="icon-moon" class="hidden" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
         </button>
       </div>
     </div>
   </header>
 
   <main id="main-content" class="main-wrap">
-    <!-- ==================== VIEW 1: PORTAL LOWONGAN MASTER-DETAIL ==================== -->
-    <section id="view-jobs" class="view-section active" aria-labelledby="page-heading">
-      <!-- COMPACT SEARCH & FILTER STRIP -->
-      <div class="search-strip">
-        <div class="shell">
-          <div class="search-title-row">
-            <h1 id="page-heading">Lowongan kerja</h1>
-            <p id="active-profile-line" class="profile-sub">Memuat profil...</p>
-          </div>
+    <!-- ==================== VIEW 1: HERO LUMINOUS + MASTER-DETAIL BOARD ==================== -->
+    <section id="view-jobs" class="view-section active" aria-labelledby="hero-heading">
+      <div class="hero-stage">
+        <div class="hero-horizon" aria-hidden="true"></div>
+        <div class="shell hero-content">
+          <h1 id="hero-heading" class="hero-title">
+            Pencarian Lowongan Kerja <span class="title-highlight">Berbasis Hybrid AI</span>
+          </h1>
+          <p id="active-profile-line" class="hero-sub">Memuat profil pencari kerja...</p>
 
-          <form id="search-form" class="unified-search" role="search">
-            <div class="search-field">
-              <svg class="field-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <form id="search-form" class="hero-search" role="search">
+            <div class="search-input-box">
+              <svg class="search-svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
@@ -92,166 +90,174 @@
               />
             </div>
 
-            <div class="search-divider" aria-hidden="true"></div>
+            <div class="search-sep" aria-hidden="true"></div>
 
-            <div class="category-field">
-              <label for="sel-category" class="sr-only">Pilih bidang pekerjaan</label>
+            <div class="search-cat-box">
+              <label for="sel-category" class="sr-only">Filter bidang pekerjaan</label>
               <select id="sel-category">
                 <option value="">Semua bidang</option>
               </select>
             </div>
 
-            <button type="submit" class="btn-solid search-btn">Cari</button>
+            <button type="submit" class="btn-primary search-cta">Cari lowongan</button>
           </form>
 
-          <!-- BARIS FILTER RINGKAS SEPERTI JOBSTREET / DEALLS -->
-          <div class="filter-bar">
-            <div class="filter-bar-left">
-              <div class="segment-group" role="group" aria-label="Mode kerja">
-                <button type="button" class="seg-btn active" data-quick-mode="all">Semua</button>
-                <button type="button" class="seg-btn" data-quick-mode="Remote">Remote</button>
-                <button type="button" class="seg-btn" data-quick-mode="Hybrid">Hybrid</button>
-                <button type="button" class="seg-btn" data-quick-mode="Onsite">Onsite</button>
-              </div>
-
-              <button
-                type="button"
-                id="btn-toggle-prefs"
-                class="filter-trigger"
-                aria-expanded="false"
-                aria-controls="prefs-drawer"
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="4" y1="21" x2="4" y2="14"></line>
-                  <line x1="4" y1="10" x2="4" y2="3"></line>
-                  <line x1="12" y1="21" x2="12" y2="12"></line>
-                  <line x1="12" y1="8" x2="12" y2="3"></line>
-                  <line x1="20" y1="21" x2="20" y2="16"></line>
-                  <line x1="20" y1="12" x2="20" y2="3"></line>
-                  <line x1="1" y1="14" x2="7" y2="14"></line>
-                  <line x1="9" y1="8" x2="15" y2="8"></line>
-                  <line x1="17" y1="16" x2="23" y2="16"></line>
-                </svg>
-                <span>Prioritas &amp; Syarat</span>
-              </button>
-
-              <span id="active-filter-summary" class="filter-summary-text"></span>
-            </div>
-
-            <div class="filter-bar-right">
-              <label for="select-mode" class="sr-only">Metode urutan</label>
-              <select id="select-mode" class="sort-select" aria-label="Metode pencocokan">
-                <option value="hybrid_multicriteria">Urutan: Hybrid Multi-Criteria</option>
-                <option value="hybrid_classic">Urutan: Hybrid Klasik</option>
-                <option value="content_based">Urutan: Content-Based (TF-IDF)</option>
-                <option value="collaborative">Urutan: Collaborative (Pearson)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- PANEL PENGATURAN PRIORITAS & SYARAT (COLLAPSIBLE, TIDAK MENGOTORI LAYAR) -->
-          <div id="prefs-drawer" class="prefs-drawer hidden">
-            <div class="prefs-grid">
-              <div class="prefs-col">
-                <div class="prefs-col-head">
-                  <h2>Bobot prioritas kriteria</h2>
-                  <span class="subtle-note">Total 100%</span>
-                </div>
-                <div id="weight-bar" class="weight-bar" aria-hidden="true"></div>
-                <div class="slider-grid">
-                  <div class="slider-item">
-                    <div class="slider-head">
-                      <label for="rng-w1">Kejelasan peran</label>
-                      <span id="lbl-w1" class="tabular">45%</span>
-                    </div>
-                    <input type="range" id="rng-w1" min="0" max="100" step="5" value="45" />
-                  </div>
-                  <div class="slider-item">
-                    <div class="slider-head">
-                      <label for="rng-w2">Tantangan teknis</label>
-                      <span id="lbl-w2" class="tabular">15%</span>
-                    </div>
-                    <input type="range" id="rng-w2" min="0" max="100" step="5" value="15" />
-                  </div>
-                  <div class="slider-item">
-                    <div class="slider-head">
-                      <label for="rng-w3">Kompensasi gaji</label>
-                      <span id="lbl-w3" class="tabular">15%</span>
-                    </div>
-                    <input type="range" id="rng-w3" min="0" max="100" step="5" value="15" />
-                  </div>
-                  <div class="slider-item">
-                    <div class="slider-head">
-                      <label for="rng-w4">Fleksibilitas kerja</label>
-                      <span id="lbl-w4" class="tabular">25%</span>
-                    </div>
-                    <input type="range" id="rng-w4" min="0" max="100" step="5" value="25" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="prefs-col">
-                <div class="prefs-col-head">
-                  <h2>Syarat wajib</h2>
-                  <label class="inline-check">
-                    <input type="checkbox" id="chk-constraints" checked />
-                    <span>Aktif</span>
-                  </label>
-                </div>
-                <div class="num-grid">
-                  <div class="field-group">
-                    <label for="inp-min-salary">Gaji minimal (Jt/bln)</label>
-                    <input type="number" id="inp-min-salary" min="0" max="60" step="0.5" value="8" />
-                  </div>
-                  <div class="field-group">
-                    <label for="inp-max-exp">Maks pengalaman (thn)</label>
-                    <input type="number" id="inp-max-exp" min="0" max="12" step="1" value="1" />
-                  </div>
-                  <div class="field-group">
-                    <label for="inp-min-c1">Min kejelasan (1-5)</label>
-                    <input type="number" id="inp-min-c1" min="0" max="5" step="0.5" value="4" />
-                  </div>
-                  <div class="field-group">
-                    <label for="inp-min-c2">Min tantangan (1-5)</label>
-                    <input type="number" id="inp-min-c2" min="0" max="5" step="0.5" value="0" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="prefs-col">
-                <div class="prefs-col-head">
-                  <h2>Keahlian Anda</h2>
-                </div>
-                <div class="field-group">
-                  <label for="inp-skills">Daftar keahlian (pisahkan koma)</label>
-                  <input type="text" id="inp-skills" placeholder="python, rust, sql, firebase" />
-                </div>
-                <div class="prefs-footer-actions">
-                  <button type="button" id="btn-save-prefs" class="btn-solid btn-sm">Simpan ke profil</button>
-                  <button type="button" id="btn-reset-demo" class="btn-outline btn-sm">Reset awal</button>
-                </div>
-              </div>
-            </div>
+          <!-- METRIK RIIL TERUKUR DARI ENGINE RUST (BUKAN ANGKA FIKTIF) -->
+          <div class="real-stats-strip" aria-label="Ringkasan data terukur sistem">
+            <div class="stat-pill"><strong id="stat-jobs-count">60</strong> <span>lowongan riil</span></div>
+            <div class="stat-sep" aria-hidden="true"></div>
+            <div class="stat-pill"><strong id="stat-p3">76,4%</strong> <span>Precision@3 (HMC-CF)</span></div>
+            <div class="stat-sep" aria-hidden="true"></div>
+            <div class="stat-pill"><strong id="stat-latency">0,50 ms</strong> <span>komputasi Rust</span></div>
           </div>
         </div>
       </div>
 
-      <!-- MASTER-DETAIL SPLIT WORKSPACE (SEPERTI JOBSTREET & PORTAL KARIR MODERN) -->
-      <div class="shell board-wrap">
+      <!-- CONTROL BAR + MASTER-DETAIL SPLIT BOARD -->
+      <div class="shell board-section">
+        <div class="control-strip">
+          <div class="control-left">
+            <div class="segment-control" role="group" aria-label="Filter mode kerja">
+              <button type="button" class="seg-item active" data-quick-mode="all">Semua</button>
+              <button type="button" class="seg-item" data-quick-mode="Remote">Remote</button>
+              <button type="button" class="seg-item" data-quick-mode="Hybrid">Hybrid</button>
+              <button type="button" class="seg-item" data-quick-mode="Onsite">Onsite</button>
+            </div>
+
+            <button
+              type="button"
+              id="btn-toggle-prefs"
+              class="btn-outline btn-sm"
+              aria-expanded="false"
+              aria-controls="prefs-drawer"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+              <span>Prioritas &amp; Syarat</span>
+            </button>
+
+            <span id="active-filter-summary" class="active-summary"></span>
+          </div>
+
+          <div class="control-right">
+            <label for="select-mode" class="sr-only">Metode algoritma rekomendasi</label>
+            <select id="select-mode" class="method-select" aria-label="Metode algoritma rekomendasi">
+              <option value="hybrid_multicriteria">Metode: Hybrid Multi-Criteria</option>
+              <option value="hybrid_classic">Metode: Hybrid Klasik</option>
+              <option value="content_based">Metode: Content-Based (TF-IDF)</option>
+              <option value="collaborative">Metode: Collaborative (Pearson)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- LACI PRIORITAS & SYARAT WAJIB (COLLAPSIBLE) -->
+        <div id="prefs-drawer" class="prefs-panel hidden">
+          <div class="prefs-grid">
+            <div class="prefs-group">
+              <div class="prefs-head">
+                <h2>Bobot prioritas multikriteria</h2>
+                <span class="meta-muted">Total 100%</span>
+              </div>
+              <div id="weight-bar" class="weight-bar" aria-hidden="true"></div>
+              <div class="slider-grid">
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="rng-w1">Kejelasan peran</label>
+                    <span id="lbl-w1" class="tabular">45%</span>
+                  </div>
+                  <input type="range" id="rng-w1" min="0" max="100" step="5" value="45" />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="rng-w2">Tantangan teknis</label>
+                    <span id="lbl-w2" class="tabular">15%</span>
+                  </div>
+                  <input type="range" id="rng-w2" min="0" max="100" step="5" value="15" />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="rng-w3">Kompensasi gaji</label>
+                    <span id="lbl-w3" class="tabular">15%</span>
+                  </div>
+                  <input type="range" id="rng-w3" min="0" max="100" step="5" value="15" />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="rng-w4">Fleksibilitas kerja</label>
+                    <span id="lbl-w4" class="tabular">25%</span>
+                  </div>
+                  <input type="range" id="rng-w4" min="0" max="100" step="5" value="25" />
+                </div>
+              </div>
+            </div>
+
+            <div class="prefs-group">
+              <div class="prefs-head">
+                <h2>Syarat wajib (Hard Filter)</h2>
+                <label class="inline-check">
+                  <input type="checkbox" id="chk-constraints" checked />
+                  <span>Aktif</span>
+                </label>
+              </div>
+              <div class="num-grid">
+                <div class="field-group">
+                  <label for="inp-min-salary">Gaji min (Jt/bln)</label>
+                  <input type="number" id="inp-min-salary" min="0" max="60" step="0.5" value="8" />
+                </div>
+                <div class="field-group">
+                  <label for="inp-max-exp">Maks pengalaman (thn)</label>
+                  <input type="number" id="inp-max-exp" min="0" max="12" step="1" value="1" />
+                </div>
+                <div class="field-group">
+                  <label for="inp-min-c1">Min kejelasan (1-5)</label>
+                  <input type="number" id="inp-min-c1" min="0" max="5" step="0.5" value="4" />
+                </div>
+                <div class="field-group">
+                  <label for="inp-min-c2">Min tantangan (1-5)</label>
+                  <input type="number" id="inp-min-c2" min="0" max="5" step="0.5" value="0" />
+                </div>
+              </div>
+            </div>
+
+            <div class="prefs-group">
+              <div class="prefs-head">
+                <h2>Keahlian Anda</h2>
+              </div>
+              <div class="field-group">
+                <label for="inp-skills">Daftar keahlian (pisahkan koma)</label>
+                <input type="text" id="inp-skills" placeholder="python, rust, sql, firebase" />
+              </div>
+              <div class="prefs-actions">
+                <button type="button" id="btn-save-prefs" class="btn-primary btn-sm">Simpan preferensi</button>
+                <button type="button" id="btn-reset-demo" class="btn-outline btn-sm">Reset awal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="feed-error" class="error-banner hidden" role="alert">
           <span id="feed-error-text">Gagal memuat daftar lowongan.</span>
           <button type="button" id="btn-retry-feed" class="btn-outline btn-sm">Coba lagi</button>
         </div>
 
-        <div class="split-board">
-          <!-- KOLOM KIRI: DAFTAR LOWONGAN RINGKAS -->
+        <!-- MASTER-DETAIL SPLIT WORKSPACE -->
+        <div class="split-workspace">
           <div class="master-col">
-            <div class="master-bar">
-              <span id="results-count" class="count-heading" aria-live="polite">Memuat lowongan...</span>
-              <span id="latency-readout" class="latency-note tabular"></span>
+            <div class="master-header">
+              <span id="results-count" class="results-label" aria-live="polite">Memuat lowongan...</span>
+              <span id="latency-readout" class="meta-muted tabular"></span>
             </div>
 
-            <div id="feed-loading" class="loading-list hidden" aria-busy="true" aria-label="Memuat lowongan">
+            <div id="feed-loading" class="loading-list hidden" aria-busy="true" aria-label="Memuat rekomendasi">
               <div class="skel-card"></div>
               <div class="skel-card"></div>
               <div class="skel-card"></div>
@@ -259,7 +265,6 @@
 
             <div id="jobs-list" class="master-list" role="list"></div>
 
-            <!-- ACCORDION BUKTI SYARAT WAJIB (SLIDE 14) -->
             <details id="filtered-drawer" class="filtered-accordion hidden">
               <summary class="filtered-trigger">
                 <span id="filtered-summary-label">Lowongan yang tidak memenuhi syarat</span>
@@ -271,43 +276,42 @@
             </details>
           </div>
 
-          <!-- KOLOM KANAN: PANEL DETAIL LOWONGAN + HITUNGAN AI -->
           <aside id="detail-pane" class="detail-col" aria-label="Detail lowongan terpilih">
             <div class="mobile-sheet-head">
-              <button type="button" id="btn-close-mobile-detail" class="btn-link">
+              <button type="button" id="btn-close-mobile-detail" class="btn-back">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
                 Kembali ke daftar
               </button>
             </div>
-            <div id="detail-pane-body" class="detail-sheet"></div>
+            <div id="detail-pane-body" class="detail-body"></div>
           </aside>
         </div>
       </div>
     </section>
 
-    <!-- ==================== VIEW 2: AKTIVITAS & POLA PENGGUNA ==================== -->
+    <!-- ==================== VIEW 2: AKTIVITAS ==================== -->
     <section id="view-activity" class="view-section" aria-labelledby="activity-heading">
       <div class="shell subpage-wrap">
-        <div class="subpage-title">
+        <div class="subpage-head">
           <h2 id="activity-heading">Aktivitas &amp; Pola Pengguna</h2>
-          <p class="subtle-copy">Lamaran dan simpanan Anda memperbarui vektor profil dan menemukan pengguna dengan pola pilihan serupa.</p>
+          <p class="meta-muted">Riwayat lamaran dan simpanan Anda membentuk sinyal profil untuk Collaborative Filtering.</p>
         </div>
 
-        <div class="two-pane-equal">
-          <div class="surface-box">
-            <div class="box-head">
-              <h3>Riwayat lamaran &amp; simpanan</h3>
-              <span id="history-count" class="subtle-note">0 item</span>
+        <div class="two-pane-grid">
+          <div class="surface-card">
+            <div class="card-head">
+              <h3>Riwayat interaksi Anda</h3>
+              <span id="history-count" class="meta-muted">0 item</span>
             </div>
             <div id="user-history-wrap"></div>
           </div>
 
-          <div class="surface-box">
-            <div class="box-head">
+          <div class="surface-card">
+            <div class="card-head">
               <h3>Pengguna dengan pola serupa</h3>
-              <span class="subtle-note">Korelasi Pearson</span>
+              <span class="meta-muted">Korelasi Pearson</span>
             </div>
             <div id="cf-neighbors-wrap"></div>
           </div>
@@ -315,32 +319,32 @@
       </div>
     </section>
 
-    <!-- ==================== VIEW 3: LAB EVALUASI AI & FIREBASE ==================== -->
+    <!-- ==================== VIEW 3: EVALUASI AI & FIREBASE ==================== -->
     <section id="view-lab" class="view-section" aria-labelledby="lab-heading">
       <div class="shell subpage-wrap">
-        <div class="subpage-title">
+        <div class="subpage-head">
           <h2 id="lab-heading">Evaluasi Algoritma &amp; Integrasi Firebase</h2>
-          <p class="subtle-copy">Pengujian ablasi 5 metode rekomendasi, simulasi studi kasus multikriteria (Slide 09-17), dan sinkronisasi Cloud Firestore.</p>
+          <p class="meta-muted">Pengujian ablasi 5 metode rekomendasi, simulasi studi kasus multikriteria (Slide 09-17), dan sinkronisasi Cloud Firestore.</p>
         </div>
 
-        <div class="lab-grid">
-          <div class="surface-box">
-            <div class="box-head">
+        <div class="lab-stack">
+          <div class="surface-card">
+            <div class="card-head">
               <h3>Pengujian ablasi (Precision@K &amp; NDCG@K)</h3>
-              <span id="eval-meta" class="subtle-note tabular"></span>
+              <span id="eval-meta" class="meta-muted tabular"></span>
             </div>
-            <p id="eval-desc" class="subtle-copy mb-16"></p>
+            <p id="eval-desc" class="meta-muted mb-16"></p>
             <div id="eval-bars" class="metric-bars"></div>
             <div id="eval-table-wrap" class="table-wrap"></div>
           </div>
 
-          <div class="surface-box">
-            <div class="box-head">
+          <div class="surface-card">
+            <div class="card-head">
               <h3>Simulasi studi kasus multikriteria (Dina vs Bima)</h3>
-              <span class="subtle-note">Verifikasi langsung engine Rust</span>
+              <span class="meta-muted">Verifikasi langsung engine Rust</span>
             </div>
-            <div id="slide-cards" class="trio-cards"></div>
-            <div class="sim-panel">
+            <div id="slide-cards" class="trio-grid"></div>
+            <div class="sim-box">
               <div class="sim-sliders">
                 <div class="slider-item">
                   <div class="slider-head">
@@ -360,9 +364,9 @@
             </div>
           </div>
 
-          <div class="surface-box">
-            <div class="box-head">
-              <h3>Firebase &amp; katalog dataset (60 lowongan)</h3>
+          <div class="surface-card">
+            <div class="card-head">
+              <h3>Status Firebase &amp; katalog dataset (60 lowongan)</h3>
               <div class="btn-row">
                 <button type="button" id="btn-sync-firebase" class="btn-outline btn-sm">Sinkronkan Firestore</button>
                 <a id="lnk-emulator-ui" href="http://127.0.0.1:4040" target="_blank" rel="noopener" class="btn-outline btn-sm">Buka Emulator UI</a>
