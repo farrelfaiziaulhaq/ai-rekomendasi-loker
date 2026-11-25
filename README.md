@@ -1,4 +1,4 @@
-# KarirAI — Sistem Rekomendasi Lowongan Kerja *Explainable* (Rust + Google Firebase)
+# KarirAI: Sistem Rekomendasi Lowongan Kerja *Explainable* (Rust + Google Firebase)
 
 [![CI](https://github.com/farrelfaiziaulhaq/ai-rekomendasi-loker/actions/workflows/ci.yml/badge.svg)](https://github.com/farrelfaiziaulhaq/ai-rekomendasi-loker/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/farrelfaiziaulhaq/ai-rekomendasi-loker)](https://github.com/farrelfaiziaulhaq/ai-rekomendasi-loker/releases/latest)
@@ -32,7 +32,7 @@ Disusun selaras penuh dengan materi perkuliahan [`references/materi-dosen/AI_Sis
 |---|---|
 | ![Simulasi Materi Dosen](docs/media/06-simulasi-materi-pdf-dosen.png) | ![Evaluasi AI](docs/media/07-evaluasi-precision-ndcg.png) |
 
-| 7. Matriks Kemiripan Pengguna (Collaborative Filtering) | 8. Tampilan Mode Gelap & Mobile Responsif (375px) |
+| 7. Matriks Kemiripan Pengguna (Collaborative Filtering) | 8. Tampilan Mode Gelap (Warm Obsidian) |
 |---|---|
 | ![Matriks Collaborative](docs/media/05-collaborative-matriks.png) | ![Mode Gelap KarirAI](docs/media/08-firebase-status-katalog-dark.png) |
 
@@ -58,14 +58,14 @@ Disusun selaras penuh dengan materi perkuliahan [`references/materi-dosen/AI_Sis
 
 ## Cara Paling Simpel Menjalankan Proyek (Windows 10/11 & Linux)
 
-### Opsi A — Paling Mudah untuk Kelompok di Windows: Unduh ZIP Release (Tanpa Install Rust!)
+### Opsi A: Paling Mudah untuk Kelompok di Windows, Unduh ZIP Release (Tanpa Install Rust!)
 
 1. Buka halaman **[GitHub Releases Terbaru](https://github.com/farrelfaiziaulhaq/ai-rekomendasi-loker/releases/latest)**.
 2. Unduh **`karir-ai-v1.2.0-windows-x86_64.zip`**, klik kanan -> **Extract All...**
 3. Klik dua kali **`start.bat`** → server langsung aktif dan otomatis membuka **`http://127.0.0.1:3000`** di browser!
    - Tersedia juga **`start-firebase-emulator.bat`** (menyalakan dashboard Firebase Firestore Emulator di `http://127.0.0.1:4040`) dan **`cek-evaluasi-ai.bat`** (mencetak tabel metrik evaluasi AI di Command Prompt).
 
-### Opsi B — Jalankan dari Source Code
+### Opsi B: Jalankan dari Source Code
 
 **Di Windows (File Explorer / PowerShell):**
 ```powershell
