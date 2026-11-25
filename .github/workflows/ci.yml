@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  linux:
+    name: Build, Test & Evaluasi AI (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pasang Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Cek Format & Clippy
+        run: |
+          cargo fmt -- --check
+          cargo clippy --all-targets -- -D warnings
+
+      - name: Unit Test Algoritma AI (TF-IDF, CF, MCRS, Constraints)
+        run: cargo test
+
+      - name: Verifikasi Studi Kasus PDF Dosen & Evaluasi Precision@K
+        run: |
+          cargo run -- --case-study
+          cargo run -- --eval
+
+      - name: Validasi Skrip Python & Bash
+        run: |
+          python3 -m py_compile scripts/download_resources.py scripts/preprocess_dataset.py
+          bash -n run.sh setup.sh scripts/package_release.sh
+
+  windows:
+    name: Build, Test & Validasi Runner (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validasi Sintaks PowerShell Runner
+        shell: pwsh
+        run: |
+          foreach ($f in @("run.ps1", "setup.ps1", "scripts/package_release.ps1")) {
+            $errors = $null
+            $null = [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path $f), [ref]$null, [ref]$errors)
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error $_ }
+              exit 1
+            }
+            Write-Host "OK: $f"
+          }
+
+      - name: Pasang Rust Toolchain (Windows MSVC)
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Unit Test & Evaluasi AI di Windows
+        run: |
+          cargo test
+          cargo run -- --case-study
+          cargo run -- --eval

@@ -1,0 +1,1783 @@
+[
+  {
+    "id": "JOB-001",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "4ae726ee-4c27-43d8-adaa-13c29268f4d9",
+    "title": "Senior Data Visualization Developer (Autonomous Driving)",
+    "company": "42dot",
+    "category": "Data Engineering & Analytics",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Remote",
+    "location": "Pangyo (Software Dream Center), South Korea",
+    "salary_idr_millions": 27.7,
+    "salary_usd_annual_ref": 106368,
+    "skills": [
+      "aws",
+      "ci-cd",
+      "data-engineering",
+      "docker",
+      "git",
+      "grpc",
+      "next.js",
+      "node.js"
+    ],
+    "description": "42dot membuka posisi Senior Data Visualization Developer (Autonomous Driving) pada divisi ENGINEERING. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis aws, ci-cd, data-engineering, docker, git. Mode kerja Remote (Pangyo (Software Dream Center), South Korea) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 2.9,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.25
+  },
+  {
+    "id": "JOB-002",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "57c07f5a-b928-4671-9028-6b051a27676a",
+    "title": "Senior Software Engineer (AD Framework)",
+    "company": "42dot",
+    "category": "Backend & Systems Engineering",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Remote",
+    "location": "Pangyo (Software Dream Center), South Korea",
+    "salary_idr_millions": 25.9,
+    "salary_usd_annual_ref": 99455,
+    "skills": [
+      "ci-cd",
+      "communication",
+      "embedded",
+      "linux",
+      "python",
+      "robotics",
+      "rust"
+    ],
+    "description": "42dot membuka posisi Senior Software Engineer (AD Framework) pada divisi ENGINEERING. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis ci-cd, communication, embedded, linux, python. Mode kerja Remote (Pangyo (Software Dream Center), South Korea) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.45
+  },
+  {
+    "id": "JOB-003",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "821bd538-9af1-4262-a533-785d73ed0bbf",
+    "title": "Senior Data Analyst - Content",
+    "company": "9fin",
+    "category": "AI & Machine Learning",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "London",
+    "salary_idr_millions": 29.8,
+    "salary_usd_annual_ref": 114432,
+    "skills": [
+      "bigquery",
+      "dbt",
+      "excel",
+      "looker",
+      "python",
+      "seo",
+      "snowflake",
+      "sql"
+    ],
+    "description": "9fin membuka posisi Senior Data Analyst - Content pada divisi Data & AI. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis bigquery, dbt, excel, looker, python. Mode kerja Hybrid (London) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.9,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 4.35
+  },
+  {
+    "id": "JOB-004",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "0584070f-23ba-4b19-85cc-18065572f370",
+    "title": "Senior Python Developer (Platform)",
+    "company": "aghanim",
+    "category": "Cloud, DevOps & SRE",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "Lisbon; Belgrade",
+    "salary_idr_millions": 27.1,
+    "salary_usd_annual_ref": 104064,
+    "skills": [
+      "communication",
+      "fastapi",
+      "gcp",
+      "nosql",
+      "python",
+      "redis",
+      "sql"
+    ],
+    "description": "aghanim membuka posisi Senior Python Developer (Platform) pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis communication, fastapi, gcp, nosql, python. Mode kerja Hybrid (Lisbon; Belgrade) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 4.5
+  },
+  {
+    "id": "JOB-005",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "0cec721e-47de-488a-943f-484081839d44",
+    "title": "QA Engineer",
+    "company": "airapps",
+    "category": "Backend & Systems Engineering",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Madrid",
+    "salary_idr_millions": 20.3,
+    "salary_usd_annual_ref": 56000,
+    "skills": [
+      "android",
+      "communication",
+      "ios",
+      "java",
+      "javascript",
+      "project-management",
+      "python",
+      "qa-testing"
+    ],
+    "description": "airapps membuka posisi QA Engineer pada divisi Quality Assurance. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis android, communication, ios, java, javascript. Mode kerja Remote (Madrid) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 3.98
+  },
+  {
+    "id": "JOB-006",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "2b1d409b-6925-4eae-b6ac-7d9632fab41f",
+    "title": "Product Analyst",
+    "company": "airapps",
+    "category": "Data Engineering & Analytics",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Berlin Metropolitain Area",
+    "salary_idr_millions": 17.7,
+    "salary_usd_annual_ref": 46000,
+    "skills": [
+      "communication",
+      "looker",
+      "power-bi",
+      "product-management",
+      "python",
+      "sql",
+      "statistics",
+      "tableau"
+    ],
+    "description": "airapps membuka posisi Product Analyst pada divisi Product. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis communication, looker, power-bi, product-management, python. Mode kerja Remote (Berlin Metropolitain Area) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.8,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.15
+  },
+  {
+    "id": "JOB-007",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "60654f81-6b3c-42f1-be22-9a915abdf84d",
+    "title": "Senior IT Engineer, LRC",
+    "company": "airwallex",
+    "category": "Cybersecurity & Cloud Security",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Remote",
+    "location": "US - San Francisco",
+    "salary_idr_millions": 31.7,
+    "salary_usd_annual_ref": 250000,
+    "skills": [
+      "aws",
+      "gcp",
+      "project-management",
+      "python",
+      "salesforce",
+      "security",
+      "terraform"
+    ],
+    "description": "airwallex membuka posisi Senior IT Engineer, LRC pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis aws, gcp, project-management, python, salesforce. Mode kerja Remote (US - San Francisco) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.5
+  },
+  {
+    "id": "JOB-008",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "f4d323da-c799-40d6-85b7-92e0802e74e6",
+    "title": "Enterprise Software Engineer",
+    "company": "antares",
+    "category": "Backend & Systems Engineering",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Los Angeles",
+    "salary_idr_millions": 22.3,
+    "salary_usd_annual_ref": 160000,
+    "skills": [
+      "c#",
+      "git",
+      "java",
+      "python",
+      "sql"
+    ],
+    "description": "antares membuka posisi Enterprise Software Engineer pada divisi Manufacturing & Quality. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis c#, git, java, python, sql. Mode kerja Hybrid (Los Angeles) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 4.03
+  },
+  {
+    "id": "JOB-009",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "d6bb835e-1a3e-4d9d-b84f-ef7c7585cf22",
+    "title": "Full-Stack Developer (Germany)",
+    "company": "anyone-ai",
+    "category": "Fullstack & Frontend Web",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Germany",
+    "salary_idr_millions": 15.9,
+    "salary_usd_annual_ref": 50,
+    "skills": [
+      "c#",
+      "java",
+      "python",
+      "recruiting"
+    ],
+    "description": "anyone-ai membuka posisi Full-Stack Developer (Germany) pada divisi Software Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis c#, java, python, recruiting. Mode kerja Remote (Germany) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.0
+  },
+  {
+    "id": "JOB-010",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "ff43d415-ee90-4185-8f7b-82427305aac7",
+    "title": "Software Engineering AI Trainer (Argentina)",
+    "company": "anyone-ai",
+    "category": "AI & Machine Learning",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Argentina - Fully Remote",
+    "salary_idr_millions": 16.9,
+    "salary_usd_annual_ref": 80,
+    "skills": [
+      "c#",
+      "java",
+      "python",
+      "recruiting"
+    ],
+    "description": "anyone-ai membuka posisi Software Engineering AI Trainer (Argentina) pada divisi Software Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis c#, java, python, recruiting. Mode kerja Remote (Argentina - Fully Remote) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.15
+  },
+  {
+    "id": "JOB-011",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "2606cf38-986c-4dc6-a6a6-e89f9c2c30eb",
+    "title": "Senior Simulation Engineer",
+    "company": "apex-technology-inc",
+    "category": "Backend & Systems Engineering",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "Los Angeles",
+    "salary_idr_millions": 27.6,
+    "salary_usd_annual_ref": 214500,
+    "skills": [
+      "ci-cd",
+      "communication",
+      "docker",
+      "linux",
+      "product-management",
+      "project-management",
+      "python",
+      "rust"
+    ],
+    "description": "apex-technology-inc membuka posisi Senior Simulation Engineer pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis ci-cd, communication, docker, linux, product-management. Mode kerja Hybrid (Los Angeles) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 4.17
+  },
+  {
+    "id": "JOB-012",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "c3307413-8541-43b3-a854-81b0ac1a3868",
+    "title": "Software Engineer - E2E Autonomy",
+    "company": "applied",
+    "category": "Cloud, DevOps & SRE",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Sunnyvale",
+    "salary_idr_millions": 19.2,
+    "salary_usd_annual_ref": 222000,
+    "skills": [
+      "kubernetes",
+      "machine-learning",
+      "python",
+      "pytorch",
+      "spark"
+    ],
+    "description": "applied membuka posisi Software Engineer - E2E Autonomy pada divisi Self-Driving Systems. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis kubernetes, machine-learning, python, pytorch, spark. Mode kerja Hybrid (Sunnyvale) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 4.17
+  },
+  {
+    "id": "JOB-013",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "839a96a2-aec5-4428-b045-ae15633a4a76",
+    "title": "Forward Deployed Engineer (EMEA)",
+    "company": "applied",
+    "category": "Data Engineering & Analytics",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Munich",
+    "salary_idr_millions": 16.2,
+    "salary_usd_annual_ref": 62207,
+    "skills": [
+      "c++",
+      "customer-success",
+      "data-engineering",
+      "docker",
+      "kubernetes",
+      "product-management",
+      "python",
+      "robotics"
+    ],
+    "description": "applied membuka posisi Forward Deployed Engineer (EMEA) pada divisi Application Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis c++, customer-success, data-engineering, docker, kubernetes. Mode kerja Hybrid (Munich) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 3.83
+  },
+  {
+    "id": "JOB-014",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "6f301d5a-457e-4d4b-bf9b-ed8a1ed2d05b",
+    "title": "C++ Software Engineer – Autonomous Systems",
+    "company": "applied",
+    "category": "Cloud, DevOps & SRE",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Poway, CA",
+    "salary_idr_millions": 24.3,
+    "salary_usd_annual_ref": 200000,
+    "skills": [
+      "c++",
+      "ci-cd",
+      "docker",
+      "git",
+      "kubernetes",
+      "python",
+      "robotics"
+    ],
+    "description": "applied membuka posisi C++ Software Engineer – Autonomous Systems pada divisi Defense. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis c++, ci-cd, docker, git, kubernetes. Mode kerja Hybrid (Poway, CA) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 3.95
+  },
+  {
+    "id": "JOB-015",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "743809df-cc8b-41f6-ac98-f54138623c0b",
+    "title": "Founding AI Engineer, Scan-to-BIM",
+    "company": "augrade",
+    "category": "AI & Machine Learning",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "San Francisco",
+    "salary_idr_millions": 15.5,
+    "salary_usd_annual_ref": 59520,
+    "skills": [
+      "c++",
+      "computer-vision",
+      "deep-learning",
+      "python"
+    ],
+    "description": "augrade membuka posisi Founding AI Engineer, Scan-to-BIM pada divisi Gen AI. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis c++, computer-vision, deep-learning, python. Mode kerja Remote (San Francisco) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.1
+  },
+  {
+    "id": "JOB-016",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "5dd4eea6-9bf9-4f2d-890e-449188a0a503",
+    "title": "Senior Software Engineer - Data Platform",
+    "company": "avra",
+    "category": "Data Engineering & Analytics",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Remote",
+    "location": "São Paulo",
+    "salary_idr_millions": 28.6,
+    "salary_usd_annual_ref": 109824,
+    "skills": [
+      "aws",
+      "ci-cd",
+      "communication",
+      "gcp",
+      "machine-learning",
+      "python",
+      "rust"
+    ],
+    "description": "avra membuka posisi Senior Software Engineer - Data Platform pada divisi Tech. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis aws, ci-cd, communication, gcp, machine-learning. Mode kerja Remote (São Paulo) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.55
+  },
+  {
+    "id": "JOB-017",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "4bd2e282-a7d5-4605-9483-8bfa89e567f6",
+    "title": "Data Scientist",
+    "company": "bedrock-robotics",
+    "category": "AI & Machine Learning",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "New York, NY; San Francisco, CA",
+    "salary_idr_millions": 20.0,
+    "salary_usd_annual_ref": 76800,
+    "skills": [
+      "computer-vision",
+      "data-engineering",
+      "data-science",
+      "gis",
+      "machine-learning",
+      "product-management",
+      "python",
+      "robotics"
+    ],
+    "description": "bedrock-robotics membuka posisi Data Scientist pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis computer-vision, data-engineering, data-science, gis, machine-learning. Mode kerja Remote (New York, NY; San Francisco, CA) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.15
+  },
+  {
+    "id": "JOB-018",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "2e425a22-3b4c-4a55-a6e1-747faf8230b2",
+    "title": "Data - Scraping Software Engineer",
+    "company": "belvo",
+    "category": "Data Engineering & Analytics",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "🇲🇽 Mexico City / 🌎 Remote",
+    "salary_idr_millions": 15.8,
+    "salary_usd_annual_ref": 60672,
+    "skills": [
+      "aws",
+      "communication",
+      "django",
+      "html-css",
+      "javascript",
+      "python",
+      "rest-api",
+      "serverless"
+    ],
+    "description": "belvo membuka posisi Data - Scraping Software Engineer pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis aws, communication, django, html-css, javascript. Mode kerja Remote (🇲🇽 Mexico City / 🌎 Remote) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.28
+  },
+  {
+    "id": "JOB-019",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "65e1d85d-01eb-46fc-af71-33e80f97c80a",
+    "title": "AI Data Engineer",
+    "company": "betterup",
+    "category": "AI & Machine Learning",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Austin, TX; San Francisco, CA; New York, NY; Arlington, VA",
+    "salary_idr_millions": 23.8,
+    "salary_usd_annual_ref": 185000,
+    "skills": [
+      "bigquery",
+      "ci-cd",
+      "communication",
+      "crm",
+      "customer-success",
+      "data-engineering",
+      "data-science",
+      "dbt"
+    ],
+    "description": "betterup membuka posisi AI Data Engineer pada divisi Revenue Operations. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis bigquery, ci-cd, communication, crm, customer-success. Mode kerja Remote (Austin, TX; San Francisco, CA; New York, NY; Arlington, VA) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.55
+  },
+  {
+    "id": "JOB-020",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "737e8320-7e3d-47b8-ac71-baa894b67657",
+    "title": "Applied AI Engineer - AI Finance Agent",
+    "company": "bjakcareer",
+    "category": "AI & Machine Learning",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Taipei, Taiwan",
+    "salary_idr_millions": 20.2,
+    "salary_usd_annual_ref": 77568,
+    "skills": [
+      "crm",
+      "customer-success",
+      "llm",
+      "python"
+    ],
+    "description": "bjakcareer membuka posisi Applied AI Engineer - AI Finance Agent pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis crm, customer-success, llm, python. Mode kerja Remote (Taipei, Taiwan) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.35
+  },
+  {
+    "id": "JOB-021",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "57f33e54-bac9-411f-9125-8793025bfa24",
+    "title": "Applied AI Engineer",
+    "company": "bjakcareer",
+    "category": "AI & Machine Learning",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Indonesia",
+    "salary_idr_millions": 18.9,
+    "salary_usd_annual_ref": 72576,
+    "skills": [
+      "crm",
+      "javascript",
+      "llm",
+      "python",
+      "typescript",
+      "java"
+    ],
+    "description": "bjakcareer membuka posisi Applied AI Engineer pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis crm, javascript, llm, python, typescript. Mode kerja Remote (Indonesia) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.2
+  },
+  {
+    "id": "JOB-022",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "f1fd4e32-e35a-4e6b-8fb5-e49f2031365b",
+    "title": "Data Engineer",
+    "company": "candidhealth",
+    "category": "AI & Machine Learning",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "San Francisco; Denver; New York City",
+    "salary_idr_millions": 22.2,
+    "salary_usd_annual_ref": 205000,
+    "skills": [
+      "airflow",
+      "bigquery",
+      "ci-cd",
+      "data-engineering",
+      "dbt",
+      "gcp",
+      "python",
+      "sql"
+    ],
+    "description": "candidhealth membuka posisi Data Engineer pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis airflow, bigquery, ci-cd, data-engineering, dbt. Mode kerja Hybrid (San Francisco; Denver; New York City) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 4.2
+  },
+  {
+    "id": "JOB-023",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "d6d2a7db-ee6e-4f3c-8d05-662a910cc13b",
+    "title": "Backend Software Engineer",
+    "company": "castle",
+    "category": "Data Engineering & Analytics",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Harvard Square; New York City",
+    "salary_idr_millions": 19.4,
+    "salary_usd_annual_ref": 145000,
+    "skills": [
+      "ci-cd",
+      "data-engineering",
+      "django",
+      "python",
+      "rest-api"
+    ],
+    "description": "castle membuka posisi Backend Software Engineer pada divisi Engineering & Product. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis ci-cd, data-engineering, django, python, rest-api. Mode kerja Remote (Harvard Square; New York City) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.2
+  },
+  {
+    "id": "JOB-024",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "54b900e9-35d1-4a26-8892-39cb7d58f833",
+    "title": "Solutions Engineer (Consultant)",
+    "company": "cerve",
+    "category": "Fullstack & Frontend Web",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Sweden",
+    "salary_idr_millions": 18.0,
+    "salary_usd_annual_ref": 69120,
+    "skills": [
+      "gcp",
+      "nosql",
+      "python",
+      "react",
+      "sql"
+    ],
+    "description": "cerve membuka posisi Solutions Engineer (Consultant) pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis gcp, nosql, python, react, sql. Mode kerja Hybrid (Sweden) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 3.85
+  },
+  {
+    "id": "JOB-025",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "3397aa91-7c71-4977-94da-19cda8588a33",
+    "title": "Founding Software Engineer",
+    "company": "cerve",
+    "category": "Backend & Systems Engineering",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Sweden",
+    "salary_idr_millions": 16.3,
+    "salary_usd_annual_ref": 62592,
+    "skills": [
+      "aws",
+      "communication",
+      "excel",
+      "gcp",
+      "nosql",
+      "python",
+      "sql"
+    ],
+    "description": "cerve membuka posisi Founding Software Engineer pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis aws, communication, excel, gcp, nosql. Mode kerja Hybrid (Sweden) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 3.9
+  },
+  {
+    "id": "JOB-026",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "bac04840-ae0e-414e-9115-46fc8ea296f1",
+    "title": "MLOps Engineer I",
+    "company": "checkout.com",
+    "category": "Data Engineering & Analytics",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Amsterdam",
+    "salary_idr_millions": 16.1,
+    "salary_usd_annual_ref": 61824,
+    "skills": [
+      "aws",
+      "databricks",
+      "machine-learning",
+      "python",
+      "pytorch",
+      "scikit-learn",
+      "spark",
+      "tensorflow"
+    ],
+    "description": "checkout.com membuka posisi MLOps Engineer I pada divisi All cost centres. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis aws, databricks, machine-learning, python, pytorch. Mode kerja Hybrid (Amsterdam) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 3.7,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 3.73
+  },
+  {
+    "id": "JOB-027",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "8c994250-977c-4d6d-a9db-537fbf1ac1a3",
+    "title": "Senior Software Engineer",
+    "company": "cloudzero",
+    "category": "Data Engineering & Analytics",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "Boston; San Francisco",
+    "salary_idr_millions": 28.4,
+    "salary_usd_annual_ref": 200000,
+    "skills": [
+      "aws",
+      "bigquery",
+      "communication",
+      "databricks",
+      "etl",
+      "machine-learning",
+      "python",
+      "serverless"
+    ],
+    "description": "cloudzero membuka posisi Senior Software Engineer pada divisi Engineering. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis aws, bigquery, communication, databricks, etl. Mode kerja Hybrid (Boston; San Francisco) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.0
+    },
+    "overall_avg_rating": 4.55
+  },
+  {
+    "id": "JOB-028",
+    "source_dataset": "zalizedata/tech-job-postings-salary-dataset",
+    "source_job_id": "ef9b939d-da66-464c-a878-ef45616c0473",
+    "title": "Software Engineer, GPU Infrastructure (HPC)",
+    "company": "cohere",
+    "category": "Cloud, DevOps & SRE",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Canada; United States",
+    "salary_idr_millions": 17.6,
+    "salary_usd_annual_ref": 67584,
+    "skills": [
+      "kubernetes",
+      "linux",
+      "machine-learning",
+      "python",
+      "pytorch",
+      "tensorflow"
+    ],
+    "description": "cohere membuka posisi Software Engineer, GPU Infrastructure (HPC) pada divisi Product. Kandidat akan berfokus pada pengembangan dan pemeliharaan sistem berbasis kubernetes, linux, machine-learning, python, pytorch. Mode kerja Remote (Canada; United States) dengan standar rekayasa perangkat lunak modern, kolaborasi lintas tim, dan evaluasi kinerja terukur.",
+    "criteria": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.28
+  },
+  {
+    "id": "JOB-029",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757938019",
+    "title": "Manager, Engineering",
+    "company": "LinkedIn Verified Employer #47444",
+    "category": "Backend & Systems Engineering",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Hybrid",
+    "location": "Bessemer, AL",
+    "salary_idr_millions": 14.5,
+    "salary_usd_annual_ref": 55680,
+    "skills": [
+      "enclosures",
+      "ductwork",
+      "departmental goals",
+      "time sensitive",
+      "scanner",
+      "subtraction",
+      "multiplication and",
+      "word"
+    ],
+    "description": "The TSUBAKI name is synonymous with excellence in quality, dependability, and customer service. U.S. Tsubaki is a leading manufacturer and supplier of power transmission and motion control products. As a part of a vast, international network of corporate and industrial resources, Tsubaki offers its customers the finest state-of-the-art products available in the world and we str",
+    "criteria": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 3.5
+  },
+  {
+    "id": "JOB-030",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757935381",
+    "title": "Insights Analyst - Auto Industry",
+    "company": "LinkedIn Verified Employer #19181",
+    "category": "Data Engineering & Analytics",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Remote",
+    "location": "United States",
+    "salary_idr_millions": 10.7,
+    "salary_usd_annual_ref": 41087,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Who We Are Escalent is an award-winning data analytics and advisory firm that helps clients understand human and market behaviors to navigate disruption. As catalysts of progress for more than 40 years, our strategies guide the world’s leading brands. We accelerate growth by creating a seamless flow between primary, secondary, syndicated, and internal business data, providing c",
+    "criteria": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    },
+    "overall_avg_rating": 3.85
+  },
+  {
+    "id": "JOB-031",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757934320",
+    "title": "Business Analyst Sr - Hybrid Nasville",
+    "company": "LinkedIn Verified Employer #19970",
+    "category": "Data Engineering & Analytics",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Remote",
+    "location": "Nashville, TN",
+    "salary_idr_millions": 24.3,
+    "salary_usd_annual_ref": 93312,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Duties And Responsibilities Below is a list of responsibilities that—while not comprehensive—provides an overview of the duties of the Evidence Coordinator within the Office of Evidence and Impact in an interim capacity (through September 30, 2024): Maintain existing data dashboards regarding the evidence base for the state budget through an annual refresh process. Lead the dev",
+    "criteria": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.8
+    },
+    "overall_avg_rating": 4.2
+  },
+  {
+    "id": "JOB-032",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757934287",
+    "title": "Lead Electrical Engineer [5326]",
+    "company": "LinkedIn Verified Employer #91313",
+    "category": "Backend & Systems Engineering",
+    "level": "Lead / Principal",
+    "min_experience_years": 5,
+    "work_mode": "Onsite",
+    "location": "Florence, KY",
+    "salary_idr_millions": 37.8,
+    "salary_usd_annual_ref": 145152,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "We're seeking a Lead Electrical Engineer to join our dynamic team and bring innovation to life without missing a beat. Join a premier organization at the forefront of cutting-edge military technology to shape the destiny of expeditionary shelter systems, shelter enhancements, and power generation solutions. Your innovations will serve the brave individuals who protect and respo",
+    "criteria": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    },
+    "overall_avg_rating": 3.97
+  },
+  {
+    "id": "JOB-033",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757934282",
+    "title": "Lead Systems Engineer [5321]",
+    "company": "LinkedIn Verified Employer #91313",
+    "category": "Backend & Systems Engineering",
+    "level": "Lead / Principal",
+    "min_experience_years": 5,
+    "work_mode": "Hybrid",
+    "location": "Florence, KY",
+    "salary_idr_millions": 35.8,
+    "salary_usd_annual_ref": 137472,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "About Us:We are a premier organization at the forefront of cutting-edge military technology to shape the destiny of expeditionary shelter systems, shelter enhancements, and power generation solutions. Your innovations will serve the brave individuals who protect and respond to emergencies. As a top-tier Systems Engineer, you'll be at the heart of it all, working on intriguing t",
+    "criteria": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 4.4
+  },
+  {
+    "id": "JOB-034",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757933843",
+    "title": "Senior Insights Analyst - Financial Services team",
+    "company": "LinkedIn Verified Employer #19181",
+    "category": "Data Engineering & Analytics",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Remote",
+    "location": "United States",
+    "salary_idr_millions": 28.2,
+    "salary_usd_annual_ref": 108288,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Who We Are Escalent is an award-winning data analytics and advisory firm that helps clients understand human and market behaviors to navigate disruption. As catalysts of progress for more than 40 years, our strategies guide the world’s leading brands. We accelerate growth by creating a seamless flow between primary, secondary, syndicated, and internal business data, providing c",
+    "criteria": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.6,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.8
+    },
+    "overall_avg_rating": 4.45
+  },
+  {
+    "id": "JOB-035",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757931749",
+    "title": "Lead Mechanical Engineer[5325]",
+    "company": "LinkedIn Verified Employer #91313",
+    "category": "Backend & Systems Engineering",
+    "level": "Lead / Principal",
+    "min_experience_years": 5,
+    "work_mode": "Hybrid",
+    "location": "Florence, KY",
+    "salary_idr_millions": 33.1,
+    "salary_usd_annual_ref": 127104,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Join a premier organization at the forefront of cutting-edge military technology. We are seeking a dynamic Lead Mechanical Engineer to shape the destiny of expeditionary shelter systems, shelter enhancements, and power generation solutions. Your innovations will serve the brave individuals who protect and respond to emergencies. As the Lead Mechanical Engineer, you will spearhe",
+    "criteria": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 4.28
+  },
+  {
+    "id": "JOB-036",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757931739",
+    "title": "Radio Frequency Engineer [5333]",
+    "company": "LinkedIn Verified Employer #91313",
+    "category": "Backend & Systems Engineering",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Hybrid",
+    "location": "Huntsville, AL",
+    "salary_idr_millions": 11.6,
+    "salary_usd_annual_ref": 44544,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Why Us?Make a Difference: Your innovations will serve the brave individuals who protect and respond to emergencies.Technical Mastery: As our primary technical expert, you'll lead projects in EMI and HEMP for game-changing systems.Diverse Opportunities: Dive into testing, design, 3D modeling, and more, fueled by your creativity. Your Impact:Collaborate on a world-class team.Put",
+    "criteria": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.9,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 3.73
+  },
+  {
+    "id": "JOB-037",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757930886",
+    "title": "Lead Controls Engineer [5327]",
+    "company": "LinkedIn Verified Employer #91313",
+    "category": "Backend & Systems Engineering",
+    "level": "Lead / Principal",
+    "min_experience_years": 5,
+    "work_mode": "Hybrid",
+    "location": "Florence, KY",
+    "salary_idr_millions": 33.8,
+    "salary_usd_annual_ref": 129791,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Join a premier organization at the forefront of cutting-edge military technology to shape the destiny of expeditionary shelter systems, shelter enhancements, and power generation solutions. Your innovations will serve the brave individuals who protect and respond to emergencies. About the Role:As a Lead Controls Engineer, you'll be at the forefront of cutting-edge technology an",
+    "criteria": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 4.12
+  },
+  {
+    "id": "JOB-038",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757929925",
+    "title": "Electrical Engineering Manager [5320]",
+    "company": "LinkedIn Verified Employer #91313",
+    "category": "Backend & Systems Engineering",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "Florence, KY",
+    "salary_idr_millions": 26.1,
+    "salary_usd_annual_ref": 100224,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "We are a premier organization at the forefront of cutting-edge military technology to shape the destiny of expeditionary shelter systems, shelter enhancements, and power generation solutions. Your innovations will serve the brave individuals who protect and respond to emergencies.We are a forward-thinking organization dedicated to pushing the boundaries of technology without li",
+    "criteria": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 3.92
+  },
+  {
+    "id": "JOB-039",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757923224",
+    "title": "ServiceNow Architect",
+    "company": "LinkedIn Verified Employer #77185",
+    "category": "Data Engineering & Analytics",
+    "level": "Lead / Principal",
+    "min_experience_years": 5,
+    "work_mode": "Hybrid",
+    "location": "New York City Metropolitan Area",
+    "salary_idr_millions": 35.4,
+    "salary_usd_annual_ref": 135936,
+    "skills": [
+      "aws",
+      "azure",
+      "etl"
+    ],
+    "description": "ITAM Architect New York City, NY (Day 1 Onsite) Long term contract Green Card Holders and Citizens Only Company Description Echo IT Solutions is a company that offers high-quality services to its clients and employees. We focus on client engagement and relationships and deliver tailor-made services to meet their technical and business requirements. Role Description This is a co",
+    "criteria": {
+      "c1_role_clarity": 3.9,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 4.32
+  },
+  {
+    "id": "JOB-040",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757922135",
+    "title": "Fullstack Engineer",
+    "company": "LinkedIn Verified Employer #29574",
+    "category": "Fullstack & Frontend Web",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Hybrid",
+    "location": "San Francisco, CA",
+    "salary_idr_millions": 9.7,
+    "salary_usd_annual_ref": 37248,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "About FareHarbor At FareHarbor, our mission is to make experiences better for everyone. Founded in 2013 in Hawaii and acquired by Booking Holdings in 2018, FareHarbor creates powerful tools that enable our clients (think boat rentals, museums, food tours, events and more!) to operate and grow. With over 20,000 clients across 90+ countries—we’re the largest in our industry and s",
+    "criteria": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 3.73
+  },
+  {
+    "id": "JOB-041",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757920617",
+    "title": "Full Stack Developer - API Integrations",
+    "company": "LinkedIn Verified Employer #54350",
+    "category": "Fullstack & Frontend Web",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "United States",
+    "salary_idr_millions": 15.5,
+    "salary_usd_annual_ref": 59520,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Full Stack Developer - API IntegrationsJob Description: Full Stack Developer (API Integrations) Position Overview:We are looking for a talented and experienced Full Stack Developer specializing in API integrations to joinour development team. As a Full Stack Developer focusing on API integrations, you will play a crucial rolein designing, developing, and maintaining seamless in",
+    "criteria": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.3,
+      "c4_flexibility": 4.8
+    },
+    "overall_avg_rating": 3.92
+  },
+  {
+    "id": "JOB-042",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757920135",
+    "title": "ISD Analyst II-ID & Access Mgmt",
+    "company": "LinkedIn Verified Employer #11568",
+    "category": "Data Engineering & Analytics",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Onsite",
+    "location": "Pensacola, FL",
+    "salary_idr_millions": 9.0,
+    "salary_usd_annual_ref": 34560,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Overview To compile, research, analyze and document data, requirements, workflow/ processes, functionality and or controls for respective ISD group. To develop and evaluate information, and prepare recommendations based on analysis for use in decision making. To support the respective ISD group's functions, projects and activities. Work under direction of higher level analyst o",
+    "criteria": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    },
+    "overall_avg_rating": 3.3
+  },
+  {
+    "id": "JOB-043",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917759",
+    "title": "Resident Engineer [5118]",
+    "company": "LinkedIn Verified Employer #79098",
+    "category": "Backend & Systems Engineering",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "Hicksville, NY",
+    "salary_idr_millions": 27.3,
+    "salary_usd_annual_ref": 104832,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Company Description:The construction management and surveying services company, based in Hicksville, New York, was formed in 1991. The company provides civil and structural engineering, land surveying, construction inspection/management, site safety, geotechnical instrumentation, technology, and special inspection services. The firm’s market sectors include transportation (high",
+    "criteria": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 4.0
+  },
+  {
+    "id": "JOB-044",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917592",
+    "title": "Principal VMware Cloud Architect",
+    "company": "LinkedIn Verified Employer #10091",
+    "category": "Cloud, DevOps & SRE",
+    "level": "Lead / Principal",
+    "min_experience_years": 5,
+    "work_mode": "Remote",
+    "location": "United States",
+    "salary_idr_millions": 36.6,
+    "salary_usd_annual_ref": 140544,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Company Summary Statement As one of the largest investor-owned utility companies in the United States, PPL Corporation (NYSE: PPL), is committed to creating long-term, sustainable value for our 3.5 million customers, our shareowners and the communities we serve. Our high-performing regulated utilities — PPL Electric Utilities, Louisville Gas and Electric, Kentucky Utilities and",
+    "criteria": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.6,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    },
+    "overall_avg_rating": 4.62
+  },
+  {
+    "id": "JOB-045",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917410",
+    "title": "Business Intelligence Analyst",
+    "company": "LinkedIn Verified Employer #78288",
+    "category": "Data Engineering & Analytics",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "Louisville, KY",
+    "salary_idr_millions": 25.4,
+    "salary_usd_annual_ref": 97535,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Description Our company Congo Brands is at the epicenter of where consumer demand meets product development. Through brand partnerships with lead influencers, we are afforded an inside look at what consumers truly desire. Congo Brands houses some of the world’s most noted brands including Alani Nu, Prime Hydration, Prime Energy, and 3D Energy only to include more within the com",
+    "criteria": {
+      "c1_role_clarity": 3.4,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 4.08
+  },
+  {
+    "id": "JOB-046",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917336",
+    "title": "Analytics Lead, Full Stack (Card & Consumer Banking)",
+    "company": "LinkedIn Verified Employer #29632",
+    "category": "Data Engineering & Analytics",
+    "level": "Lead / Principal",
+    "min_experience_years": 5,
+    "work_mode": "Remote",
+    "location": "San Jose, CA",
+    "salary_idr_millions": 33.3,
+    "salary_usd_annual_ref": 127871,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Affirm is reinventing credit to make it more honest and friendly, giving consumers the flexibility to buy now and pay later without any hidden fees or compounding interest. We’re looking for a scrappy, highly driven, and analytically-minded professional to join the Growth Analytics - Financial Products team, focusing on Affirm’s Consumer Banking and Card products. The Financial",
+    "criteria": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    },
+    "overall_avg_rating": 4.42
+  },
+  {
+    "id": "JOB-047",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917315",
+    "title": "IT Help Desk Technician",
+    "company": "LinkedIn Verified Employer #37291",
+    "category": "Backend & Systems Engineering",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Onsite",
+    "location": "Raleigh, NC",
+    "salary_idr_millions": 10.2,
+    "salary_usd_annual_ref": 39168,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Job Description Are you an experienced IT Help Desk Technician? If so, let’s talk! Our client is actively seeking a talented IT Help Desk Technician in Raleigh, NC This is a 3-month contract-to-hire opportunity with our client. Job Overview As a help desk technician, you will be required to respond to queries in person and over the phone, assess and diagnose computer hardware a",
+    "criteria": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    },
+    "overall_avg_rating": 3.35
+  },
+  {
+    "id": "JOB-048",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917224",
+    "title": "Customer Support Engineer –Herndon, VA",
+    "company": "LinkedIn Verified Employer #16313",
+    "category": "Backend & Systems Engineering",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Hybrid",
+    "location": "Herndon, VA",
+    "salary_idr_millions": 9.4,
+    "salary_usd_annual_ref": 36096,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Company Overview: Cogent Communications is a multinational, Tier 1 facilities-based ISP, consistently ranked as one of the top five networks in the world and is publicly traded on the NASDAQ Stock Market under the ticker symbol CCOI. Cogent specializes in providing businesses with high speed Internet access and point-to-point transport services. Cogent's facilities-based, all-o",
+    "criteria": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 3.62
+  },
+  {
+    "id": "JOB-049",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917223",
+    "title": "Customer Support Engineer –Atlanta, GA.",
+    "company": "LinkedIn Verified Employer #16313",
+    "category": "Backend & Systems Engineering",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Onsite",
+    "location": "Atlanta Metropolitan Area",
+    "salary_idr_millions": 10.8,
+    "salary_usd_annual_ref": 41472,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Company Overview: Cogent Communications is a multinational, Tier 1 facilities-based ISP, consistently ranked as one of the top five networks in the world and is publicly traded on the NASDAQ Stock Market under the ticker symbol CCOI. Cogent specializes in providing businesses with high speed Internet access and point-to-point transport services. Cogent's facilities-based, all-o",
+    "criteria": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    },
+    "overall_avg_rating": 3.45
+  },
+  {
+    "id": "JOB-050",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757917153",
+    "title": "Cloud Solutions Engineer",
+    "company": "LinkedIn Verified Employer #64890",
+    "category": "Cloud, DevOps & SRE",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Onsite",
+    "location": "Chicago, IL",
+    "salary_idr_millions": 8.2,
+    "salary_usd_annual_ref": 31487,
+    "skills": [
+      "rust",
+      "aws",
+      "gcp",
+      "azure"
+    ],
+    "description": "Come join the company that is reinventing cloud security and empowering businesses to thrive in the cloud. As the fastest-growing startup ever, Wiz is on a mission to help organizations secure cloud environments that will accelerate their businesses. Trusted by security teams all over the world, we have a proven track record of success and a culture that values world-class tale",
+    "criteria": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    },
+    "overall_avg_rating": 3.25
+  },
+  {
+    "id": "JOB-051",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757916658",
+    "title": "Cogent Project Engineering Manager",
+    "company": "LinkedIn Verified Employer #16313",
+    "category": "Backend & Systems Engineering",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Onsite",
+    "location": "Washington, DC",
+    "salary_idr_millions": 9.6,
+    "salary_usd_annual_ref": 36864,
+    "skills": [
+      "software engineering",
+      "git",
+      "sql",
+      "problem solving"
+    ],
+    "description": "Company: Cogent Communications is a global, Tier 1 facilities-based ISP, consistently ranked as one of the top five networks in the world and is publicly traded on the NASDAQ Stock Market under the ticker symbol CCOI. Cogent specializes in providing businesses with high speed Internet access and Ethernet transport services. Cogent's facilities-based, all-optical IP network back",
+    "criteria": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.6,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 2.7
+    },
+    "overall_avg_rating": 3.38
+  },
+  {
+    "id": "JOB-052",
+    "source_dataset": "xanderios/linkedin-job-postings",
+    "source_job_id": "3757915814",
+    "title": "Cyber Security SOC L3 Security Analyst (M/F)",
+    "company": "LinkedIn Verified Employer #27219",
+    "category": "Cybersecurity & Cloud Security",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Onsite",
+    "location": "Detroit, MI",
+    "salary_idr_millions": 28.7,
+    "salary_usd_annual_ref": 110208,
+    "skills": [
+      "rust",
+      "react",
+      "git",
+      "cybersecurity"
+    ],
+    "description": "The Equans Group is a world leader in the energy and services industry. The Group operates in 20 countries and has 90,000 employees on 5 continents. Equans designs, installs, and delivers customized solutions to improve its customers’ equipment, systems and technical processes and optimize their use in the context of their energy, industrial and digital transitions. Active in C",
+    "criteria": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 2.7
+    },
+    "overall_avg_rating": 3.92
+  },
+  {
+    "id": "JOB-053",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-53",
+    "title": "Junior Python & Backend Engineer (Structured Mentorship)",
+    "company": "Nusantara EduTech Indonesia",
+    "category": "Backend & Systems Engineering",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Remote",
+    "location": "Jakarta / Remote Indonesia",
+    "salary_idr_millions": 10.5,
+    "salary_usd_annual_ref": 40320,
+    "skills": [
+      "python",
+      "sql",
+      "postgresql",
+      "rest api",
+      "git",
+      "docker"
+    ],
+    "description": "Program onboarding terstruktur 12 minggu untuk lulusan baru S1 Teknik Informatika. Dokumentasi arsitektur sangat jelas, code review harian bersama senior mentor, membangun REST API Python & PostgreSQL.",
+    "criteria": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.08
+  },
+  {
+    "id": "JOB-054",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-54",
+    "title": "High-Frequency Systems & Rust Backend Engineer",
+    "company": "Garuda Cloud Infrastructure",
+    "category": "Backend & Systems Engineering",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Bandung / Remote",
+    "salary_idr_millions": 22.0,
+    "salary_usd_annual_ref": 84480,
+    "skills": [
+      "rust",
+      "tokio",
+      "axum",
+      "firebase",
+      "firestore",
+      "docker",
+      "linux",
+      "microservices"
+    ],
+    "description": "Merancang mesin rekomendasi dan microservice latensi mikrodetik menggunakan Rust (Axum, Tokio) terintegrasi Cloud Firestore & REST API berkonkurensi tinggi. Tantangan optimasi algoritma intensif.",
+    "criteria": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.55
+  },
+  {
+    "id": "JOB-055",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-55",
+    "title": "AI & Recommender Systems Engineer (NLP / TF-IDF)",
+    "company": "KarirPintar AI Labs",
+    "category": "AI & Machine Learning",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Hybrid",
+    "location": "Malang / Surabaya",
+    "salary_idr_millions": 11.5,
+    "salary_usd_annual_ref": 44160,
+    "skills": [
+      "python",
+      "rust",
+      "machine learning",
+      "nlp",
+      "tf-idf",
+      "sql",
+      "pandas"
+    ],
+    "description": "Mengembangkan pipeline Content-Based Filtering (TF-IDF, Cosine Similarity), Collaborative Filtering, dan evaluasi Precision@K untuk pencocokan pencari kerja dan lowongan industri.",
+    "criteria": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.2
+    },
+    "overall_avg_rating": 4.25
+  },
+  {
+    "id": "JOB-056",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-56",
+    "title": "Cloud Fullstack Developer (Rust + Firebase Serverless)",
+    "company": "Merdeka Digital Studio",
+    "category": "Fullstack & Frontend Web",
+    "level": "Entry / Junior",
+    "min_experience_years": 1,
+    "work_mode": "Remote",
+    "location": "Yogyakarta / Remote",
+    "salary_idr_millions": 12.5,
+    "salary_usd_annual_ref": 48000,
+    "skills": [
+      "rust",
+      "firebase",
+      "firestore",
+      "javascript",
+      "typescript",
+      "react",
+      "rest api",
+      "ci/cd"
+    ],
+    "description": "Membangun aplikasi web real-time menggunakan backend Rust dan autentikasi serta basis data dokumen Google Firebase Firestore dengan pipeline CI/CD lintas platform.",
+    "criteria": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 5.0
+    },
+    "overall_avg_rating": 4.42
+  },
+  {
+    "id": "JOB-057",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-57",
+    "title": "Competitive Algorithm & Distributed Rust Engineer",
+    "company": "Nusantara Quant Systems",
+    "category": "Backend & Systems Engineering",
+    "level": "Senior",
+    "min_experience_years": 4,
+    "work_mode": "Hybrid",
+    "location": "Jakarta Selatan",
+    "salary_idr_millions": 32.0,
+    "salary_usd_annual_ref": 122880,
+    "skills": [
+      "rust",
+      "c++",
+      "linux",
+      "system design",
+      "kafka",
+      "redis",
+      "microservices"
+    ],
+    "description": "Tantangan teknis ekstrem membangun engine pemrosesan terdistribusi berlatensi rendah dengan Rust dan C++. Eksplorasi mandiri tinggi untuk engineer berpengalaman.",
+    "criteria": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    },
+    "overall_avg_rating": 4.2
+  },
+  {
+    "id": "JOB-058",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-58",
+    "title": "Associate Data Analyst & Business Intelligence",
+    "company": "FinTech Syariah Nusantara",
+    "category": "Data Engineering & Analytics",
+    "level": "Entry / Junior",
+    "min_experience_years": 0,
+    "work_mode": "Hybrid",
+    "location": "Malang / Jakarta",
+    "salary_idr_millions": 9.5,
+    "salary_usd_annual_ref": 36480,
+    "skills": [
+      "python",
+      "sql",
+      "data analysis",
+      "tableau",
+      "power bi",
+      "pandas"
+    ],
+    "description": "Posisi ramah fresh graduate dengan panduan SOP analitik lengkap, pembuatan dashboard KPI, kueri SQL terstruktur, dan pelatihan mingguan bersama Lead Data Analyst.",
+    "criteria": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    },
+    "overall_avg_rating": 3.85
+  },
+  {
+    "id": "JOB-059",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-59",
+    "title": "SOC & Cloud Security Engineer (SIEM & Firestore Audit)",
+    "company": "Perisai Siber Indonesia",
+    "category": "Cybersecurity & Cloud Security",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Remote Indonesia",
+    "salary_idr_millions": 18.5,
+    "salary_usd_annual_ref": 71040,
+    "skills": [
+      "cybersecurity",
+      "siem",
+      "network security",
+      "linux",
+      "python",
+      "gcp",
+      "firebase"
+    ],
+    "description": "Memantau insiden keamanan cloud, mengaudit aturan akses Firestore Security Rules, mengotomasi deteksi ancaman menggunakan Python & SIEM.",
+    "criteria": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.2,
+      "c4_flexibility": 4.8
+    },
+    "overall_avg_rating": 4.47
+  },
+  {
+    "id": "JOB-060",
+    "source_dataset": "curated-indonesian-tech-benchmark",
+    "source_job_id": "id-bench-60",
+    "title": "DevOps & GitHub Actions Release Engineer",
+    "company": "AwanKilat Tech",
+    "category": "Cloud, DevOps & SRE",
+    "level": "Mid-Level",
+    "min_experience_years": 2,
+    "work_mode": "Remote",
+    "location": "Remote",
+    "salary_idr_millions": 19.0,
+    "salary_usd_annual_ref": 72960,
+    "skills": [
+      "ci/cd",
+      "docker",
+      "kubernetes",
+      "git",
+      "linux",
+      "terraform",
+      "aws"
+    ],
+    "description": "Mengelola otomasi CI/CD multi-OS (Windows & Linux), rilis biner otomatis, containerization Docker, dan observabilitas layanan cloud produksi.",
+    "criteria": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    },
+    "overall_avg_rating": 4.5
+  }
+]

@@ -1,0 +1,308 @@
+{
+  "lecturer_slide_reference": {
+    "id": "REF_DOSEN_SLIDE_18",
+    "doi": "10.1007/978-1-4899-7637-6_25",
+    "google_devs_url": "https://developers.google.com/machine-learning/recommendation/overview",
+    "note": "Referensi utama Slide 18 AI_Sistem_Rekomendasi_Visual.pdf: Adomavicius & Kwon (2015) Multi-Criteria Recommender Systems, Recommender Systems Handbook, hlm. 847-880, Springer.",
+    "title": "Multi-Criteria Recommender Systems",
+    "year": 2015,
+    "venue": "Springer eBooks",
+    "authors": [
+      "Gediminas Adomavičius",
+      "YoungOk Kwon"
+    ],
+    "cited_by_count": 141,
+    "openalex_id": "https://openalex.org/W1657011257",
+    "doi_url": "https://doi.org/10.1007/978-1-4899-7637-6_25"
+  },
+  "journals_count": 15,
+  "journals": [
+    {
+      "id": "J01",
+      "filename": "J01_2021_DeRuijt_Bhulai_Job_Recommender_Systems_Review.pdf",
+      "doi": "10.48550/arxiv.2111.13576",
+      "doi_url": "https://doi.org/10.48550/arxiv.2111.13576",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/2111.13576.pdf",
+      "topic_group": "Taksonomi & Survey Komprehensif Sistem Rekomendasi Kerja",
+      "title": "Job Recommender Systems: A Review",
+      "year": 2021,
+      "venue": "arXiv",
+      "authors": [
+        "Corné de Ruijt",
+        "Sandjai Bhulai"
+      ],
+      "cited_by_count": 91,
+      "openalex_id": "https://openalex.org/W3215674247"
+    },
+    {
+      "id": "J02",
+      "filename": "J02_2017_Yang_KBS_Combining_ContentBased_Collaborative_Job_RecSys.pdf",
+      "doi": "10.1016/j.knosys.2017.08.017",
+      "doi_url": "https://doi.org/10.1016/j.knosys.2017.08.017",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/1607.01050.pdf",
+      "topic_group": "Hybrid Content-Based & Collaborative Filtering untuk Lowongan Kerja",
+      "title": "Combining content-based and collaborative filtering for job recommendation system: A cost-sensitive Statistical Relational Learning approach",
+      "year": 2017,
+      "venue": "Knowledge-Based Systems",
+      "authors": [
+        "Shuo Yang",
+        "Mohammed Korayem",
+        "Khalifeh AlJadda",
+        "Trey Grainger",
+        "Sriraam Natarajan"
+      ],
+      "cited_by_count": 185,
+      "openalex_id": "https://openalex.org/W2751933316"
+    },
+    {
+      "id": "J03",
+      "filename": "J03_2016_Pacuk_RecSysChallenge_Scalable_Hybrid_Job_Recommendations.pdf",
+      "doi": "10.1145/2987538.2987539",
+      "doi_url": "https://doi.org/10.1145/2987538.2987539",
+      "downloaded_pdf_url": "https://biblio.ugent.be/publication/8162090/file/8162096.pdf",
+      "topic_group": "Algoritma Hybrid Berperforma Tinggi pada Rekomendasi Kerja",
+      "title": "A scalable, high-performance Algorithm for hybrid job recommendations",
+      "year": 2016,
+      "venue": "ACM Recommender Systems Challenge (RecSys Challenge)",
+      "authors": [
+        "Toon De Pessemier",
+        "Kris Vanhecke",
+        "Luc Martens"
+      ],
+      "cited_by_count": 19,
+      "openalex_id": "https://openalex.org/W2560236604"
+    },
+    {
+      "id": "J04",
+      "filename": "J04_2025_JATI_TFIDF_Cosine_Similarity_Rekomendasi_Lowongan_Kerja.pdf",
+      "doi": "10.36040/jati.v9i1.12406",
+      "doi_url": "https://doi.org/10.36040/jati.v9i1.12406",
+      "downloaded_pdf_url": "https://ejournal.itn.ac.id/index.php/jati/article/download/12406/7091",
+      "topic_group": "Content-Based Filtering (TF-IDF & Cosine Similarity) Konteks Indonesia",
+      "title": "PENERAPAN ALGORITMA TF-IDF DAN COSINE SIMILARITY DALAM SISTEM REKOMENDASI LOWONGAN PEKERJAAN",
+      "year": 2025,
+      "venue": "JATI (Jurnal Mahasiswa Teknik Informatika)",
+      "authors": [
+        "Venny Meida Hersianty",
+        "Eka Larasati Amalia",
+        "Dwi Nikmah Puspitasari",
+        "Dimas Wahyu Wibowo"
+      ],
+      "cited_by_count": 29,
+      "openalex_id": "https://openalex.org/W4406779650"
+    },
+    {
+      "id": "J05",
+      "filename": "J05_2018_Shalaby_IEEEBigData_Graph_Content_Job_Recommendation_Scale.pdf",
+      "doi": "10.48550/arxiv.1801.00377",
+      "doi_url": "https://doi.org/10.48550/arxiv.1801.00377",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/1801.00377.pdf",
+      "topic_group": "Content & Graph-Based Job Recommendation Skala Industri (CareerBuilder)",
+      "title": "Help me find a job: A graph-based approach for job recommendation at scale",
+      "year": 2017,
+      "venue": "IEEE International Conference on Big Data (BigData)",
+      "authors": [
+        "Walid Shalaby",
+        "BahaaEddin AlAila",
+        "Mohammed Korayem",
+        "Layla Pournajaf",
+        "Khalifeh AlJadda",
+        "Shannon P. Quinn",
+        "Wlodek Zadrozny"
+      ],
+      "cited_by_count": 110,
+      "openalex_id": "https://openalex.org/W2781897831"
+    },
+    {
+      "id": "J06",
+      "filename": "J06_2023_Kwiecinski_Benchmarking_Collaborative_Filtering_Job_Recs.pdf",
+      "doi": "10.48550/arxiv.2301.07946",
+      "doi_url": "https://doi.org/10.48550/arxiv.2301.07946",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/2301.07946.pdf",
+      "topic_group": "Benchmarking Collaborative Filtering pada Portal Lowongan Kerja",
+      "title": "Job Recommendations: Benchmarking of Collaborative Filtering Methods for Classifieds",
+      "year": 2024,
+      "venue": "Electronics",
+      "authors": [
+        "Robert Kwieciński",
+        "Tomasz Górecki",
+        "Agata Filipowska",
+        "Viacheslav Dubrov"
+      ],
+      "cited_by_count": 14,
+      "openalex_id": "https://openalex.org/W4401209207"
+    },
+    {
+      "id": "J07",
+      "filename": "J07_2021_Nigam_Embedding_Recommender_Job_Candidate_Matching_Scale.pdf",
+      "doi": "10.48550/arxiv.2107.00221",
+      "doi_url": "https://doi.org/10.48550/arxiv.2107.00221",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/2107.00221.pdf",
+      "topic_group": "Representasi Vektor & Pencocokan Kandidat-Lowongan Skala Besar",
+      "title": "Embedding-based Recommender System for Job to Candidate Matching on Scale",
+      "year": 2021,
+      "venue": "arXiv",
+      "authors": [
+        "Jing Zhao",
+        "Jingya Wang",
+        "Madhav Sigdel",
+        "Bopeng Zhang",
+        "Hoang, Phuong",
+        "Mengshu Liu",
+        "Mohammed Korayem"
+      ],
+      "cited_by_count": 63,
+      "openalex_id": "https://openalex.org/W3174822636"
+    },
+    {
+      "id": "J08",
+      "filename": "J08_2024_Reciprocal_Recommendations_Job_Search_Best_Of_Both.pdf",
+      "doi": "10.48550/arxiv.2409.10992",
+      "doi_url": "https://doi.org/10.48550/arxiv.2409.10992",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/2409.10992.pdf",
+      "topic_group": "Pencocokan Dua Arah & Preferensi Pencari Kerja",
+      "title": "A Best-of-Both Approach to Improve Match Predictions and Reciprocal Recommendations for Job Search",
+      "year": 2024,
+      "venue": "arXiv",
+      "authors": [
+        "Shuhei Goda",
+        "Hayashi, Yudai",
+        "Yuta Saito"
+      ],
+      "cited_by_count": 2,
+      "openalex_id": "https://openalex.org/W4403709569"
+    },
+    {
+      "id": "J09",
+      "filename": "J09_2016_IJACSA_ItemBased_MultiCriteria_Collaborative_Filtering.pdf",
+      "doi": "10.14569/ijacsa.2016.070837",
+      "doi_url": "https://doi.org/10.14569/ijacsa.2016.070837",
+      "downloaded_pdf_url": "https://thesai.org/Downloads/Volume7No8/Paper_37-An_Item_based_Multi_Criteria_Collaborative_Filtering_Algorithm.pdf",
+      "topic_group": "Multi-Criteria Collaborative Filtering (MCCF)",
+      "title": "An Item-based Multi-Criteria Collaborative Filtering Algorithm for Personalized Recommender Systems",
+      "year": 2016,
+      "venue": "International Journal of Advanced Computer Science and Applications",
+      "authors": [
+        "Qusai Yousef Shambour",
+        "Mou’ath Hourani",
+        "Salam Fraihat"
+      ],
+      "cited_by_count": 76,
+      "openalex_id": "https://openalex.org/W2511071455"
+    },
+    {
+      "id": "J10",
+      "filename": "J10_2019_Li_Tuzhilin_Latent_MultiCriteria_Ratings_Recommendations.pdf",
+      "doi": "10.48550/arxiv.1906.10948",
+      "doi_url": "https://doi.org/10.48550/arxiv.1906.10948",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/1906.10948.pdf",
+      "topic_group": "Pemodelan Rating Multikriteria untuk Personalisasi Rekomendasi",
+      "title": "Latent multi-criteria ratings for recommendations",
+      "year": 2019,
+      "venue": "ACM Conference on Recommender Systems (RecSys)",
+      "authors": [
+        "Li Pan",
+        "Alexander Tuzhilin"
+      ],
+      "cited_by_count": 29,
+      "openalex_id": "https://openalex.org/W2973142485"
+    },
+    {
+      "id": "J11",
+      "filename": "J11_2025_Forouzandeh_Multiview_MultiCriteria_Recommender_Systems.pdf",
+      "doi": "10.48550/arxiv.2502.19271",
+      "doi_url": "https://doi.org/10.48550/arxiv.2502.19271",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/2502.19271.pdf",
+      "topic_group": "Perkembangan Mutakhir Multi-Criteria Recommender Systems (MCRS)",
+      "title": "Multiview graph dual-attention deep learning and contrastive learning for multi-criteria recommender systems",
+      "year": 2025,
+      "venue": "Expert Systems with Applications",
+      "authors": [
+        "Saman Forouzandeh",
+        "Pavel N. Krivitsky",
+        "Rohitash Chandra"
+      ],
+      "cited_by_count": 11,
+      "openalex_id": "https://openalex.org/W4411189459"
+    },
+    {
+      "id": "J12",
+      "filename": "J12_2025_FrontiersAI_Explainable_Person_Job_Recommendations.pdf",
+      "doi": "10.3389/frai.2025.1660548",
+      "doi_url": "https://doi.org/10.3389/frai.2025.1660548",
+      "downloaded_pdf_url": "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1660548/pdf",
+      "topic_group": "Explainable AI (XAI) dalam Pencocokan Pencari Kerja & Lowongan",
+      "title": "Explainable person–job recommendations: challenges, approaches, and comparative analysis",
+      "year": 2025,
+      "venue": "Frontiers in Artificial Intelligence",
+      "authors": [
+        "Fang Tang",
+        "Renqi Zhu",
+        "Feng Yao",
+        "Junzhi Wang",
+        "Lailong Luo",
+        "Bo Li"
+      ],
+      "cited_by_count": 26,
+      "openalex_id": "https://openalex.org/W4414972464"
+    },
+    {
+      "id": "J13",
+      "filename": "J13_2025_Schellingerhout_OKRA_Explainable_MultiStakeholder_Job_RecSys.pdf",
+      "doi": "10.48550/arxiv.2504.07108",
+      "doi_url": "https://doi.org/10.48550/arxiv.2504.07108",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/2504.07108.pdf",
+      "topic_group": "Explainable & Constraint-Aware Multi-Stakeholder Job Recommendation",
+      "title": "OKRA: an Explainable, Heterogeneous, Multi-Stakeholder Job Recommender System",
+      "year": 2025,
+      "venue": "arXiv",
+      "authors": [
+        "Roan Schellingerhout",
+        "Francesco Barile",
+        "Nava Tintarev"
+      ],
+      "cited_by_count": 0,
+      "openalex_id": "https://openalex.org/W6910673764"
+    },
+    {
+      "id": "J14",
+      "filename": "J14_2020_Xu_Rust_Memory_Safety_Performance_InDepth_Study.pdf",
+      "doi": "10.48550/arxiv.2003.03296",
+      "doi_url": "https://doi.org/10.48550/arxiv.2003.03296",
+      "downloaded_pdf_url": "https://arxiv.org/pdf/2003.03296.pdf",
+      "topic_group": "Keamanan Memori & Performa Sistem Backend Menggunakan Bahasa Rust",
+      "title": "Memory-Safety Challenge Considered Solved? An In-Depth Study with All Rust CVEs",
+      "year": 2021,
+      "venue": "ACM Transactions on Software Engineering and Methodology",
+      "authors": [
+        "Hui Xu",
+        "Zhuangbin Chen",
+        "Mingshen Sun",
+        "Yangfan Zhou",
+        "Michael Rung-Tsong Lyu"
+      ],
+      "cited_by_count": 124,
+      "openalex_id": "https://openalex.org/W3202751128"
+    },
+    {
+      "id": "J15",
+      "filename": "J15_2023_IJEECS_Google_Firebase_Firestore_Optimization_Analysis.pdf",
+      "doi": "10.11591/ijeecs.v29.i3.pp1719-1728",
+      "doi_url": "https://doi.org/10.11591/ijeecs.v29.i3.pp1719-1728",
+      "downloaded_pdf_url": "https://ijeecs.iaescore.com/index.php/IJEECS/article/download/30229/17143",
+      "topic_group": "Optimasi Basis Data Cloud Real-Time Google Firebase Firestore",
+      "title": "Cloud computing: google firebase firestore optimization analysis",
+      "year": 2023,
+      "venue": "Indonesian Journal of Electrical Engineering and Computer Science",
+      "authors": [
+        "Andi Bahtiar Semma",
+        "Mukti Ali",
+        "Muh Saerozi",
+        "Mansur Mansur",
+        "Kusrini Kusrini"
+      ],
+      "cited_by_count": 29,
+      "openalex_id": "https://openalex.org/W4311950634"
+    }
+  ]
+}

@@ -1,0 +1,445 @@
+[
+  {
+    "id": "USR-01",
+    "name": "Dina Rahmawati",
+    "email": "dina@karir-ai.test",
+    "role_headline": "Fresh Graduate S1 Teknik Informatika (Backend & AI Pemula)",
+    "persona_tag": "Persona Slide Dosen: Prioritas Kejelasan & Mentorship (70%)",
+    "experience_years": 0,
+    "preferred_skills": [
+      "python",
+      "sql",
+      "postgresql",
+      "rest api",
+      "machine learning",
+      "tf-idf",
+      "git"
+    ],
+    "preferred_categories": [
+      "Backend & Systems Engineering",
+      "AI & Machine Learning",
+      "Data Engineering & Analytics"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.45,
+      "c2_technical_challenge": 0.15,
+      "c3_compensation": 0.15,
+      "c4_flexibility": 0.25
+    },
+    "constraints": {
+      "min_salary_idr_millions": 8.0,
+      "max_required_experience_years": 1,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 4.0,
+      "min_technical_challenge": 0.0
+    }
+  },
+  {
+    "id": "USR-02",
+    "name": "Bima Pratama",
+    "email": "bima@karir-ai.test",
+    "role_headline": "Systems & Rust Backend Engineer (3 Tahun Pengalaman)",
+    "persona_tag": "Persona Slide Dosen: Prioritas Tantangan Teknis & Kompensasi",
+    "experience_years": 3,
+    "preferred_skills": [
+      "rust",
+      "tokio",
+      "axum",
+      "firebase",
+      "firestore",
+      "docker",
+      "microservices",
+      "linux"
+    ],
+    "preferred_categories": [
+      "Backend & Systems Engineering",
+      "Cloud, DevOps & SRE"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.1,
+      "c2_technical_challenge": 0.45,
+      "c3_compensation": 0.3,
+      "c4_flexibility": 0.15
+    },
+    "constraints": {
+      "min_salary_idr_millions": 15.0,
+      "max_required_experience_years": 4,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 0.0,
+      "min_technical_challenge": 4.0
+    }
+  },
+  {
+    "id": "USR-03",
+    "name": "Citra Kusuma",
+    "email": "citra@karir-ai.test",
+    "role_headline": "Fullstack Cloud Developer (Rust / React / Firebase)",
+    "persona_tag": "Prioritas Fleksibilitas Remote & Fullstack Cloud",
+    "experience_years": 2,
+    "preferred_skills": [
+      "rust",
+      "firebase",
+      "firestore",
+      "react",
+      "typescript",
+      "javascript",
+      "rest api",
+      "ci/cd"
+    ],
+    "preferred_categories": [
+      "Fullstack & Frontend Web",
+      "Backend & Systems Engineering"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.2,
+      "c2_technical_challenge": 0.25,
+      "c3_compensation": 0.2,
+      "c4_flexibility": 0.35
+    },
+    "constraints": {
+      "min_salary_idr_millions": 11.0,
+      "max_required_experience_years": 3,
+      "allowed_work_modes": [
+        "Remote"
+      ],
+      "min_role_clarity": 3.5,
+      "min_technical_challenge": 3.5
+    }
+  },
+  {
+    "id": "USR-04",
+    "name": "Arif Nugroho",
+    "email": "arif@karir-ai.test",
+    "role_headline": "Junior Data & ML Engineer",
+    "persona_tag": "Tetangga Kemiripan Tinggi dengan Dina (Python/Data/ML)",
+    "experience_years": 1,
+    "preferred_skills": [
+      "python",
+      "sql",
+      "pandas",
+      "machine learning",
+      "nlp",
+      "tf-idf",
+      "tableau"
+    ],
+    "preferred_categories": [
+      "AI & Machine Learning",
+      "Data Engineering & Analytics"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.4,
+      "c2_technical_challenge": 0.25,
+      "c3_compensation": 0.15,
+      "c4_flexibility": 0.2
+    },
+    "constraints": {
+      "min_salary_idr_millions": 8.5,
+      "max_required_experience_years": 2,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid",
+        "Onsite"
+      ],
+      "min_role_clarity": 3.8,
+      "min_technical_challenge": 0.0
+    }
+  },
+  {
+    "id": "USR-05",
+    "name": "Raka Mahendra",
+    "email": "raka@karir-ai.test",
+    "role_headline": "Senior Cloud & Rust Platform Engineer",
+    "persona_tag": "Tetangga Kemiripan Tinggi dengan Bima (Rust/Systems/Cloud)",
+    "experience_years": 5,
+    "preferred_skills": [
+      "rust",
+      "kubernetes",
+      "docker",
+      "linux",
+      "microservices",
+      "kafka",
+      "aws",
+      "ci/cd"
+    ],
+    "preferred_categories": [
+      "Backend & Systems Engineering",
+      "Cloud, DevOps & SRE"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.1,
+      "c2_technical_challenge": 0.4,
+      "c3_compensation": 0.35,
+      "c4_flexibility": 0.15
+    },
+    "constraints": {
+      "min_salary_idr_millions": 20.0,
+      "max_required_experience_years": 6,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 0.0,
+      "min_technical_challenge": 4.0
+    }
+  },
+  {
+    "id": "USR-06",
+    "name": "Nadia Putri",
+    "email": "nadia@karir-ai.test",
+    "role_headline": "Cybersecurity & SOC Engineer",
+    "persona_tag": "Fokus Keamanan Siber & Cloud",
+    "experience_years": 3,
+    "preferred_skills": [
+      "cybersecurity",
+      "siem",
+      "network security",
+      "linux",
+      "python",
+      "gcp",
+      "firebase"
+    ],
+    "preferred_categories": [
+      "Cybersecurity & Cloud Security",
+      "Cloud, DevOps & SRE"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.25,
+      "c2_technical_challenge": 0.35,
+      "c3_compensation": 0.2,
+      "c4_flexibility": 0.2
+    },
+    "constraints": {
+      "min_salary_idr_millions": 14.0,
+      "max_required_experience_years": 4,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 3.5,
+      "min_technical_challenge": 3.8
+    }
+  },
+  {
+    "id": "USR-07",
+    "name": "Fajar Setiawan",
+    "email": "fajar@karir-ai.test",
+    "role_headline": "Junior Backend Developer",
+    "persona_tag": "Tetangga Pola Pilihan Dina (Entry Backend & SQL)",
+    "experience_years": 1,
+    "preferred_skills": [
+      "python",
+      "postgresql",
+      "sql",
+      "rest api",
+      "docker",
+      "git"
+    ],
+    "preferred_categories": [
+      "Backend & Systems Engineering",
+      "Data Engineering & Analytics"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.45,
+      "c2_technical_challenge": 0.2,
+      "c3_compensation": 0.15,
+      "c4_flexibility": 0.2
+    },
+    "constraints": {
+      "min_salary_idr_millions": 8.0,
+      "max_required_experience_years": 2,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 4.0,
+      "min_technical_challenge": 0.0
+    }
+  },
+  {
+    "id": "USR-08",
+    "name": "Sinta Dewi",
+    "email": "sinta@karir-ai.test",
+    "role_headline": "Frontend & Web Engineer",
+    "persona_tag": "Tetangga Pola Pilihan Citra (React/TypeScript/Firebase)",
+    "experience_years": 2,
+    "preferred_skills": [
+      "react",
+      "typescript",
+      "javascript",
+      "firebase",
+      "firestore",
+      "rest api"
+    ],
+    "preferred_categories": [
+      "Fullstack & Frontend Web"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.25,
+      "c2_technical_challenge": 0.2,
+      "c3_compensation": 0.2,
+      "c4_flexibility": 0.35
+    },
+    "constraints": {
+      "min_salary_idr_millions": 10.0,
+      "max_required_experience_years": 3,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 3.5,
+      "min_technical_challenge": 0.0
+    }
+  },
+  {
+    "id": "USR-09",
+    "name": "Dimas Saputra",
+    "email": "dimas@karir-ai.test",
+    "role_headline": "DevOps & Automation Engineer",
+    "persona_tag": "Fokus CI/CD, Container & Infrastruktur Cloud",
+    "experience_years": 3,
+    "preferred_skills": [
+      "docker",
+      "kubernetes",
+      "ci/cd",
+      "terraform",
+      "aws",
+      "linux",
+      "git"
+    ],
+    "preferred_categories": [
+      "Cloud, DevOps & SRE",
+      "Backend & Systems Engineering"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.2,
+      "c2_technical_challenge": 0.3,
+      "c3_compensation": 0.25,
+      "c4_flexibility": 0.25
+    },
+    "constraints": {
+      "min_salary_idr_millions": 15.0,
+      "max_required_experience_years": 4,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 0.0,
+      "min_technical_challenge": 3.8
+    }
+  },
+  {
+    "id": "USR-10",
+    "name": "Larasati Putri",
+    "email": "laras@karir-ai.test",
+    "role_headline": "AI Research & NLP Engineer",
+    "persona_tag": "Fokus NLP, Deep Learning & Evaluasi Model",
+    "experience_years": 2,
+    "preferred_skills": [
+      "python",
+      "machine learning",
+      "deep learning",
+      "nlp",
+      "pytorch",
+      "tf-idf"
+    ],
+    "preferred_categories": [
+      "AI & Machine Learning",
+      "Data Engineering & Analytics"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.3,
+      "c2_technical_challenge": 0.35,
+      "c3_compensation": 0.15,
+      "c4_flexibility": 0.2
+    },
+    "constraints": {
+      "min_salary_idr_millions": 11.0,
+      "max_required_experience_years": 3,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 3.5,
+      "min_technical_challenge": 3.8
+    }
+  },
+  {
+    "id": "USR-11",
+    "name": "Hendra Wijaya",
+    "email": "hendra@karir-ai.test",
+    "role_headline": "Principal Distributed Systems Architect",
+    "persona_tag": "Tetangga Senior Bima & Raka",
+    "experience_years": 6,
+    "preferred_skills": [
+      "rust",
+      "golang",
+      "c++",
+      "system design",
+      "kafka",
+      "microservices",
+      "linux"
+    ],
+    "preferred_categories": [
+      "Backend & Systems Engineering",
+      "Cloud, DevOps & SRE"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.1,
+      "c2_technical_challenge": 0.45,
+      "c3_compensation": 0.35,
+      "c4_flexibility": 0.1
+    },
+    "constraints": {
+      "min_salary_idr_millions": 24.0,
+      "max_required_experience_years": 8,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid",
+        "Onsite"
+      ],
+      "min_role_clarity": 0.0,
+      "min_technical_challenge": 4.2
+    }
+  },
+  {
+    "id": "USR-12",
+    "name": "Aulia Rahman",
+    "email": "aulia@karir-ai.test",
+    "role_headline": "Data Analyst Fresh Graduate",
+    "persona_tag": "Tetangga Fresh Graduate Dina (SQL/BI/Python)",
+    "experience_years": 0,
+    "preferred_skills": [
+      "sql",
+      "python",
+      "data analysis",
+      "tableau",
+      "power bi",
+      "pandas"
+    ],
+    "preferred_categories": [
+      "Data Engineering & Analytics"
+    ],
+    "weights": {
+      "c1_role_clarity": 0.5,
+      "c2_technical_challenge": 0.15,
+      "c3_compensation": 0.15,
+      "c4_flexibility": 0.2
+    },
+    "constraints": {
+      "min_salary_idr_millions": 8.0,
+      "max_required_experience_years": 1,
+      "allowed_work_modes": [
+        "Remote",
+        "Hybrid"
+      ],
+      "min_role_clarity": 4.0,
+      "min_technical_challenge": 0.0
+    }
+  }
+]

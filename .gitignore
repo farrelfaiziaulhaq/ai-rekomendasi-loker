@@ -1,0 +1,10 @@
+/target/
+/dist/
+/data/runtime_firestore_mirror.json
+.env
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+__pycache__/
+*.pyc
+node_modules/

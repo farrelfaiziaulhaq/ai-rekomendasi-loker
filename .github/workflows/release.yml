@@ -1,0 +1,114 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag versi rilis (contoh: v1.0.0)"
+        required: true
+        default: "v1.0.0"
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-windows:
+    name: Paket Rilis Siap Pakai Windows (.zip)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pasang Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Jalankan Unit Test
+        run: cargo test
+
+      - name: Kemas Paket Rilis Windows (.zip)
+        shell: pwsh
+        run: |
+          $Tag = "${{ github.event.inputs.tag || github.ref_name }}"
+          ./scripts/package_release.ps1 -Version $Tag
+
+      - name: Unggah Artefak Windows
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-windows
+          path: |
+            dist/*.zip
+            dist/*.zip.sha256
+
+  build-linux:
+    name: Paket Rilis Siap Pakai Linux (.tar.gz)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pasang Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Jalankan Unit Test
+        run: cargo test
+
+      - name: Kemas Paket Rilis Linux (.tar.gz)
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          bash scripts/package_release.sh "$TAG"
+
+      - name: Unggah Artefak Linux
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-linux
+          path: |
+            dist/*.tar.gz
+            dist/*.tar.gz.sha256
+
+  publish:
+    name: Terbitkan GitHub Release (Windows + Linux)
+    needs: [build-windows, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unduh Seluruh Artefak
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Publikasikan GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          name: "KarirAI ${{ github.event.inputs.tag || github.ref_name }} — Sistem Rekomendasi Lowongan Kerja (Rust + Firebase)"
+          generate_release_notes: true
+          body: |
+            ### Paket Rilis Siap Pakai (Tanpa Perlu Install Rust / Kompilasi!)
+
+            Dirancang khusus agar seluruh anggota kelompok (khususnya pengguna **Windows 10/11**) maupun dosen penguji dapat langsung menjalankan aplikasi dalam **1 klik**:
+
+            #### 1. Windows 10 / 11 (`x86_64`)
+            1. Unduh **`karir-ai-${{ github.event.inputs.tag || github.ref_name }}-windows-x86_64.zip`** lalu klik kanan -> **Extract All...**
+            2. Klik dua kali **`start.bat`** -> server langsung menyala dan membuka **`http://127.0.0.1:3000`** di browser!
+            3. Tersedia juga:
+               - **`start-firebase-emulator.bat`**: menyalakan Firebase Auth & Cloud Firestore Emulator lokal beserta Dashboard UI di `http://127.0.0.1:4000`.
+               - **`cek-evaluasi-ai.bat`**: mencetak tabel evaluasi ilmiah (`Precision@3`, `Precision@5`, `Recall@5`, `F1@5`, `NDCG@5`, dan latensi Rust) di terminal.
+
+            #### 2. Linux (`x86_64`)
+            ```bash
+            curl -fL https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.tag || github.ref_name }}/karir-ai-${{ github.event.inputs.tag || github.ref_name }}-linux-x86_64.tar.gz | tar -xz
+            cd karir-ai-${{ github.event.inputs.tag || github.ref_name }}-linux-x86_64
+            ./start.sh
+            ```
+          files: |
+            release-assets/*

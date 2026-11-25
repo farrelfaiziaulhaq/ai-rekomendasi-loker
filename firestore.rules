@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Aturan Cloud Firestore untuk koleksi sistem rekomendasi KarirAI:
+    // Katalog lowongan dapat dibaca publik, sedangkan penulisan interaksi & profil
+    // dikelola melalui backend Rust terotentikasi / emulator pengembangan.
+    match /jobs/{jobId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+    match /interactions/{interactionId} {
+      allow read, write: if true;
+    }
+    match /recommendation_logs/{logId} {
+      allow read, write: if true;
+    }
+    match /system_meta/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

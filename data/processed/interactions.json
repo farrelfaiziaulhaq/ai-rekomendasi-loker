@@ -1,0 +1,4706 @@
+[
+  {
+    "id": "INT-0001",
+    "user_id": "USR-01",
+    "job_id": "JOB-053",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0002",
+    "user_id": "USR-01",
+    "job_id": "JOB-055",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.2
+    }
+  },
+  {
+    "id": "INT-0003",
+    "user_id": "USR-01",
+    "job_id": "JOB-030",
+    "rating": 4.9,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0004",
+    "user_id": "USR-01",
+    "job_id": "JOB-036",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.9,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0005",
+    "user_id": "USR-01",
+    "job_id": "JOB-051",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.6,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0006",
+    "user_id": "USR-01",
+    "job_id": "JOB-048",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0007",
+    "user_id": "USR-01",
+    "job_id": "JOB-049",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0008",
+    "user_id": "USR-01",
+    "job_id": "JOB-042",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0009",
+    "user_id": "USR-01",
+    "job_id": "JOB-058",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0010",
+    "user_id": "USR-01",
+    "job_id": "JOB-047",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0011",
+    "user_id": "USR-01",
+    "job_id": "JOB-008",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0012",
+    "user_id": "USR-01",
+    "job_id": "JOB-040",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0013",
+    "user_id": "USR-01",
+    "job_id": "JOB-033",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0014",
+    "user_id": "USR-01",
+    "job_id": "JOB-034",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.6,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0015",
+    "user_id": "USR-01",
+    "job_id": "JOB-046",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0016",
+    "user_id": "USR-01",
+    "job_id": "JOB-035",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0017",
+    "user_id": "USR-01",
+    "job_id": "JOB-031",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0018",
+    "user_id": "USR-01",
+    "job_id": "JOB-045",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.4,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0019",
+    "user_id": "USR-01",
+    "job_id": "JOB-037",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0020",
+    "user_id": "USR-01",
+    "job_id": "JOB-043",
+    "rating": 3.7,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0021",
+    "user_id": "USR-01",
+    "job_id": "JOB-029",
+    "rating": 2.7,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0022",
+    "user_id": "USR-01",
+    "job_id": "JOB-060",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0023",
+    "user_id": "USR-01",
+    "job_id": "JOB-012",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0024",
+    "user_id": "USR-01",
+    "job_id": "JOB-059",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.2,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0025",
+    "user_id": "USR-01",
+    "job_id": "JOB-028",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0026",
+    "user_id": "USR-01",
+    "job_id": "JOB-009",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0027",
+    "user_id": "USR-01",
+    "job_id": "JOB-052",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0028",
+    "user_id": "USR-01",
+    "job_id": "JOB-007",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0029",
+    "user_id": "USR-02",
+    "job_id": "JOB-054",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0030",
+    "user_id": "USR-02",
+    "job_id": "JOB-057",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0031",
+    "user_id": "USR-02",
+    "job_id": "JOB-011",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0032",
+    "user_id": "USR-02",
+    "job_id": "JOB-060",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0033",
+    "user_id": "USR-02",
+    "job_id": "JOB-002",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0034",
+    "user_id": "USR-02",
+    "job_id": "JOB-028",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0035",
+    "user_id": "USR-02",
+    "job_id": "JOB-056",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 5.0
+    }
+  },
+  {
+    "id": "INT-0036",
+    "user_id": "USR-02",
+    "job_id": "JOB-014",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0037",
+    "user_id": "USR-02",
+    "job_id": "JOB-053",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0038",
+    "user_id": "USR-02",
+    "job_id": "JOB-050",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0039",
+    "user_id": "USR-02",
+    "job_id": "JOB-004",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0040",
+    "user_id": "USR-02",
+    "job_id": "JOB-059",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.2,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0041",
+    "user_id": "USR-02",
+    "job_id": "JOB-012",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0042",
+    "user_id": "USR-02",
+    "job_id": "JOB-043",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0043",
+    "user_id": "USR-02",
+    "job_id": "JOB-038",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0044",
+    "user_id": "USR-02",
+    "job_id": "JOB-025",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0045",
+    "user_id": "USR-02",
+    "job_id": "JOB-008",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0046",
+    "user_id": "USR-02",
+    "job_id": "JOB-005",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0047",
+    "user_id": "USR-02",
+    "job_id": "JOB-048",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0048",
+    "user_id": "USR-02",
+    "job_id": "JOB-036",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.9,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0049",
+    "user_id": "USR-02",
+    "job_id": "JOB-030",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0050",
+    "user_id": "USR-02",
+    "job_id": "JOB-033",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0051",
+    "user_id": "USR-02",
+    "job_id": "JOB-032",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0052",
+    "user_id": "USR-02",
+    "job_id": "JOB-037",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0053",
+    "user_id": "USR-02",
+    "job_id": "JOB-035",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0054",
+    "user_id": "USR-02",
+    "job_id": "JOB-042",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0055",
+    "user_id": "USR-02",
+    "job_id": "JOB-046",
+    "rating": 2.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0056",
+    "user_id": "USR-02",
+    "job_id": "JOB-039",
+    "rating": 2.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.9,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0057",
+    "user_id": "USR-03",
+    "job_id": "JOB-056",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 5.0
+    }
+  },
+  {
+    "id": "INT-0058",
+    "user_id": "USR-03",
+    "job_id": "JOB-054",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0059",
+    "user_id": "USR-03",
+    "job_id": "JOB-053",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0060",
+    "user_id": "USR-03",
+    "job_id": "JOB-024",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0061",
+    "user_id": "USR-03",
+    "job_id": "JOB-005",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0062",
+    "user_id": "USR-03",
+    "job_id": "JOB-021",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0063",
+    "user_id": "USR-03",
+    "job_id": "JOB-009",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0064",
+    "user_id": "USR-03",
+    "job_id": "JOB-041",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.3,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0065",
+    "user_id": "USR-03",
+    "job_id": "JOB-008",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0066",
+    "user_id": "USR-03",
+    "job_id": "JOB-025",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0067",
+    "user_id": "USR-03",
+    "job_id": "JOB-040",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0068",
+    "user_id": "USR-03",
+    "job_id": "JOB-036",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.9,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0069",
+    "user_id": "USR-03",
+    "job_id": "JOB-048",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0070",
+    "user_id": "USR-03",
+    "job_id": "JOB-029",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0071",
+    "user_id": "USR-03",
+    "job_id": "JOB-049",
+    "rating": 3.7,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0072",
+    "user_id": "USR-03",
+    "job_id": "JOB-047",
+    "rating": 3.7,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0073",
+    "user_id": "USR-03",
+    "job_id": "JOB-051",
+    "rating": 3.7,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.6,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0074",
+    "user_id": "USR-03",
+    "job_id": "JOB-060",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0075",
+    "user_id": "USR-03",
+    "job_id": "JOB-059",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.2,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0076",
+    "user_id": "USR-03",
+    "job_id": "JOB-018",
+    "rating": 3.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0077",
+    "user_id": "USR-03",
+    "job_id": "JOB-027",
+    "rating": 2.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0078",
+    "user_id": "USR-03",
+    "job_id": "JOB-046",
+    "rating": 2.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0079",
+    "user_id": "USR-03",
+    "job_id": "JOB-004",
+    "rating": 2.2,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0080",
+    "user_id": "USR-03",
+    "job_id": "JOB-001",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 2.9,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0081",
+    "user_id": "USR-03",
+    "job_id": "JOB-003",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.9,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0082",
+    "user_id": "USR-03",
+    "job_id": "JOB-031",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0083",
+    "user_id": "USR-03",
+    "job_id": "JOB-039",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.9,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0084",
+    "user_id": "USR-03",
+    "job_id": "JOB-045",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.4,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0085",
+    "user_id": "USR-04",
+    "job_id": "JOB-055",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.2
+    }
+  },
+  {
+    "id": "INT-0086",
+    "user_id": "USR-04",
+    "job_id": "JOB-058",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0087",
+    "user_id": "USR-04",
+    "job_id": "JOB-006",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.8,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0088",
+    "user_id": "USR-04",
+    "job_id": "JOB-022",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0089",
+    "user_id": "USR-04",
+    "job_id": "JOB-020",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0090",
+    "user_id": "USR-04",
+    "job_id": "JOB-010",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0091",
+    "user_id": "USR-04",
+    "job_id": "JOB-015",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0092",
+    "user_id": "USR-04",
+    "job_id": "JOB-030",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0093",
+    "user_id": "USR-04",
+    "job_id": "JOB-023",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0094",
+    "user_id": "USR-04",
+    "job_id": "JOB-018",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0095",
+    "user_id": "USR-04",
+    "job_id": "JOB-021",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0096",
+    "user_id": "USR-04",
+    "job_id": "JOB-017",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0097",
+    "user_id": "USR-04",
+    "job_id": "JOB-042",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0098",
+    "user_id": "USR-04",
+    "job_id": "JOB-013",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0099",
+    "user_id": "USR-04",
+    "job_id": "JOB-026",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 3.7,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0100",
+    "user_id": "USR-04",
+    "job_id": "JOB-019",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0101",
+    "user_id": "USR-04",
+    "job_id": "JOB-008",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0102",
+    "user_id": "USR-04",
+    "job_id": "JOB-053",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0103",
+    "user_id": "USR-04",
+    "job_id": "JOB-024",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0104",
+    "user_id": "USR-04",
+    "job_id": "JOB-025",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0105",
+    "user_id": "USR-04",
+    "job_id": "JOB-007",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0106",
+    "user_id": "USR-04",
+    "job_id": "JOB-037",
+    "rating": 2.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0107",
+    "user_id": "USR-04",
+    "job_id": "JOB-032",
+    "rating": 2.4,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0108",
+    "user_id": "USR-04",
+    "job_id": "JOB-043",
+    "rating": 2.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0109",
+    "user_id": "USR-04",
+    "job_id": "JOB-038",
+    "rating": 2.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0110",
+    "user_id": "USR-04",
+    "job_id": "JOB-011",
+    "rating": 2.4,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0111",
+    "user_id": "USR-04",
+    "job_id": "JOB-052",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0112",
+    "user_id": "USR-04",
+    "job_id": "JOB-057",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0113",
+    "user_id": "USR-05",
+    "job_id": "JOB-060",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0114",
+    "user_id": "USR-05",
+    "job_id": "JOB-057",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0115",
+    "user_id": "USR-05",
+    "job_id": "JOB-054",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0116",
+    "user_id": "USR-05",
+    "job_id": "JOB-011",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0117",
+    "user_id": "USR-05",
+    "job_id": "JOB-028",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0118",
+    "user_id": "USR-05",
+    "job_id": "JOB-002",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0119",
+    "user_id": "USR-05",
+    "job_id": "JOB-050",
+    "rating": 4.6,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0120",
+    "user_id": "USR-05",
+    "job_id": "JOB-014",
+    "rating": 4.5,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0121",
+    "user_id": "USR-05",
+    "job_id": "JOB-012",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0122",
+    "user_id": "USR-05",
+    "job_id": "JOB-025",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0123",
+    "user_id": "USR-05",
+    "job_id": "JOB-053",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0124",
+    "user_id": "USR-05",
+    "job_id": "JOB-044",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.6,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0125",
+    "user_id": "USR-05",
+    "job_id": "JOB-004",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0126",
+    "user_id": "USR-05",
+    "job_id": "JOB-033",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0127",
+    "user_id": "USR-05",
+    "job_id": "JOB-016",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0128",
+    "user_id": "USR-05",
+    "job_id": "JOB-032",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0129",
+    "user_id": "USR-05",
+    "job_id": "JOB-035",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0130",
+    "user_id": "USR-05",
+    "job_id": "JOB-037",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0131",
+    "user_id": "USR-05",
+    "job_id": "JOB-043",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0132",
+    "user_id": "USR-05",
+    "job_id": "JOB-038",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0133",
+    "user_id": "USR-05",
+    "job_id": "JOB-041",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.3,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0134",
+    "user_id": "USR-05",
+    "job_id": "JOB-010",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0135",
+    "user_id": "USR-05",
+    "job_id": "JOB-015",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0136",
+    "user_id": "USR-05",
+    "job_id": "JOB-024",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0137",
+    "user_id": "USR-05",
+    "job_id": "JOB-040",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0138",
+    "user_id": "USR-05",
+    "job_id": "JOB-058",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0139",
+    "user_id": "USR-05",
+    "job_id": "JOB-030",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0140",
+    "user_id": "USR-05",
+    "job_id": "JOB-042",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0141",
+    "user_id": "USR-06",
+    "job_id": "JOB-059",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.2,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0142",
+    "user_id": "USR-06",
+    "job_id": "JOB-004",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0143",
+    "user_id": "USR-06",
+    "job_id": "JOB-028",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0144",
+    "user_id": "USR-06",
+    "job_id": "JOB-007",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0145",
+    "user_id": "USR-06",
+    "job_id": "JOB-060",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0146",
+    "user_id": "USR-06",
+    "job_id": "JOB-012",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0147",
+    "user_id": "USR-06",
+    "job_id": "JOB-052",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0148",
+    "user_id": "USR-06",
+    "job_id": "JOB-014",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0149",
+    "user_id": "USR-06",
+    "job_id": "JOB-050",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0150",
+    "user_id": "USR-06",
+    "job_id": "JOB-016",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0151",
+    "user_id": "USR-06",
+    "job_id": "JOB-002",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0152",
+    "user_id": "USR-06",
+    "job_id": "JOB-054",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0153",
+    "user_id": "USR-06",
+    "job_id": "JOB-024",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0154",
+    "user_id": "USR-06",
+    "job_id": "JOB-022",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0155",
+    "user_id": "USR-06",
+    "job_id": "JOB-011",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0156",
+    "user_id": "USR-06",
+    "job_id": "JOB-025",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0157",
+    "user_id": "USR-06",
+    "job_id": "JOB-020",
+    "rating": 3.7,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0158",
+    "user_id": "USR-06",
+    "job_id": "JOB-027",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0159",
+    "user_id": "USR-06",
+    "job_id": "JOB-023",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0160",
+    "user_id": "USR-06",
+    "job_id": "JOB-010",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0161",
+    "user_id": "USR-06",
+    "job_id": "JOB-029",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0162",
+    "user_id": "USR-06",
+    "job_id": "JOB-042",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0163",
+    "user_id": "USR-06",
+    "job_id": "JOB-033",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0164",
+    "user_id": "USR-06",
+    "job_id": "JOB-046",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0165",
+    "user_id": "USR-06",
+    "job_id": "JOB-039",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.9,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0166",
+    "user_id": "USR-06",
+    "job_id": "JOB-035",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0167",
+    "user_id": "USR-06",
+    "job_id": "JOB-037",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0168",
+    "user_id": "USR-06",
+    "job_id": "JOB-032",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0169",
+    "user_id": "USR-07",
+    "job_id": "JOB-053",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0170",
+    "user_id": "USR-07",
+    "job_id": "JOB-008",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0171",
+    "user_id": "USR-07",
+    "job_id": "JOB-030",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0172",
+    "user_id": "USR-07",
+    "job_id": "JOB-036",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.9,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0173",
+    "user_id": "USR-07",
+    "job_id": "JOB-049",
+    "rating": 4.9,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0174",
+    "user_id": "USR-07",
+    "job_id": "JOB-051",
+    "rating": 4.9,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.6,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0175",
+    "user_id": "USR-07",
+    "job_id": "JOB-048",
+    "rating": 4.9,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0176",
+    "user_id": "USR-07",
+    "job_id": "JOB-042",
+    "rating": 4.9,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0177",
+    "user_id": "USR-07",
+    "job_id": "JOB-047",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0178",
+    "user_id": "USR-07",
+    "job_id": "JOB-058",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0179",
+    "user_id": "USR-07",
+    "job_id": "JOB-025",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0180",
+    "user_id": "USR-07",
+    "job_id": "JOB-006",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.8,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0181",
+    "user_id": "USR-07",
+    "job_id": "JOB-013",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0182",
+    "user_id": "USR-07",
+    "job_id": "JOB-014",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0183",
+    "user_id": "USR-07",
+    "job_id": "JOB-018",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0184",
+    "user_id": "USR-07",
+    "job_id": "JOB-023",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0185",
+    "user_id": "USR-07",
+    "job_id": "JOB-054",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0186",
+    "user_id": "USR-07",
+    "job_id": "JOB-005",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0187",
+    "user_id": "USR-07",
+    "job_id": "JOB-041",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.3,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0188",
+    "user_id": "USR-07",
+    "job_id": "JOB-040",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0189",
+    "user_id": "USR-07",
+    "job_id": "JOB-016",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0190",
+    "user_id": "USR-07",
+    "job_id": "JOB-004",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0191",
+    "user_id": "USR-07",
+    "job_id": "JOB-050",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0192",
+    "user_id": "USR-07",
+    "job_id": "JOB-039",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.9,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0193",
+    "user_id": "USR-07",
+    "job_id": "JOB-003",
+    "rating": 2.8,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.9,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0194",
+    "user_id": "USR-07",
+    "job_id": "JOB-057",
+    "rating": 2.8,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0195",
+    "user_id": "USR-07",
+    "job_id": "JOB-052",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0196",
+    "user_id": "USR-07",
+    "job_id": "JOB-007",
+    "rating": 2.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0197",
+    "user_id": "USR-08",
+    "job_id": "JOB-056",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 5.0
+    }
+  },
+  {
+    "id": "INT-0198",
+    "user_id": "USR-08",
+    "job_id": "JOB-024",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0199",
+    "user_id": "USR-08",
+    "job_id": "JOB-021",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0200",
+    "user_id": "USR-08",
+    "job_id": "JOB-054",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0201",
+    "user_id": "USR-08",
+    "job_id": "JOB-009",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0202",
+    "user_id": "USR-08",
+    "job_id": "JOB-041",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.3,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0203",
+    "user_id": "USR-08",
+    "job_id": "JOB-040",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0204",
+    "user_id": "USR-08",
+    "job_id": "JOB-059",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.2,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0205",
+    "user_id": "USR-08",
+    "job_id": "JOB-053",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0206",
+    "user_id": "USR-08",
+    "job_id": "JOB-018",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0207",
+    "user_id": "USR-08",
+    "job_id": "JOB-005",
+    "rating": 3.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0208",
+    "user_id": "USR-08",
+    "job_id": "JOB-019",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0209",
+    "user_id": "USR-08",
+    "job_id": "JOB-060",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0210",
+    "user_id": "USR-08",
+    "job_id": "JOB-020",
+    "rating": 3.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0211",
+    "user_id": "USR-08",
+    "job_id": "JOB-028",
+    "rating": 3.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0212",
+    "user_id": "USR-08",
+    "job_id": "JOB-010",
+    "rating": 3.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0213",
+    "user_id": "USR-08",
+    "job_id": "JOB-017",
+    "rating": 3.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0214",
+    "user_id": "USR-08",
+    "job_id": "JOB-023",
+    "rating": 3.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0215",
+    "user_id": "USR-08",
+    "job_id": "JOB-055",
+    "rating": 3.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.2
+    }
+  },
+  {
+    "id": "INT-0216",
+    "user_id": "USR-08",
+    "job_id": "JOB-006",
+    "rating": 3.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.8,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0217",
+    "user_id": "USR-08",
+    "job_id": "JOB-035",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0218",
+    "user_id": "USR-08",
+    "job_id": "JOB-011",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0219",
+    "user_id": "USR-08",
+    "job_id": "JOB-057",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0220",
+    "user_id": "USR-08",
+    "job_id": "JOB-037",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0221",
+    "user_id": "USR-08",
+    "job_id": "JOB-045",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.4,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0222",
+    "user_id": "USR-08",
+    "job_id": "JOB-043",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0223",
+    "user_id": "USR-08",
+    "job_id": "JOB-038",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0224",
+    "user_id": "USR-08",
+    "job_id": "JOB-032",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0225",
+    "user_id": "USR-09",
+    "job_id": "JOB-060",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0226",
+    "user_id": "USR-09",
+    "job_id": "JOB-014",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0227",
+    "user_id": "USR-09",
+    "job_id": "JOB-028",
+    "rating": 4.8,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0228",
+    "user_id": "USR-09",
+    "job_id": "JOB-054",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0229",
+    "user_id": "USR-09",
+    "job_id": "JOB-053",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0230",
+    "user_id": "USR-09",
+    "job_id": "JOB-011",
+    "rating": 4.6,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0231",
+    "user_id": "USR-09",
+    "job_id": "JOB-002",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0232",
+    "user_id": "USR-09",
+    "job_id": "JOB-043",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0233",
+    "user_id": "USR-09",
+    "job_id": "JOB-012",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0234",
+    "user_id": "USR-09",
+    "job_id": "JOB-038",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0235",
+    "user_id": "USR-09",
+    "job_id": "JOB-001",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 2.9,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0236",
+    "user_id": "USR-09",
+    "job_id": "JOB-057",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0237",
+    "user_id": "USR-09",
+    "job_id": "JOB-008",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0238",
+    "user_id": "USR-09",
+    "job_id": "JOB-036",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.9,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0239",
+    "user_id": "USR-09",
+    "job_id": "JOB-048",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0240",
+    "user_id": "USR-09",
+    "job_id": "JOB-025",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0241",
+    "user_id": "USR-09",
+    "job_id": "JOB-049",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0242",
+    "user_id": "USR-09",
+    "job_id": "JOB-047",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0243",
+    "user_id": "USR-09",
+    "job_id": "JOB-051",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.6,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0244",
+    "user_id": "USR-09",
+    "job_id": "JOB-050",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0245",
+    "user_id": "USR-09",
+    "job_id": "JOB-017",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0246",
+    "user_id": "USR-09",
+    "job_id": "JOB-010",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0247",
+    "user_id": "USR-09",
+    "job_id": "JOB-015",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0248",
+    "user_id": "USR-09",
+    "job_id": "JOB-009",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0249",
+    "user_id": "USR-09",
+    "job_id": "JOB-024",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0250",
+    "user_id": "USR-09",
+    "job_id": "JOB-058",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0251",
+    "user_id": "USR-09",
+    "job_id": "JOB-039",
+    "rating": 2.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.9,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0252",
+    "user_id": "USR-09",
+    "job_id": "JOB-046",
+    "rating": 2.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0253",
+    "user_id": "USR-10",
+    "job_id": "JOB-055",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.2
+    }
+  },
+  {
+    "id": "INT-0254",
+    "user_id": "USR-10",
+    "job_id": "JOB-026",
+    "rating": 4.6,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 3.7,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0255",
+    "user_id": "USR-10",
+    "job_id": "JOB-020",
+    "rating": 4.5,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0256",
+    "user_id": "USR-10",
+    "job_id": "JOB-010",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0257",
+    "user_id": "USR-10",
+    "job_id": "JOB-015",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0258",
+    "user_id": "USR-10",
+    "job_id": "JOB-023",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0259",
+    "user_id": "USR-10",
+    "job_id": "JOB-021",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0260",
+    "user_id": "USR-10",
+    "job_id": "JOB-018",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0261",
+    "user_id": "USR-10",
+    "job_id": "JOB-022",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0262",
+    "user_id": "USR-10",
+    "job_id": "JOB-006",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.8,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0263",
+    "user_id": "USR-10",
+    "job_id": "JOB-058",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0264",
+    "user_id": "USR-10",
+    "job_id": "JOB-017",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0265",
+    "user_id": "USR-10",
+    "job_id": "JOB-013",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0266",
+    "user_id": "USR-10",
+    "job_id": "JOB-012",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0267",
+    "user_id": "USR-10",
+    "job_id": "JOB-028",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0268",
+    "user_id": "USR-10",
+    "job_id": "JOB-019",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0269",
+    "user_id": "USR-10",
+    "job_id": "JOB-030",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0270",
+    "user_id": "USR-10",
+    "job_id": "JOB-042",
+    "rating": 3.7,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0271",
+    "user_id": "USR-10",
+    "job_id": "JOB-059",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 4.2,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0272",
+    "user_id": "USR-10",
+    "job_id": "JOB-009",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0273",
+    "user_id": "USR-10",
+    "job_id": "JOB-033",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0274",
+    "user_id": "USR-10",
+    "job_id": "JOB-035",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0275",
+    "user_id": "USR-10",
+    "job_id": "JOB-057",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0276",
+    "user_id": "USR-10",
+    "job_id": "JOB-037",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0277",
+    "user_id": "USR-10",
+    "job_id": "JOB-032",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0278",
+    "user_id": "USR-10",
+    "job_id": "JOB-052",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0279",
+    "user_id": "USR-10",
+    "job_id": "JOB-043",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0280",
+    "user_id": "USR-10",
+    "job_id": "JOB-038",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0281",
+    "user_id": "USR-11",
+    "job_id": "JOB-057",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0282",
+    "user_id": "USR-11",
+    "job_id": "JOB-054",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0283",
+    "user_id": "USR-11",
+    "job_id": "JOB-002",
+    "rating": 4.7,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0284",
+    "user_id": "USR-11",
+    "job_id": "JOB-011",
+    "rating": 4.6,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0285",
+    "user_id": "USR-11",
+    "job_id": "JOB-060",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0286",
+    "user_id": "USR-11",
+    "job_id": "JOB-028",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0287",
+    "user_id": "USR-11",
+    "job_id": "JOB-014",
+    "rating": 4.2,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0288",
+    "user_id": "USR-11",
+    "job_id": "JOB-050",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0289",
+    "user_id": "USR-11",
+    "job_id": "JOB-044",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.6,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0290",
+    "user_id": "USR-11",
+    "job_id": "JOB-004",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 4.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0291",
+    "user_id": "USR-11",
+    "job_id": "JOB-033",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0292",
+    "user_id": "USR-11",
+    "job_id": "JOB-032",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.7,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0293",
+    "user_id": "USR-11",
+    "job_id": "JOB-037",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0294",
+    "user_id": "USR-11",
+    "job_id": "JOB-035",
+    "rating": 4.0,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0295",
+    "user_id": "USR-11",
+    "job_id": "JOB-043",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.2,
+      "c2_technical_challenge": 4.1,
+      "c3_compensation": 4.6,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0296",
+    "user_id": "USR-11",
+    "job_id": "JOB-012",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0297",
+    "user_id": "USR-11",
+    "job_id": "JOB-038",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0298",
+    "user_id": "USR-11",
+    "job_id": "JOB-008",
+    "rating": 3.9,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 4.1,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0299",
+    "user_id": "USR-11",
+    "job_id": "JOB-025",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0300",
+    "user_id": "USR-11",
+    "job_id": "JOB-005",
+    "rating": 3.8,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0301",
+    "user_id": "USR-11",
+    "job_id": "JOB-017",
+    "rating": 3.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0302",
+    "user_id": "USR-11",
+    "job_id": "JOB-010",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 3.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0303",
+    "user_id": "USR-11",
+    "job_id": "JOB-026",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 3.7,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0304",
+    "user_id": "USR-11",
+    "job_id": "JOB-024",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.3,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0305",
+    "user_id": "USR-11",
+    "job_id": "JOB-040",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0306",
+    "user_id": "USR-11",
+    "job_id": "JOB-058",
+    "rating": 3.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0307",
+    "user_id": "USR-11",
+    "job_id": "JOB-030",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0308",
+    "user_id": "USR-11",
+    "job_id": "JOB-042",
+    "rating": 2.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0309",
+    "user_id": "USR-12",
+    "job_id": "JOB-058",
+    "rating": 5.0,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.9,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0310",
+    "user_id": "USR-12",
+    "job_id": "JOB-055",
+    "rating": 4.6,
+    "action": "applied",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 3.6,
+      "c4_flexibility": 4.2
+    }
+  },
+  {
+    "id": "INT-0311",
+    "user_id": "USR-12",
+    "job_id": "JOB-030",
+    "rating": 4.4,
+    "action": "applied",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 3.2,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0312",
+    "user_id": "USR-12",
+    "job_id": "JOB-042",
+    "rating": 4.3,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.5,
+      "c3_compensation": 2.6,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0313",
+    "user_id": "USR-12",
+    "job_id": "JOB-053",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 5.0,
+      "c2_technical_challenge": 3.0,
+      "c3_compensation": 3.4,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0314",
+    "user_id": "USR-12",
+    "job_id": "JOB-006",
+    "rating": 4.1,
+    "action": "bookmarked",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.2,
+      "c2_technical_challenge": 3.8,
+      "c3_compensation": 3.7,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0315",
+    "user_id": "USR-12",
+    "job_id": "JOB-040",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.1,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0316",
+    "user_id": "USR-12",
+    "job_id": "JOB-036",
+    "rating": 3.6,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 2.9,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0317",
+    "user_id": "USR-12",
+    "job_id": "JOB-051",
+    "rating": 3.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.5,
+      "c2_technical_challenge": 3.6,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0318",
+    "user_id": "USR-12",
+    "job_id": "JOB-049",
+    "rating": 3.5,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0319",
+    "user_id": "USR-12",
+    "job_id": "JOB-048",
+    "rating": 3.5,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 2.7,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0320",
+    "user_id": "USR-12",
+    "job_id": "JOB-047",
+    "rating": 3.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.5,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 2.8,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0321",
+    "user_id": "USR-12",
+    "job_id": "JOB-034",
+    "rating": 3.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.6,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0322",
+    "user_id": "USR-12",
+    "job_id": "JOB-046",
+    "rating": 3.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.7,
+      "c2_technical_challenge": 4.2,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0323",
+    "user_id": "USR-12",
+    "job_id": "JOB-018",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.8,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 3.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0324",
+    "user_id": "USR-12",
+    "job_id": "JOB-027",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.8,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0325",
+    "user_id": "USR-12",
+    "job_id": "JOB-031",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.3,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.8
+    }
+  },
+  {
+    "id": "INT-0326",
+    "user_id": "USR-12",
+    "job_id": "JOB-056",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.6,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 5.0
+    }
+  },
+  {
+    "id": "INT-0327",
+    "user_id": "USR-12",
+    "job_id": "JOB-023",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 3.8,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0328",
+    "user_id": "USR-12",
+    "job_id": "JOB-045",
+    "rating": 3.3,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.4,
+      "c2_technical_challenge": 4.4,
+      "c3_compensation": 4.4,
+      "c4_flexibility": 4.1
+    }
+  },
+  {
+    "id": "INT-0329",
+    "user_id": "USR-12",
+    "job_id": "JOB-011",
+    "rating": 2.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 4.0,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 4.0
+    }
+  },
+  {
+    "id": "INT-0330",
+    "user_id": "USR-12",
+    "job_id": "JOB-005",
+    "rating": 2.4,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.0,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.9,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0331",
+    "user_id": "USR-12",
+    "job_id": "JOB-019",
+    "rating": 2.2,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.7,
+      "c2_technical_challenge": 4.3,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0332",
+    "user_id": "USR-12",
+    "job_id": "JOB-060",
+    "rating": 2.2,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.3,
+      "c2_technical_challenge": 4.5,
+      "c3_compensation": 4.3,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0333",
+    "user_id": "USR-12",
+    "job_id": "JOB-054",
+    "rating": 2.1,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.8,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 4.5,
+      "c4_flexibility": 4.9
+    }
+  },
+  {
+    "id": "INT-0334",
+    "user_id": "USR-12",
+    "job_id": "JOB-052",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "test",
+    "aspect_ratings": {
+      "c1_role_clarity": 4.4,
+      "c2_technical_challenge": 3.9,
+      "c3_compensation": 4.7,
+      "c4_flexibility": 2.7
+    }
+  },
+  {
+    "id": "INT-0335",
+    "user_id": "USR-12",
+    "job_id": "JOB-057",
+    "rating": 2.0,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.0,
+      "c2_technical_challenge": 5.0,
+      "c3_compensation": 5.0,
+      "c4_flexibility": 3.8
+    }
+  },
+  {
+    "id": "INT-0336",
+    "user_id": "USR-12",
+    "job_id": "JOB-029",
+    "rating": 1.9,
+    "action": "viewed",
+    "split": "train",
+    "aspect_ratings": {
+      "c1_role_clarity": 3.6,
+      "c2_technical_challenge": 3.1,
+      "c3_compensation": 3.2,
+      "c4_flexibility": 4.1
+    }
+  }
+]
