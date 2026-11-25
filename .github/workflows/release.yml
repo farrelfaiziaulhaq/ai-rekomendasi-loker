@@ -113,13 +113,14 @@ jobs:
 
           for attempt in 1 2 3 4 5 6; do
             echo "Percobaan publikasi release ke-$attempt..."
-            if gh release view "$TAG" >/dev/null 2>&1; then
-              if gh release upload "$TAG" release-assets/* --clobber; then
+            if gh release view "$TAG" -R "${{ github.repository }}" >/dev/null 2>&1; then
+              if gh release upload "$TAG" release-assets/* --clobber -R "${{ github.repository }}"; then
                 echo "[OK] Artefak berhasil diunggah ke release $TAG"
                 exit 0
               fi
             else
               if gh release create "$TAG" release-assets/* \
+                -R "${{ github.repository }}" \
                 --title "KarirAI $TAG — Sistem Rekomendasi Lowongan Kerja (Rust + Firebase)" \
                 --notes-file /tmp/release_notes.md; then
                 echo "[OK] Release $TAG berhasil diterbitkan!"
