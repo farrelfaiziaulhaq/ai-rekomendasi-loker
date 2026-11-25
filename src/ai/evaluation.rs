@@ -1,16 +1,10 @@
-//! Evaluasi Ilmiah Sistem Rekomendasi (Slide 15 `AI_Sistem_Rekomendasi_Visual.pdf`)
-//! "Bagaimana mengetahui hasilnya baik? Dalam contoh ini, 2 dari 3 rekomendasi sesuai kebutuhan pengguna."
-//!
-//! Menghitung metrik standar Information Retrieval & Recommender Systems secara komparatif
-//! pada ke-4 variasi metode:
-//! - `Precision@3`, `Precision@5`, `Precision@10` (proporsi rekomendasi teratas yang relevan)
-//! - `Recall@5` & `F1-Score@5`
-//! - `NDCG@5` & `NDCG@10` (Normalized Discounted Cumulative Gain — menilai ketepatan urutan ranking)
-//! - `HitRate@5` (persentase pengguna yang memperoleh minimal 1 lowongan sangat cocok di Top-5)
-//! - `Avg Latency (µs)` (bukti kecepatan eksekusi native Rust)
+//! Evaluasi Ilmiah Sistem Rekomendasi (Slide 15 `AI_Sistem_Rekomendasi_Visual.pdf`).
+//! Memanfaatkan `RecommenderIndex` terprakomputasi untuk pengukuran latensi dan metrik
+//! ablasi secara akurat pada 5 konfigurasi metode.
 
 use crate::ai::constraints::check_hard_constraints;
-use crate::ai::hybrid::{recommend_jobs, RecommenderRequest};
+use crate::ai::hybrid::{recommend_jobs_indexed, RecommenderRequest};
+use crate::ai::index::RecommenderIndex;
 use crate::models::{AlgorithmMode, JobPosting, UserInteraction, UserProfile};
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
@@ -39,15 +33,11 @@ pub struct EvaluationReport {
     pub total_interactions_count: usize,
     pub train_interactions_count: usize,
     pub test_interactions_count: usize,
+    pub index_build_micros: u128,
     pub relevance_definition: String,
     pub methods: Vec<MethodMetrics>,
 }
 
-/// Menentukan himpunan Ground Truth lowongan yang benar-benar relevan bagi seorang pengguna `u`:
-/// Sebuah lowongan `j` (di luar data `train` yang sudah dilihat) dinyatakan **Cocok / Relevan** apabila:
-/// 1. Memenuhi syarat wajib pengguna (`check_hard_constraints == passed`), DAN
-/// 2. Memiliki kecocokan substantif: tercatat disukai pada data uji (`rating >= 3.8`) ATAU
-///    memiliki skor utilitas multikriteria >= 3.85 disertai minimal 2 keahlian teknis yang relevan.
 fn ground_truth_relevant_jobs(
     user: &UserProfile,
     jobs: &[JobPosting],
@@ -66,8 +56,7 @@ fn ground_truth_relevant_jobs(
         if train_seen.contains(&job.id) {
             continue;
         }
-        let cons_ok = check_hard_constraints(&user.constraints, job).passed;
-        if !cons_ok {
+        if !check_hard_constraints(&user.constraints, job).passed {
             continue;
         }
 
@@ -121,11 +110,12 @@ fn calc_ndcg(rec_ids: &[String], rel_gains: &HashMap<String, f64>, k: usize) -> 
     }
 }
 
-/// Menjalankan evaluasi komparatif menyeluruh untuk 5 konfigurasi metode (Ablation Study).
-pub fn run_full_evaluation(
+/// Menjalankan evaluasi komparatif menggunakan indeks yang sudah dibangun.
+pub fn run_full_evaluation_indexed(
     users: &[UserProfile],
     jobs: &[JobPosting],
     interactions: &[UserInteraction],
+    index: &RecommenderIndex,
 ) -> EvaluationReport {
     let train_count = interactions.iter().filter(|i| i.split != "test").count();
     let test_count = interactions.iter().filter(|i| i.split == "test").count();
@@ -133,31 +123,31 @@ pub fn run_full_evaluation(
     let configs = vec![
         (
             "cb_only",
-            "1. Content-Based Filtering (TF-IDF + Cosine)",
+            "1. Content-Based (TF-IDF + Cosine)",
             AlgorithmMode::ContentBased,
             false,
         ),
         (
             "cf_only",
-            "2. Collaborative Filtering (User-Based Pearson)",
+            "2. Collaborative (User-Based Pearson)",
             AlgorithmMode::Collaborative,
             false,
         ),
         (
             "hybrid_classic",
-            "3. Hybrid Klasik (CB + CF tanpa Multikriteria)",
+            "3. Hybrid Klasik (CB + CF)",
             AlgorithmMode::HybridClassic,
             false,
         ),
         (
             "hmc_no_filter",
-            "4. Hybrid Multi-Criteria (Tanpa Hard Filter)",
+            "4. Hybrid Multi-Criteria (Tanpa Filter)",
             AlgorithmMode::HybridMulticriteria,
             false,
         ),
         (
             "proposed_hmc_cf",
-            "5. Metode Usulan: Hybrid Multi-Criteria + Hard Filter (HMC-CF)",
+            "5. Metode Usulan: Hybrid Multi-Criteria + Filter Syarat (HMC-CF)",
             AlgorithmMode::HybridMulticriteria,
             true,
         ),
@@ -196,17 +186,22 @@ pub fn run_full_evaluation(
             }
             valid_users += 1;
 
-            let resp = recommend_jobs(RecommenderRequest {
-                user: u,
-                jobs,
-                all_users: users,
-                interactions,
-                mode,
-                apply_hard_constraints: apply_cons,
-                top_k: 10,
-                exclude_interacted_train: true,
-                include_test_in_cf: false,
-            });
+            let resp = recommend_jobs_indexed(
+                RecommenderRequest {
+                    user: u,
+                    jobs,
+                    all_users: users,
+                    interactions,
+                    mode,
+                    apply_hard_constraints: apply_cons,
+                    top_k: 10,
+                    exclude_interacted_train: true,
+                    include_test_in_cf: false,
+                    search_query: None,
+                    category_filter: None,
+                },
+                index,
+            );
 
             latency_sum += resp.execution_time_micros;
             let rec_ids: Vec<String> = resp
@@ -285,9 +280,19 @@ pub fn run_full_evaluation(
         total_interactions_count: interactions.len(),
         train_interactions_count: train_count,
         test_interactions_count: test_count,
-        relevance_definition: "Lowongan belum dilihat pada train split yang lolos seluruh syarat wajib pengguna (Hard Constraints) serta disukai pada test split (rating >= 3.8) atau memiliki kecocokan keahlian >= 2 skill & utilitas multikriteria >= 3.85/5.0.".into(),
+        index_build_micros: index.build_time_micros,
+        relevance_definition: "Lowongan di luar train split yang memenuhi syarat wajib pengguna serta disukai pada test split (rating >= 3.8) atau memiliki minimal 2 skill cocok dengan skor multikriteria >= 3.85/5.0.".into(),
         methods: method_results,
     }
+}
+
+pub fn run_full_evaluation(
+    users: &[UserProfile],
+    jobs: &[JobPosting],
+    interactions: &[UserInteraction],
+) -> EvaluationReport {
+    let index = RecommenderIndex::build(jobs, users, interactions);
+    run_full_evaluation_indexed(users, jobs, interactions, &index)
 }
 
 fn round4(v: f64) -> f64 {

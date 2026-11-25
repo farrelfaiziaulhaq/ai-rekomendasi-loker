@@ -1,13 +1,7 @@
 //! Cara 2: User-Based Collaborative Filtering (Slide 06 `AI_Sistem_Rekomendasi_Visual.pdf`)
-//! "Melihat pengguna yang mirip — Karena pola pilihannya mirip, item menjadi kandidat."
 //!
-//! Menggunakan Mean-Centered Pearson Correlation (setara Adjusted Cosine antar-pengguna)
-//! pada matriks interaksi Pengguna × Lowongan:
-//!
-//! `Sim(u, v) = Σ_{i ∈ I_uv} (r_{u,i} - r̄_u)(r_{v,i} - r̄_v) / (√Σ(r_{u,i} - r̄_u)² * √Σ(r_{v,i} - r̄_v)²)`
-//!
-//! Prediksi rating pengguna `u` terhadap lowongan `j`:
-//! `r̂_CF(u, j) = r̄_u + [ Σ_{v ∈ N(u;j)} Sim(u, v) * (r_{v,j} - r̄_v) ] / [ Σ_{v ∈ N(u;j)} |Sim(u, v)| ]`
+//! Dioptimalkan dengan prakomputasi matriks kemiripan pasangan pengguna (`sim_cache`)
+//! sehingga prediksi per lowongan berjalan dalam waktu O(|U|) dengan lookup O(1) per tetangga.
 
 use crate::models::{CollaborativeProof, SimilarNeighborProof, UserInteraction, UserProfile};
 use std::collections::HashMap;
@@ -16,14 +10,16 @@ use std::collections::HashMap;
 pub struct CollaborativeMatrix {
     /// `ratings[user_id][job_id] = rating (1.0 .. 5.0)`
     pub ratings: HashMap<String, HashMap<String, f64>>,
-    /// Rata-rata rating tiap pengguna `r̄_u`
+    /// Rata-rata rating tiap pengguna `r_bar_u`
     pub user_means: HashMap<String, f64>,
     /// Nama tampilan pengguna untuk keperluan Explainable AI
     pub user_names: HashMap<String, String>,
+    /// Cache kemiripan antar-pengguna: `sim_cache[u][v] = (similarity, shared_count)`
+    sim_cache: HashMap<String, HashMap<String, (f64, usize)>>,
 }
 
 impl CollaborativeMatrix {
-    /// Membangun matriks interaksi dari data historis (mengabaikan split `"test"` agar evaluasi jujur!).
+    /// Membangun matriks interaksi & memprakomputasi matriks kemiripan Pearson antar-pengguna.
     pub fn build(
         users: &[UserProfile],
         interactions: &[UserInteraction],
@@ -57,16 +53,37 @@ impl CollaborativeMatrix {
             }
         }
 
-        Self {
+        let mut matrix = Self {
             ratings,
             user_means,
             user_names,
+            sim_cache: HashMap::new(),
+        };
+
+        // Prakomputasi seluruh pasangan simetris (u, v) sekali saja
+        let uids: Vec<String> = matrix.ratings.keys().cloned().collect();
+        for i in 0..uids.len() {
+            for j in (i + 1)..uids.len() {
+                let u = &uids[i];
+                let v = &uids[j];
+                let pair = matrix.compute_pair_similarity(u, v);
+                matrix
+                    .sim_cache
+                    .entry(u.clone())
+                    .or_default()
+                    .insert(v.clone(), pair);
+                matrix
+                    .sim_cache
+                    .entry(v.clone())
+                    .or_default()
+                    .insert(u.clone(), pair);
+            }
         }
+
+        matrix
     }
 
-    /// Menghitung kemiripan pola rating antara pengguna `u` dan pengguna `v` dalam rentang `[-1.0, 1.0]`,
-    /// beserta jumlah lowongan yang sama-sama pernah dinilai (`shared_count`).
-    pub fn user_similarity(&self, user_u: &str, user_v: &str) -> (f64, usize) {
+    fn compute_pair_similarity(&self, user_u: &str, user_v: &str) -> (f64, usize) {
         let (Some(map_u), Some(map_v)) = (self.ratings.get(user_u), self.ratings.get(user_v))
         else {
             return (0.0, 0);
@@ -98,8 +115,6 @@ impl CollaborativeMatrix {
         }
 
         let raw_sim = if den_u <= 1e-9 || den_v <= 1e-9 {
-            // Jika seluruh rating pada irisan bernilai identik konstan (misal sama-sama 5.0 seperti Slide 06 Dina & Bima!),
-            // gunakan kesamaan jarak rata-rata mutlak agar pola identik tetap terdeteksi positif!
             let avg_diff =
                 shared.iter().map(|(ru, rv)| (ru - rv).abs()).sum::<f64>() / (shared_count as f64);
             (1.0 - avg_diff / 4.0).clamp(0.0, 1.0)
@@ -107,9 +122,16 @@ impl CollaborativeMatrix {
             (num / (den_u.sqrt() * den_v.sqrt())).clamp(-1.0, 1.0)
         };
 
-        // Significance weighting ringan agar pengguna yang hanya kebetulan beririsan 1 item tidak mendominasi berlebihan
         let sig_factor = (shared_count as f64 / 3.0).min(1.0);
         (raw_sim * sig_factor, shared_count)
+    }
+
+    /// Lookup O(1) kemiripan pola rating antara pengguna `u` dan pengguna `v`.
+    pub fn user_similarity(&self, user_u: &str, user_v: &str) -> (f64, usize) {
+        if let Some(val) = self.sim_cache.get(user_u).and_then(|m| m.get(user_v)) {
+            return *val;
+        }
+        self.compute_pair_similarity(user_u, user_v)
     }
 
     /// Memprediksi ketertarikan pengguna `target_user` terhadap lowongan `job_id` menggunakan Top-K tetangga terdekat.
@@ -222,9 +244,6 @@ mod tests {
 
     #[test]
     fn skenario_slide_06_dina_dan_bima_pola_mirip() {
-        // Slide 06 PDF Dosen:
-        // Dina: Python dasar = Suka (5.0), Logika = Suka (5.0), Latihan Python = Belum mencoba
-        // Bima: Python dasar = Suka (5.0), Logika = Suka (5.0), Latihan Python = Suka (5.0)
         let users = vec![dummy_user("DINA", "Dina"), dummy_user("BIMA", "Bima")];
         let interactions = vec![
             UserInteraction {

@@ -1,10 +1,12 @@
 //! Implementasi murni (from-scratch) Tokenisasi Teks Dwibahasa (Indonesia + Inggris),
 //! pembobotan TF-IDF (Term Frequency - Inverse Document Frequency), dan Cosine Similarity.
 //!
-//! Digunakan pada tahap Content-Based Filtering (Slide 05 `AI_Sistem_Rekomendasi_Visual.pdf`).
+//! Dioptimalkan dengan `OnceLock` untuk kamus stopwords (zero-allocation lookup)
+//! serta fungsi `cosine_similarity_with_norms` untuk memanfaatkan norma vektor yang sudah diindeks.
 
 use crate::models::TermContribution;
 use std::collections::{HashMap, HashSet};
+use std::sync::OnceLock;
 
 const STOPWORDS: &[&str] = &[
     // Bahasa Indonesia
@@ -79,9 +81,15 @@ const STOPWORDS: &[&str] = &[
     "across",
 ];
 
+static STOPWORD_SET: OnceLock<HashSet<&'static str>> = OnceLock::new();
+
+fn stopwords() -> &'static HashSet<&'static str> {
+    STOPWORD_SET.get_or_init(|| STOPWORDS.iter().copied().collect())
+}
+
 /// Mengubah teks mentah menjadi daftar token bersih (huruf kecil, mempertahankan simbol teknis seperti `c++`, `ci/cd`, `tf-idf`).
 pub fn tokenize(text: &str) -> Vec<String> {
-    let stop: HashSet<&str> = STOPWORDS.iter().copied().collect();
+    let stop = stopwords();
     text.to_lowercase()
         .split(|c: char| !(c.is_alphanumeric() || c == '+' || c == '#' || c == '-' || c == '/'))
         .map(|s| s.trim_matches(|c: char| c == '-' || c == '/'))
@@ -89,6 +97,11 @@ pub fn tokenize(text: &str) -> Vec<String> {
         .filter(|s| !s.chars().all(|c| c.is_ascii_digit()))
         .map(String::from)
         .collect()
+}
+
+/// Menghitung norma L2 `||v||` dari sebuah vektor jarang TF-IDF.
+pub fn vector_norm(vec: &HashMap<String, f64>) -> f64 {
+    vec.values().map(|v| v * v).sum::<f64>().sqrt()
 }
 
 /// Korpus TF-IDF yang menyimpan nilai IDF tiap kata dari seluruh katalog lowongan kerja.
@@ -146,16 +159,15 @@ impl TfidfCorpus {
     }
 }
 
-/// Menghitung Cosine Similarity antara dua vektor TF-IDF beserta rincian bukti matematisnya:
-/// `Cosine(A, B) = (A · B) / (||A|| * ||B||)`
-pub fn cosine_similarity_detailed(
+/// Menghitung Cosine Similarity menggunakan norma yang sudah diprakomputasi (fast path).
+/// Iterasi dilakukan pada vektor yang lebih kecil untuk efisiensi lookup HashMap.
+pub fn cosine_similarity_with_norms(
     vec_user: &HashMap<String, f64>,
+    norm_u: f64,
     vec_job: &HashMap<String, f64>,
+    norm_j: f64,
     top_n_terms: usize,
 ) -> (f64, f64, f64, f64, Vec<TermContribution>) {
-    let norm_u = vec_user.values().map(|v| v * v).sum::<f64>().sqrt();
-    let norm_j = vec_job.values().map(|v| v * v).sum::<f64>().sqrt();
-
     if norm_u <= 1e-12 || norm_j <= 1e-12 {
         return (0.0, 0.0, norm_u, norm_j, Vec::new());
     }
@@ -163,16 +175,31 @@ pub fn cosine_similarity_detailed(
     let mut dot = 0.0;
     let mut contributions = Vec::new();
 
-    for (term, &w_u) in vec_user {
-        if let Some(&w_j) = vec_job.get(term) {
-            let prod = w_u * w_j;
-            dot += prod;
-            contributions.push(TermContribution {
-                term: term.clone(),
-                tfidf_user: (w_u * 10000.0).round() / 10000.0,
-                tfidf_job: (w_j * 10000.0).round() / 10000.0,
-                product: (prod * 10000.0).round() / 10000.0,
-            });
+    if vec_user.len() <= vec_job.len() {
+        for (term, &w_u) in vec_user {
+            if let Some(&w_j) = vec_job.get(term) {
+                let prod = w_u * w_j;
+                dot += prod;
+                contributions.push(TermContribution {
+                    term: term.clone(),
+                    tfidf_user: (w_u * 10000.0).round() / 10000.0,
+                    tfidf_job: (w_j * 10000.0).round() / 10000.0,
+                    product: (prod * 10000.0).round() / 10000.0,
+                });
+            }
+        }
+    } else {
+        for (term, &w_j) in vec_job {
+            if let Some(&w_u) = vec_user.get(term) {
+                let prod = w_u * w_j;
+                dot += prod;
+                contributions.push(TermContribution {
+                    term: term.clone(),
+                    tfidf_user: (w_u * 10000.0).round() / 10000.0,
+                    tfidf_job: (w_j * 10000.0).round() / 10000.0,
+                    product: (prod * 10000.0).round() / 10000.0,
+                });
+            }
         }
     }
 
@@ -185,6 +212,18 @@ pub fn cosine_similarity_detailed(
 
     let cosine = (dot / (norm_u * norm_j)).clamp(0.0, 1.0);
     (cosine, dot, norm_u, norm_j, contributions)
+}
+
+/// Menghitung Cosine Similarity antara dua vektor TF-IDF beserta rincian bukti matematisnya:
+/// `Cosine(A, B) = (A . B) / (||A|| * ||B||)`
+pub fn cosine_similarity_detailed(
+    vec_user: &HashMap<String, f64>,
+    vec_job: &HashMap<String, f64>,
+    top_n_terms: usize,
+) -> (f64, f64, f64, f64, Vec<TermContribution>) {
+    let norm_u = vector_norm(vec_user);
+    let norm_j = vector_norm(vec_job);
+    cosine_similarity_with_norms(vec_user, norm_u, vec_job, norm_j, top_n_terms)
 }
 
 #[cfg(test)]

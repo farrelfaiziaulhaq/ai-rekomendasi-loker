@@ -5,5 +5,6 @@ pub mod constraints;
 pub mod content_based;
 pub mod evaluation;
 pub mod hybrid;
+pub mod index;
 pub mod multicriteria;
 pub mod tfidf;

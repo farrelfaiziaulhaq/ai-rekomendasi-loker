@@ -1,14 +1,19 @@
 //! Integrasi Google Firebase (Cloud Firestore REST API + Firebase Auth Identity Toolkit REST API)
-//! dengan mekanisme Auto-Detect Emulator & Local Persistent Mirror sehingga:
-//! 1. Berjalan 100% terhubung ke Cloud Firestore & Firebase Auth (baik Cloud maupun Firebase Emulator `:8080`/`:9099`).
-//! 2. Tetap dapat dijalankan 1-klik di Windows tanpa instalasi Java/Node/Firebase CLI bila sedang offline di kelas!
+//! yang dioptimalkan dengan:
+//! 1. Immutable `Arc<AppDatasetState>` + `Arc<RecommenderIndex>` + `Arc<EvaluationReport>` untuk
+//!    pembacaan zero-clone berkecepatan sub-milidetik.
+//! 2. Sinkronisasi konkuren terukur (`Semaphore(16)` + `JoinSet`) ke Cloud Firestore.
+//! 3. Penulisan lokal atomik (`.tmp` -> rename) agar berkas mirror tidak pernah korup.
 
+use crate::ai::evaluation::{run_full_evaluation_indexed, EvaluationReport};
+use crate::ai::index::RecommenderIndex;
 use crate::models::{JobPosting, UserInteraction, UserProfile};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
-use tokio::sync::RwLock;
+use tokio::sync::{RwLock, Semaphore};
+use tokio::task::JoinSet;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirebaseStatus {
@@ -21,6 +26,7 @@ pub struct FirebaseStatus {
     pub synced_jobs: usize,
     pub synced_users: usize,
     pub synced_interactions: usize,
+    pub index_build_micros: u128,
     pub message: String,
 }
 
@@ -32,7 +38,9 @@ pub struct AppDatasetState {
 }
 
 pub struct DataStore {
-    pub state: RwLock<AppDatasetState>,
+    state: RwLock<Arc<AppDatasetState>>,
+    index: RwLock<Arc<RecommenderIndex>>,
+    eval_cache: RwLock<Arc<EvaluationReport>>,
     pub data_dir: PathBuf,
     pub runtime_mirror_path: PathBuf,
     pub http: reqwest::Client,
@@ -49,13 +57,24 @@ impl DataStore {
         let data_dir = root_dir.join("data").join("processed");
         let runtime_mirror_path = root_dir.join("data").join("runtime_firestore_mirror.json");
 
-        // Muat data awal dari runtime mirror (bila sudah ada perubahan user) atau processed dataset
         let initial_state = if runtime_mirror_path.exists() {
             Self::load_from_mirror(&runtime_mirror_path)
                 .unwrap_or_else(|_| Self::load_seed_files(&data_dir))
         } else {
             Self::load_seed_files(&data_dir)
         };
+
+        let initial_index = RecommenderIndex::build(
+            &initial_state.jobs,
+            &initial_state.users,
+            &initial_state.interactions,
+        );
+        let initial_eval = run_full_evaluation_indexed(
+            &initial_state.users,
+            &initial_state.jobs,
+            &initial_state.interactions,
+            &initial_index,
+        );
 
         let project_id =
             std::env::var("FIREBASE_PROJECT_ID").unwrap_or_else(|_| "demo-karir-ai".to_string());
@@ -64,14 +83,13 @@ impl DataStore {
 
         let http = reqwest::Client::builder()
             .timeout(std::time::Duration::from_secs(4))
+            .pool_max_idle_per_host(16)
             .build()
             .unwrap_or_default();
 
-        // Deteksi konfigurasi Firebase Emulator atau Firebase Cloud
         let mut store_emu = std::env::var("FIRESTORE_EMULATOR_HOST").ok();
         let mut auth_emu = std::env::var("FIREBASE_AUTH_EMULATOR_HOST").ok();
 
-        // Auto-probe port default emulator lokal (127.0.0.1:8088) bila env var belum diset!
         if store_emu.is_none()
             && std::env::var("FIREBASE_CLOUD_URL").is_err()
             && http.get("http://127.0.0.1:8088/").send().await.is_ok()
@@ -91,7 +109,7 @@ impl DataStore {
                 Some(fs_url),
                 Some(au_url),
                 Some("http://127.0.0.1:4040".to_string()),
-                "Firebase Emulator Suite (Cloud Firestore + Auth Live)".to_string(),
+                "Firebase Emulator Suite (Cloud Firestore + Auth)".to_string(),
             )
         } else if std::env::var("FIREBASE_PROJECT_ID").is_ok()
             && std::env::var("FIREBASE_API_KEY").is_ok()
@@ -104,20 +122,21 @@ impl DataStore {
                 Some(fs_url),
                 Some(au_url),
                 None,
-                "Google Firebase Cloud Production (Firestore REST)".to_string(),
+                "Google Firebase Cloud (Firestore REST)".to_string(),
             )
         } else {
             (
                 None,
                 None,
                 None,
-                "Local Firestore Mirror (Siap Tanpa Instalasi Tambahan / Offline-Ready)"
-                    .to_string(),
+                "Penyimpanan Lokal Siap Pakai (Firestore Mirror)".to_string(),
             )
         };
 
         let ds = Arc::new(Self {
-            state: RwLock::new(initial_state),
+            state: RwLock::new(Arc::new(initial_state)),
+            index: RwLock::new(Arc::new(initial_index)),
+            eval_cache: RwLock::new(Arc::new(initial_eval)),
             data_dir,
             runtime_mirror_path,
             http,
@@ -134,6 +153,54 @@ impl DataStore {
             let _ = ds.sync_all_to_firestore().await;
         }
         ds
+    }
+
+    /// Pengambilan snapshot O(1) tanpa menyalin data vektor/katalog di heap.
+    pub async fn snapshot(&self) -> Arc<AppDatasetState> {
+        Arc::clone(&*self.state.read().await)
+    }
+
+    /// Pengambilan indeks TF-IDF + Pearson O(1).
+    pub async fn index(&self) -> Arc<RecommenderIndex> {
+        Arc::clone(&*self.index.read().await)
+    }
+
+    /// Pengambilan laporan evaluasi tercache O(1).
+    pub async fn evaluation_report(&self) -> Arc<EvaluationReport> {
+        Arc::clone(&*self.eval_cache.read().await)
+    }
+
+    /// Menerapkan mutasi state lalu membangun ulang indeks dan cache evaluasi secara atomik.
+    pub async fn mutate_state<F, R>(&self, mutator: F) -> R
+    where
+        F: FnOnce(&mut AppDatasetState) -> R,
+    {
+        let (result, next_state) = {
+            let mut guard = self.state.write().await;
+            let mut cloned = (**guard).clone();
+            let res = mutator(&mut cloned);
+            let arc_next = Arc::new(cloned);
+            *guard = Arc::clone(&arc_next);
+            (res, arc_next)
+        };
+
+        let next_index = Arc::new(RecommenderIndex::build(
+            &next_state.jobs,
+            &next_state.users,
+            &next_state.interactions,
+        ));
+        let next_eval = Arc::new(run_full_evaluation_indexed(
+            &next_state.users,
+            &next_state.jobs,
+            &next_state.interactions,
+            &next_index,
+        ));
+
+        *self.index.write().await = next_index;
+        *self.eval_cache.write().await = next_eval;
+        self.save_mirror().await;
+
+        result
     }
 
     fn load_seed_files(data_dir: &Path) -> AppDatasetState {
@@ -158,24 +225,26 @@ impl DataStore {
         serde_json::from_str(&raw).map_err(|e| e.to_string())
     }
 
+    /// Penulisan atomik ke disk (`.tmp` lalu rename) agar berkas tidak pernah rusak.
     pub async fn save_mirror(&self) {
-        let guard = self.state.read().await;
-        if let Ok(serialized) = serde_json::to_string_pretty(&*guard) {
-            let _ = std::fs::write(&self.runtime_mirror_path, serialized);
+        let snap = self.snapshot().await;
+        if let Ok(serialized) = serde_json::to_string_pretty(&*snap) {
+            let tmp_path = self.runtime_mirror_path.with_extension("json.tmp");
+            if std::fs::write(&tmp_path, serialized).is_ok() {
+                let _ = std::fs::rename(&tmp_path, &self.runtime_mirror_path);
+            }
         }
     }
 
     pub async fn reset_to_seed(&self) {
         let seed = Self::load_seed_files(&self.data_dir);
-        {
-            let mut guard = self.state.write().await;
-            *guard = seed;
-        }
-        self.save_mirror().await;
+        self.mutate_state(|st| {
+            *st = seed;
+        })
+        .await;
         let _ = self.sync_all_to_firestore().await;
     }
 
-    /// Konversi JSON biasa ke format dokumen REST Cloud Firestore (`fields: { ... }`)
     fn json_to_firestore_value(v: &Value) -> Value {
         match v {
             Value::Null => json!({ "nullValue": null }),
@@ -202,26 +271,29 @@ impl DataStore {
         }
     }
 
-    /// Menyimpan satu dokumen ke koleksi Cloud Firestore via HTTP PATCH (upsert).
-    pub async fn upsert_firestore_doc(
-        &self,
+    async fn resolve_firestore_base(&self) -> Option<String> {
+        if let Some(b) = &self.firestore_base {
+            return Some(b.clone());
+        }
+        if self.http.get("http://127.0.0.1:8088/").send().await.is_ok() {
+            let mut m = self.mode_label.write().await;
+            *m = "Firebase Emulator Suite (Terhubung :8088)".to_string();
+            return Some(format!(
+                "http://127.0.0.1:8088/v1/projects/{}/databases/(default)/documents",
+                self.project_id
+            ));
+        }
+        None
+    }
+
+    async fn upsert_with_base(
+        http: &reqwest::Client,
+        base: &str,
+        api_key: &str,
         collection: &str,
         doc_id: &str,
         payload: &Value,
     ) -> Result<(), String> {
-        let base = if let Some(b) = &self.firestore_base {
-            b.clone()
-        } else if self.http.get("http://127.0.0.1:8088/").send().await.is_ok() {
-            let mut m = self.mode_label.write().await;
-            *m = "Firebase Emulator Suite (Auto-Connected :8088)".to_string();
-            format!(
-                "http://127.0.0.1:8088/v1/projects/{}/databases/(default)/documents",
-                self.project_id
-            )
-        } else {
-            return Err("Firestore endpoint belum aktif".into());
-        };
-
         let Some(obj) = payload.as_object() else {
             return Err("Payload bukan objek JSON".into());
         };
@@ -232,11 +304,10 @@ impl DataStore {
 
         let mut url = format!("{base}/{collection}/{doc_id}");
         if base.starts_with("https://") {
-            url = format!("{url}?key={}", self.api_key);
+            url = format!("{url}?key={api_key}");
         }
 
-        let resp = self
-            .http
+        let resp = http
             .patch(&url)
             .json(&json!({ "fields": fields }))
             .send()
@@ -250,40 +321,52 @@ impl DataStore {
         }
     }
 
-    /// Mendaftarkan akun pengguna demo ke Firebase Auth Emulator bila aktif.
-    async fn ensure_auth_user(&self, email: &str, display_name: &str) {
-        let auth_url = if let Some(a) = &self.auth_base {
-            a.clone()
-        } else if self.http.get("http://127.0.0.1:9098/").send().await.is_ok() {
-            "http://127.0.0.1:9098/identitytoolkit.googleapis.com/v1".to_string()
-        } else {
-            return;
+    pub async fn upsert_firestore_doc(
+        &self,
+        collection: &str,
+        doc_id: &str,
+        payload: &Value,
+    ) -> Result<(), String> {
+        let Some(base) = self.resolve_firestore_base().await else {
+            return Err("Firestore endpoint belum aktif".into());
         };
-
-        let signup = format!("{auth_url}/accounts:signUp?key={}", self.api_key);
-        let _ = self
-            .http
-            .post(&signup)
-            .json(&json!({
-                "email": email,
-                "password": "karir-ai-2026",
-                "displayName": display_name,
-                "returnSecureToken": true
-            }))
-            .send()
-            .await;
+        Self::upsert_with_base(
+            &self.http,
+            &base,
+            &self.api_key,
+            collection,
+            doc_id,
+            payload,
+        )
+        .await
     }
 
-    /// Menyinkronkan koleksi `jobs`, `users`, dan interaksi terbaru ke Cloud Firestore.
-    pub async fn sync_all_to_firestore(&self) -> Result<FirebaseStatus, String> {
-        let snapshot = self.state.read().await.clone();
+    async fn resolve_auth_base(&self) -> Option<String> {
+        if let Some(a) = &self.auth_base {
+            return Some(a.clone());
+        }
+        if self.http.get("http://127.0.0.1:9098/").send().await.is_ok() {
+            return Some("http://127.0.0.1:9098/identitytoolkit.googleapis.com/v1".to_string());
+        }
+        None
+    }
 
-        // Uji koneksi terlebih dahulu dengan satu dokumen metadata
-        self.upsert_firestore_doc(
+    /// Sinkronisasi konkuren (maks 16 worker) seluruh koleksi ke Cloud Firestore & Firebase Auth.
+    pub async fn sync_all_to_firestore(&self) -> Result<FirebaseStatus, String> {
+        let Some(base) = self.resolve_firestore_base().await else {
+            return Err("Firestore endpoint belum aktif".into());
+        };
+        let auth_base = self.resolve_auth_base().await;
+        let snapshot = self.snapshot().await;
+
+        Self::upsert_with_base(
+            &self.http,
+            &base,
+            &self.api_key,
             "system_meta",
             "catalog_info",
             &json!({
-                "app": "KarirAI - Rust + Firebase Job Recommender",
+                "app": "KarirAI (Rust + Firebase)",
                 "jobs_count": snapshot.jobs.len(),
                 "users_count": snapshot.users.len(),
                 "interactions_count": snapshot.interactions.len()
@@ -291,33 +374,79 @@ impl DataStore {
         )
         .await?;
 
+        let sem = Arc::new(Semaphore::new(16));
+        let mut set: JoinSet<()> = JoinSet::new();
+
         for u in &snapshot.users {
-            self.ensure_auth_user(&u.email, &u.name).await;
             if let Ok(val) = serde_json::to_value(u) {
-                let _ = self.upsert_firestore_doc("users", &u.id, &val).await;
+                let permit = sem.clone().acquire_owned().await.ok();
+                let http = self.http.clone();
+                let base_c = base.clone();
+                let auth_c = auth_base.clone();
+                let key_c = self.api_key.clone();
+                let uid = u.id.clone();
+                let email = u.email.clone();
+                let name = u.name.clone();
+                set.spawn(async move {
+                    let _p = permit;
+                    if let Some(au) = auth_c {
+                        let signup = format!("{au}/accounts:signUp?key={key_c}");
+                        let _ = http
+                            .post(&signup)
+                            .json(&json!({
+                                "email": email,
+                                "password": "karir-ai-2026",
+                                "displayName": name,
+                                "returnSecureToken": true
+                            }))
+                            .send()
+                            .await;
+                    }
+                    let _ =
+                        Self::upsert_with_base(&http, &base_c, &key_c, "users", &uid, &val).await;
+                });
             }
         }
 
         for j in &snapshot.jobs {
             if let Ok(val) = serde_json::to_value(j) {
-                let _ = self.upsert_firestore_doc("jobs", &j.id, &val).await;
+                let permit = sem.clone().acquire_owned().await.ok();
+                let http = self.http.clone();
+                let base_c = base.clone();
+                let key_c = self.api_key.clone();
+                let jid = j.id.clone();
+                set.spawn(async move {
+                    let _p = permit;
+                    let _ =
+                        Self::upsert_with_base(&http, &base_c, &key_c, "jobs", &jid, &val).await;
+                });
             }
         }
 
-        // Sinkronkan 80 interaksi terbaru agar proses cepat namun koleksi `interactions` di Firestore kaya data
         for it in snapshot.interactions.iter().rev().take(80) {
             if let Ok(val) = serde_json::to_value(it) {
-                let _ = self
-                    .upsert_firestore_doc("interactions", &it.id, &val)
-                    .await;
+                let permit = sem.clone().acquire_owned().await.ok();
+                let http = self.http.clone();
+                let base_c = base.clone();
+                let key_c = self.api_key.clone();
+                let iid = it.id.clone();
+                set.spawn(async move {
+                    let _p = permit;
+                    let _ =
+                        Self::upsert_with_base(&http, &base_c, &key_c, "interactions", &iid, &val)
+                            .await;
+                });
             }
         }
+
+        while set.join_next().await.is_some() {}
 
         Ok(self.status().await)
     }
 
     pub async fn status(&self) -> FirebaseStatus {
-        let snapshot = self.state.read().await;
+        let snapshot = self.snapshot().await;
+        let idx = self.index().await;
         let emu_host = std::env::var("FIRESTORE_EMULATOR_HOST")
             .unwrap_or_else(|_| "127.0.0.1:8088".to_string());
         let auth_host = std::env::var("FIREBASE_AUTH_EMULATOR_HOST")
@@ -336,9 +465,9 @@ impl DataStore {
         let connected = emu_live || cloud_cfg;
 
         let mode = if emu_live {
-            format!("Firebase Emulator Suite (Cloud Firestore {emu_host} + Auth {auth_host} Aktif)")
+            format!("Firebase Emulator (Firestore {emu_host} + Auth {auth_host})")
         } else if cloud_cfg {
-            "Google Firebase Cloud Production (REST API Aktif)".to_string()
+            "Google Firebase Cloud (Firestore REST)".to_string()
         } else {
             self.mode_label.read().await.clone()
         };
@@ -351,7 +480,7 @@ impl DataStore {
         } else {
             self.firestore_base
                 .clone()
-                .unwrap_or_else(|| "data/runtime_firestore_mirror.json (Local Fallback)".into())
+                .unwrap_or_else(|| "data/runtime_firestore_mirror.json (Lokal)".into())
         };
 
         let au_ep = if emu_live {
@@ -359,7 +488,7 @@ impl DataStore {
         } else {
             self.auth_base
                 .clone()
-                .unwrap_or_else(|| "Local Persona Session".into())
+                .unwrap_or_else(|| "Sesi Persona Lokal".into())
         };
 
         FirebaseStatus {
@@ -376,12 +505,15 @@ impl DataStore {
             synced_jobs: snapshot.jobs.len(),
             synced_users: snapshot.users.len(),
             synced_interactions: snapshot.interactions.len(),
+            index_build_micros: idx.build_time_micros,
             message: if emu_live {
-                "Terhubung langsung ke Firebase Auth & Cloud Firestore Emulator! Buka http://127.0.0.1:4040 untuk melihat dokumen real-time.".into()
+                "Terhubung ke Firebase Auth & Cloud Firestore Emulator (UI: http://127.0.0.1:4040)."
+                    .into()
             } else if cloud_cfg {
                 "Terhubung ke Google Cloud Firestore produksi.".into()
             } else {
-                "Berjalan dalam Mode Instan Tanpa Konfigurasi (Local Mirror). Jalankan dengan --emulator / run-emulator.bat bila ingin menampilkan dashboard Firebase Emulator :4040.".into()
+                "Berjalan dalam mode penyimpanan lokal siap pakai. Jalankan run-emulator.bat atau ./run.sh --emulator untuk membuka dashboard Firestore :4040."
+                    .into()
             },
         }
     }

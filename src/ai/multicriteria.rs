@@ -139,8 +139,8 @@ pub fn verify_lecturer_slide_case(
     };
 
     LecturerSlideVerification {
-        item_a_name: "Lowongan A — Junior Python Developer (Full Mentorship)".into(),
-        item_b_name: "Lowongan B — Systems & Algorithm Engineer (Intensive Lab)".into(),
+        item_a_name: "Lowongan A: Junior Python Developer (Full Mentorship)".into(),
+        item_b_name: "Lowongan B: Systems & Algorithm Engineer (Intensive Lab)".into(),
         item_a_clarity: a_c,
         item_a_practice: a_p,
         item_a_simple_avg: (a_c + a_p) / 2.0,

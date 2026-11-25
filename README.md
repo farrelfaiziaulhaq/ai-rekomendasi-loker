@@ -32,9 +32,13 @@ Disusun selaras penuh dengan materi perkuliahan [`references/materi-dosen/AI_Sis
 |---|---|
 | ![Simulasi Materi Dosen](docs/media/06-simulasi-materi-pdf-dosen.png) | ![Evaluasi AI](docs/media/07-evaluasi-precision-ndcg.png) |
 
-| 7. Matriks Kemiripan Pengguna (Collaborative Filtering) | 8. Koleksi Live di Firebase Emulator Suite (`:4040`) |
+| 7. Matriks Kemiripan Pengguna (Collaborative Filtering) | 8. Tampilan Mode Gelap & Mobile Responsif (375px) |
 |---|---|
-| ![Matriks Collaborative](docs/media/05-collaborative-matriks.png) | ![Firebase Firestore Live](docs/media/09-firebase-emulator-firestore-ui.png) |
+| ![Matriks Collaborative](docs/media/05-collaborative-matriks.png) | ![Mode Gelap KarirAI](docs/media/08-firebase-status-katalog-dark.png) |
+
+| 9. Tampilan Mobile Responsif (375px) | 10. Koleksi Live di Firebase Emulator Suite (`:4040`) |
+|---|---|
+| ![Mobile Responsif](docs/media/10-mobile-responsive-375px.png) | ![Firebase Firestore Live](docs/media/09-firebase-emulator-firestore-ui.png) |
 
 ---
 
@@ -57,7 +61,7 @@ Disusun selaras penuh dengan materi perkuliahan [`references/materi-dosen/AI_Sis
 ### Opsi A — Paling Mudah untuk Kelompok di Windows: Unduh ZIP Release (Tanpa Install Rust!)
 
 1. Buka halaman **[GitHub Releases Terbaru](https://github.com/farrelfaiziaulhaq/ai-rekomendasi-loker/releases/latest)**.
-2. Unduh **`karir-ai-v1.0.0-windows-x86_64.zip`**, klik kanan → **Extract All...**
+2. Unduh **`karir-ai-v1.1.0-windows-x86_64.zip`**, klik kanan -> **Extract All...**
 3. Klik dua kali **`start.bat`** → server langsung aktif dan otomatis membuka **`http://127.0.0.1:3000`** di browser!
    - Tersedia juga **`start-firebase-emulator.bat`** (menyalakan dashboard Firebase Firestore Emulator di `http://127.0.0.1:4040`) dan **`cek-evaluasi-ai.bat`** (mencetak tabel metrik evaluasi AI di Command Prompt).
 
@@ -104,13 +108,15 @@ Seluruh mesin kecerdasan buatan ditulis murni di dalam direktori [`src/ai/`](src
 
 ### Hasil Pengujian Ablasi (`cargo run --release -- --eval`)
 
-| Metode Algoritma | Precision@3 | Precision@5 | Recall@5 | F1-Score@5 | NDCG@5 | Lolos Syarat Wajib | Latensi Rust |
+Setelah optimasi arsitektur dengan **`RecommenderIndex`** terprakomputasi (`src/ai/index.rs`), `OnceLock` stopwords, *Pearson similarity cache*, serta pembacaan *zero-clone* `Arc` snapshot, latensi inferensi turun **4,5x** ke level **sub-milidetik (`~0,50 ms`)**:
+
+| Metode Algoritma | Precision@3 | Precision@5 | Recall@5 | F1-Score@5 | NDCG@5 | Lolos Syarat Wajib | Latensi Rust (Terindeks) |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1. Content-Based (TF-IDF + Cosine) | 47.22% | 41.67% | 65.77% | 51.02% | 64.53% | 43.3% | 2.61 ms |
-| 2. Collaborative (User-Based Pearson) | 33.33% | 25.00% | 38.91% | 30.44% | 38.87% | 43.3% | 2.47 ms |
-| 3. Hybrid Klasik (CB + CF) | 63.89% | 48.33% | 73.99% | 58.47% | 70.65% | 50.0% | 2.33 ms |
-| 4. Hybrid Multi-Criteria (Tanpa Filter) | 63.89% | 45.00% | 73.49% | 55.82% | 72.70% | 53.3% | 2.28 ms |
-| **5. Usulan HMC-CF (MCRS + Hard Filter)** | **76.39%** | **64.72%** | **93.10%** | **76.36%** | **95.01%** | **100.0%** | **2.24 ms** |
+| 1. Content-Based (TF-IDF + Cosine) | 47.22% | 41.67% | 65.77% | 51.02% | 64.53% | 43.3% | 0.44 ms (444 us) |
+| 2. Collaborative (User-Based Pearson) | 33.33% | 25.00% | 38.91% | 30.44% | 38.87% | 43.3% | 0.52 ms (515 us) |
+| 3. Hybrid Klasik (CB + CF) | 63.89% | 48.33% | 73.99% | 58.47% | 70.65% | 50.0% | 0.42 ms (418 us) |
+| 4. Hybrid Multi-Criteria (Tanpa Filter) | 63.89% | 45.00% | 73.49% | 55.82% | 72.70% | 53.3% | 0.43 ms (428 us) |
+| **5. Usulan HMC-CF (MCRS + Hard Filter)** | **76.39%** | **64.72%** | **93.10%** | **76.36%** | **95.01%** | **100.0%** | **0.50 ms (499 us)** |
 
 ---
 

@@ -1,16 +1,9 @@
 //! Titik masuk utama (`main.rs`) aplikasi `KarirAI`:
 //! Sistem Rekomendasi Lowongan Kerja menggunakan Rust (Axum + Tokio) dan Google Firebase.
-//!
-//! Mendukung:
-//! - Mode Web Server Interaktif (default): `cargo run` -> `http://127.0.0.1:3000`
-//! - Mode Evaluasi CLI Ilmiah: `cargo run -- --eval` (mencetak tabel metrik Precision@K, NDCG@K, Latensi)
-//! - Mode Verifikasi Studi Kasus PDF Dosen: `cargo run -- --case-study`
 
 use axum::Router;
 use karir_ai::{
-    ai::{evaluation::run_full_evaluation, multicriteria::verify_lecturer_slide_case},
-    api::api_router,
-    firebase::DataStore,
+    ai::multicriteria::verify_lecturer_slide_case, api::api_router, firebase::DataStore,
 };
 use std::path::PathBuf;
 use tower_http::{cors::CorsLayer, services::ServeDir};
@@ -75,22 +68,22 @@ async fn main() {
     }
 
     if args.iter().any(|a| a == "--eval") {
-        let snap = store.state.read().await;
-        let report = run_full_evaluation(&snap.users, &snap.jobs, &snap.interactions);
+        let report = store.evaluation_report().await;
         println!(
-            "=== EVALUASI KOMPARATIF ALGORITMA AI ({} Users, {} Jobs, {} Interactions) ===",
+            "=== EVALUASI KOMPARATIF ALGORITMA AI ({} Users, {} Jobs, {} Interactions | Index build: {} us) ===",
             report.evaluated_users_count,
             report.catalog_jobs_count,
-            report.total_interactions_count
+            report.total_interactions_count,
+            report.index_build_micros
         );
         println!(
-            "{:<58} | {:>6} | {:>6} | {:>6} | {:>6} | {:>6} | {:>7} | {:>8}",
+            "{:<64} | {:>6} | {:>6} | {:>6} | {:>6} | {:>6} | {:>7} | {:>8}",
             "Metode Algoritma", "P@3", "P@5", "R@5", "F1@5", "NDCG@5", "CSR(%)", "Lat(us)"
         );
-        println!("{}", "-".repeat(120));
+        println!("{}", "-".repeat(126));
         for m in &report.methods {
             println!(
-                "{:<58} | {:>6.4} | {:>6.4} | {:>6.4} | {:>6.4} | {:>6.4} | {:>6.1}% | {:>8}",
+                "{:<64} | {:>6.4} | {:>6.4} | {:>6.4} | {:>6.4} | {:>6.4} | {:>6.1}% | {:>8}",
                 m.method_label,
                 m.precision_at_3,
                 m.precision_at_5,
@@ -118,11 +111,15 @@ async fn main() {
         .layer(CorsLayer::permissive());
 
     println!("==========================================================================");
-    println!("  KarirAI — Sistem Rekomendasi Lowongan Kerja (Rust + Google Firebase)");
+    println!("  KarirAI: Sistem Rekomendasi Lowongan Kerja (Rust + Google Firebase)");
     println!("  URL Aplikasi Web  : http://127.0.0.1:{port}");
     println!("  Mode Basis Data   : {}", fb_status.mode);
+    println!(
+        "  Indeks TF-IDF+CF  : siap dalam {} mikrodetik",
+        fb_status.index_build_micros
+    );
     if let Some(ui) = fb_status.emulator_ui_url {
-        println!("  Firebase UI (:4000): {ui}");
+        println!("  Firebase UI (:4040): {ui}");
     }
     println!("==========================================================================");
 

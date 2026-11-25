@@ -110,11 +110,11 @@ Pengujian ablasi dilakukan terhadap seluruh 12 persona pengguna dengan menyembun
 
 | Konfigurasi Metode | Precision@3 | Precision@5 | Recall@5 | F1-Score@5 | NDCG@5 | HitRate@5 | Kepatuhan Syarat (CSR) | Latensi Release Rust |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1. Content-Based (TF-IDF + Cosine) | 47,22% | 41,67% | 65,77% | 51,02% | 64,53% | 91,7% | 43,3% | 2.614 µs (2,61 ms) |
-| 2. Collaborative (User-Based Pearson) | 33,33% | 25,00% | 38,91% | 30,44% | 38,87% | 75,0% | 43,3% | 2.465 µs (2,47 ms) |
-| 3. Hybrid Klasik (CB + CF) | 63,89% | 48,33% | 73,99% | 58,47% | 70,65% | 91,7% | 50,0% | 2.333 µs (2,33 ms) |
-| 4. Hybrid Multi-Criteria (Tanpa Filter) | 63,89% | 45,00% | 73,49% | 55,82% | 72,70% | 100,0% | 53,3% | 2.280 µs (2,28 ms) |
-| **5. Usulan HMC-CF (MCRS + Hard Filter)** | **76,39%** | **64,72%** | **93,10%** | **76,36%** | **95,01%** | **100,0%** | **100,0%** | **2.243 µs (2,24 ms)** |
+| 1. Content-Based (TF-IDF + Cosine) | 47,22% | 41,67% | 65,77% | 51,02% | 64,53% | 91,7% | 43,3% | 444 µs (0,44 ms) |
+| 2. Collaborative (User-Based Pearson) | 33,33% | 25,00% | 38,91% | 30,44% | 38,87% | 75,0% | 43,3% | 515 µs (0,52 ms) |
+| 3. Hybrid Klasik (CB + CF) | 63,89% | 48,33% | 73,99% | 58,47% | 70,65% | 91,7% | 50,0% | 418 µs (0,42 ms) |
+| 4. Hybrid Multi-Criteria (Tanpa Filter) | 63,89% | 45,00% | 73,49% | 55,82% | 72,70% | 100,0% | 53,3% | 428 µs (0,43 ms) |
+| **5. Usulan HMC-CF (MCRS + Hard Filter)** | **76,39%** | **64,72%** | **93,10%** | **76,36%** | **95,01%** | **100,0%** | **100,0%** | **499 µs (0,50 ms)** |
 
 ![Grafik Pengujian Ablasi 5 Metode](figures/fig2_ablation_precision_ndcg.png)  
 *Gambar 3. Perbandingan capaian Precision@3, F1-Score@5, NDCG@5, dan Kepatuhan Syarat Wajib (CSR) antar-metode.*

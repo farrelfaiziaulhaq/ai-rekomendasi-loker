@@ -1,28 +1,17 @@
-//! Mesin Rekomendasi Hybrid Multikriteria & Explainable AI (Slide 07–14 `AI_Sistem_Rekomendasi_Visual.pdf`).
+//! Mesin Rekomendasi Hybrid Multikriteria & Explainable AI (Slide 07-14 `AI_Sistem_Rekomendasi_Visual.pdf`).
 //!
-//! Mengorkestrasi ke-4 komponen kecerdasan buatan:
-//! 1. Content-Based Filtering (`S_CB`) — TF-IDF Cosine + Skill Coverage
-//! 2. User-Based Collaborative Filtering (`S_CF`) — Pearson Neighborhood
-//! 3. Multi-Criteria Utility (`S_MC`) — Adomavicius & Kwon (2015) 4-Aspect Weighted Score
-//! 4. Hard Constraint Filtering — Eliminasi syarat mutlak sebelum/saat keputusan akhir
-//!
-//! Rumus Hybrid Multikriteria Adaptif (dengan penanganan Cold-Start otomatis):
-//! - Jika sinyal Collaborative Filtering tersedia (`has_cf_signal = true`):
-//!   `S_Final = 0.40 * S_CB + 0.25 * S_CF + 0.35 * S_MC`
-//! - Jika pengguna baru / belum ada tetangga pada item tersebut (`Cold-Start`):
-//!   bobot `β = 0.25` diredistribusikan proporsional ke Content-Based & Multi-Criteria:
-//!   `S_Final = 0.5333 * S_CB + 0.00 * S_CF + 0.4667 * S_MC`
+//! Dioptimalkan menggunakan `RecommenderIndex` yang telah diprakomputasi sehingga waktu
+//! komputasi per permintaan turun ke orde mikrodetik (sub-milidetik) di Rust.
 
-use crate::ai::collaborative::CollaborativeMatrix;
 use crate::ai::constraints::check_hard_constraints;
-use crate::ai::content_based::{build_user_profile_vector, job_document_text, score_content_based};
+use crate::ai::content_based::{build_user_profile_vector_indexed, score_content_based_indexed};
+use crate::ai::index::RecommenderIndex;
 use crate::ai::multicriteria::score_multi_criteria;
-use crate::ai::tfidf::TfidfCorpus;
 use crate::models::{
     AlgorithmMode, JobPosting, JobRecommendation, RecommendationResponse, UserInteraction,
     UserProfile,
 };
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 use std::time::Instant;
 
 pub struct RecommenderRequest<'a> {
@@ -35,55 +24,92 @@ pub struct RecommenderRequest<'a> {
     pub top_k: usize,
     pub exclude_interacted_train: bool,
     pub include_test_in_cf: bool,
+    pub search_query: Option<&'a str>,
+    pub category_filter: Option<&'a str>,
 }
 
-pub fn recommend_jobs(req: RecommenderRequest<'_>) -> RecommendationResponse {
+/// Menjalankan mesin rekomendasi memanfaatkan `RecommenderIndex` terprakomputasi (O(N_jobs) fast path).
+pub fn recommend_jobs_indexed(
+    req: RecommenderRequest<'_>,
+    index: &RecommenderIndex,
+) -> RecommendationResponse {
     let t0 = Instant::now();
 
-    // 1. Siapkan korpus TF-IDF seluruh katalog lowongan
-    let docs: Vec<String> = req.jobs.iter().map(job_document_text).collect();
-    let corpus = TfidfCorpus::fit(&docs);
+    // 1. Bangun vektor profil pengguna (+ kata kunci pencarian bila diisi)
+    let (user_vec, user_norm) =
+        build_user_profile_vector_indexed(req.user, req.interactions, index, req.search_query);
 
-    let jobs_map: HashMap<String, &JobPosting> =
-        req.jobs.iter().map(|j| (j.id.clone(), j)).collect();
+    let user_skill_set: HashSet<String> = req
+        .user
+        .preferred_skills
+        .iter()
+        .map(|s| s.to_lowercase())
+        .collect();
 
-    // 2. Bangun vektor profil minat pengguna (Slide 04 & 05)
-    let user_vec = build_user_profile_vector(req.user, req.interactions, &jobs_map, &corpus);
+    // Token pencarian (case-insensitive) untuk filter teks langsung seperti portal loker
+    let query_tokens: Vec<String> = req
+        .search_query
+        .map(|q| {
+            q.to_lowercase()
+                .split_whitespace()
+                .filter(|t| !t.is_empty())
+                .map(String::from)
+                .collect()
+        })
+        .unwrap_or_default();
 
-    // 3. Bangun matriks interaksi Collaborative Filtering (Slide 06)
-    let cf_matrix =
-        CollaborativeMatrix::build(req.all_users, req.interactions, req.include_test_in_cf);
+    let category_filter = req.category_filter.map(str::trim).filter(|c| !c.is_empty());
 
-    // Catat lowongan yang sudah pernah dilamar/dinilai oleh user pada data train agar fokus ke kandidat baru
-    let interacted_set: HashSet<String> = req
+    // Catat lowongan yang sudah pernah dilamar/dinilai user pada data train
+    let interacted_set: HashSet<&str> = req
         .interactions
         .iter()
         .filter(|it| it.user_id == req.user.id && (req.include_test_in_cf || it.split != "test"))
-        .map(|it| it.job_id.clone())
+        .map(|it| it.job_id.as_str())
         .collect();
 
-    let mut passed_list: Vec<JobRecommendation> = Vec::new();
+    let mut passed_list: Vec<JobRecommendation> = Vec::with_capacity(req.jobs.len());
     let mut filtered_out_list: Vec<JobRecommendation> = Vec::new();
 
     for (idx, job) in req.jobs.iter().enumerate() {
-        if req.exclude_interacted_train && interacted_set.contains(&job.id) {
+        if req.exclude_interacted_train && interacted_set.contains(job.id.as_str()) {
             continue;
         }
 
-        let job_vec = corpus.vectorize(&docs[idx]);
-        let cb_proof = score_content_based(req.user, &user_vec, job, &job_vec);
-        let cf_proof = cf_matrix.predict_for_job(&req.user.id, &job.id, 5);
+        if let Some(cat) = category_filter {
+            if !job.category.eq_ignore_ascii_case(cat) {
+                continue;
+            }
+        }
+
+        if !query_tokens.is_empty() {
+            let haystack = &index.job_search_haystacks[idx];
+            if !query_tokens.iter().all(|t| haystack.contains(t)) {
+                continue;
+            }
+        }
+
+        let cb_proof = score_content_based_indexed(
+            req.user,
+            &user_skill_set,
+            &user_vec,
+            user_norm,
+            job,
+            &index.job_vectors[idx],
+            index.job_norms[idx],
+        );
+        let cf_proof = index
+            .cf_matrix_train
+            .predict_for_job(&req.user.id, &job.id, 5);
         let mc_proof = score_multi_criteria(&req.user.weights, &job.criteria);
         let cons_res = check_hard_constraints(&req.user.constraints, job);
 
-        // Tentukan bobot kombinasi (alpha, beta, gamma) sesuai mode algoritma
         let (alpha, beta, gamma) = match req.mode {
             AlgorithmMode::ContentBased => (1.0, 0.0, 0.0),
             AlgorithmMode::Collaborative => {
                 if cf_proof.has_cf_signal {
                     (0.0, 1.0, 0.0)
                 } else {
-                    // Fallback minimal agar urutan deterministik saat murni CF mengalami cold-start
                     (0.25, 0.0, 0.0)
                 }
             }
@@ -98,7 +124,6 @@ pub fn recommend_jobs(req: RecommenderRequest<'_>) -> RecommendationResponse {
                 if cf_proof.has_cf_signal {
                     (0.40, 0.25, 0.35)
                 } else {
-                    // Redistribusi otomatis saat Cold-Start
                     (0.40 / 0.75, 0.0, 0.35 / 0.75)
                 }
             }
@@ -178,6 +203,12 @@ pub fn recommend_jobs(req: RecommenderRequest<'_>) -> RecommendationResponse {
     }
 }
 
+/// Wrapper kompatibel untuk pemanggilan langsung tanpa indeks tersimpan (membangun indeks sekali).
+pub fn recommend_jobs(req: RecommenderRequest<'_>) -> RecommendationResponse {
+    let index = RecommenderIndex::build(req.jobs, req.all_users, req.interactions);
+    recommend_jobs_indexed(req, &index)
+}
+
 fn build_human_explanation(
     job: &JobPosting,
     cb: &crate::models::ContentBasedProof,
@@ -209,33 +240,33 @@ fn build_human_explanation(
     if cf.has_cf_signal && mode != AlgorithmMode::ContentBased {
         let top_n = &cf.neighbors_used[0];
         parts.push(format!(
-            "Disukai pengguna berpola serupa seperti {} (sim {:.2}, rating {:.1}/5)",
-            top_n.neighbor_name, top_n.similarity, top_n.neighbor_rating_on_job
+            "serupa pilihan {} (rating {:.1}/5)",
+            top_n.neighbor_name, top_n.neighbor_rating_on_job
         ));
     }
 
     if mode == AlgorithmMode::HybridMulticriteria {
         parts.push(format!(
-            "Skor multikriteria {:.2}/5.00 sesuai bobot prioritas Anda",
+            "nilai prioritas {:.2}/5",
             mc.raw_weighted_rating_1_to_5
         ));
     }
 
     if !cons.passed {
         parts.push(format!(
-            "Namun tereliminasi syarat wajib: {}",
+            "tidak lolos syarat wajib ({})",
             cons.violations.join("; ")
         ));
     } else {
         parts.push(format!(
-            "Lolos seluruh syarat wajib ({}, Rp {:.1} Jt/bln) — kecocokan total {:.1}%",
+            "sesuai syarat {}, Rp {:.1} Jt/bln (kecocokan {:.0}%)",
             job.work_mode,
             job.salary_idr_millions,
             final_score * 100.0
         ));
     }
 
-    parts.join(" • ")
+    parts.join(", ")
 }
 
 fn round4(v: f64) -> f64 {

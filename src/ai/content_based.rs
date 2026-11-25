@@ -1,17 +1,14 @@
 //! Cara 1: Content-Based Filtering (Slide 05 `AI_Sistem_Rekomendasi_Visual.pdf`)
-//! "Mencari isi yang mirip — Dasar rekomendasi: kemiripan isi dengan minat pengguna."
 //!
-//! Menggabungkan:
-//! 1. Vektor TF-IDF dari profil pengguna (pilihan topik/skill eksplisit + ekspansi Rocchio dari
-//!    riwayat lowongan yang disukai/dibuka pada Slide 04) terhadap deskripsi & judul lowongan.
-//! 2. Kecocokan himpunan keahlian teknis eksplisit (Skill Coverage) & kesesuaian bidang karir.
+//! Mendukung fast-path memanfaatkan `RecommenderIndex` (vektor & norma lowongan sudah diprakomputasi)
+//! serta kata kunci pencarian interaktif dari kolom pencarian utama.
 
-use crate::ai::tfidf::{cosine_similarity_detailed, TfidfCorpus};
+use crate::ai::index::RecommenderIndex;
+use crate::ai::tfidf::{cosine_similarity_with_norms, vector_norm};
 use crate::models::{ContentBasedProof, JobPosting, UserInteraction, UserProfile};
 use std::collections::{HashMap, HashSet};
 
 /// Menyusun representasi teks satu lowongan kerja untuk indeks TF-IDF.
-/// Kata kunci skill diulang 2x agar bobot representasi teknis lebih tegas dibanding kata deskriptif umum.
 pub fn job_document_text(job: &JobPosting) -> String {
     let skills_joined = job.skills.join(" ");
     format!(
@@ -20,14 +17,14 @@ pub fn job_document_text(job: &JobPosting) -> String {
     )
 }
 
-/// Membangun vektor profil minat pengguna (User Profile Vector) dengan pendekatan Rocchio sederhana:
-/// `V_user = 1.0 * V_explicit_profile + 0.55 * Mean(V_liked_jobs)`
-pub fn build_user_profile_vector(
+/// Membangun vektor profil minat pengguna (Rocchio) + pengayaan kata kunci pencarian opsional,
+/// menggunakan vektor lowongan yang sudah diindeks di `RecommenderIndex` (tanpa re-tokenisasi!).
+pub fn build_user_profile_vector_indexed(
     user: &UserProfile,
     interactions: &[UserInteraction],
-    jobs_map: &HashMap<String, &JobPosting>,
-    corpus: &TfidfCorpus,
-) -> HashMap<String, f64> {
+    index: &RecommenderIndex,
+    search_query: Option<&str>,
+) -> (HashMap<String, f64>, f64) {
     let skills_twice = format!(
         "{} {}",
         user.preferred_skills.join(" "),
@@ -35,9 +32,9 @@ pub fn build_user_profile_vector(
     );
     let cats = user.preferred_categories.join(" ");
     let explicit_doc = format!("{} {} {}", user.role_headline, skills_twice, cats);
-    let mut profile_vec = corpus.vectorize(&explicit_doc);
+    let mut profile_vec = index.corpus.vectorize(&explicit_doc);
 
-    // Tambahkan sinyal riwayat lowongan yang disukai / dilamar pengguna (rating >= 3.8) — Slide 04!
+    // Perkuat dengan sinyal riwayat lowongan yang disukai / dilamar pengguna (rating >= 3.8)
     let liked: Vec<&UserInteraction> = interactions
         .iter()
         .filter(|it| it.user_id == user.id && it.rating >= 3.8 && it.split != "test")
@@ -46,38 +43,39 @@ pub fn build_user_profile_vector(
     if !liked.is_empty() {
         let scale = 0.55 / (liked.len() as f64);
         for it in liked {
-            if let Some(job) = jobs_map.get(&it.job_id) {
-                let j_vec = corpus.vectorize(&job_document_text(job));
+            if let Some(&job_idx) = index.job_id_to_idx.get(&it.job_id) {
                 let rating_weight = (it.rating / 5.0) * scale;
-                for (term, val) in j_vec {
-                    *profile_vec.entry(term).or_insert(0.0) += val * rating_weight;
+                for (term, &val) in &index.job_vectors[job_idx] {
+                    *profile_vec.entry(term.clone()).or_insert(0.0) += val * rating_weight;
                 }
             }
         }
     }
 
-    profile_vec
+    // Jika pengguna mengetik kata kunci di kotak pencarian, perkuat bobot term pencarian pada vektor query
+    if let Some(q) = search_query.map(str::trim).filter(|s| !s.is_empty()) {
+        let q_vec = index.corpus.vectorize(q);
+        for (term, val) in q_vec {
+            *profile_vec.entry(term).or_insert(0.0) += val * 1.15;
+        }
+    }
+
+    let norm = vector_norm(&profile_vec);
+    (profile_vec, norm)
 }
 
-/// Menghitung skor Content-Based Filtering `S_CB(u, j)` dalam rentang `[0.0, 1.0]`
-/// beserta bukti lengkap (`ContentBasedProof`).
-///
-/// Rumus:
-/// `S_CB(u, j) = 0.55 * Cosine_TFIDF(u, j) + 0.35 * SkillCoverage(u, j) + 0.10 * CategoryBonus(u, j)`
-pub fn score_content_based(
+/// Menghitung skor Content-Based Filtering `S_CB(u, j)` menggunakan vektor & norma terindeks.
+pub fn score_content_based_indexed(
     user: &UserProfile,
+    user_skill_set: &HashSet<String>,
     user_vec: &HashMap<String, f64>,
+    user_norm: f64,
     job: &JobPosting,
     job_vec: &HashMap<String, f64>,
+    job_norm: f64,
 ) -> ContentBasedProof {
     let (tfidf_cos, dot, u_norm, j_norm, top_terms) =
-        cosine_similarity_detailed(user_vec, job_vec, 6);
-
-    let user_skill_set: HashSet<String> = user
-        .preferred_skills
-        .iter()
-        .map(|s| s.to_lowercase())
-        .collect();
+        cosine_similarity_with_norms(user_vec, user_norm, job_vec, job_norm, 6);
 
     let mut matched_skills = Vec::new();
     let mut missing_skills = Vec::new();

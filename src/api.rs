@@ -1,9 +1,9 @@
-//! Endpoint HTTP REST API (`axum`) untuk antarmuka web `KarirAI`, simulasi materi PDF dosen,
-//! pembaruan preferensi/interaksi real-time ke Firebase Firestore, serta evaluasi algoritma AI.
+//! Endpoint HTTP REST API (`axum`) untuk KarirAI.
+//! Seluruh endpoint baca memanfaatkan `Arc` snapshot dan `RecommenderIndex` terprakomputasi
+//! agar latensi pencarian & geser slider terasa instan di browser.
 
-use crate::ai::collaborative::CollaborativeMatrix;
-use crate::ai::evaluation::{run_full_evaluation, EvaluationReport};
-use crate::ai::hybrid::{recommend_jobs, RecommenderRequest};
+use crate::ai::evaluation::EvaluationReport;
+use crate::ai::hybrid::{recommend_jobs_indexed, RecommenderRequest};
 use crate::ai::multicriteria::{verify_lecturer_slide_case, LecturerSlideVerification};
 use crate::firebase::{DataStore, FirebaseStatus};
 use crate::models::{
@@ -38,11 +38,14 @@ pub fn api_router(store: Arc<DataStore>) -> Router {
         .with_state(store)
 }
 
-async fn health() -> Json<serde_json::Value> {
+async fn health(State(store): State<Arc<DataStore>>) -> Json<serde_json::Value> {
+    let idx = store.index().await;
     Json(json!({
         "status": "ok",
         "engine": "KarirAI Rust Hybrid Multi-Criteria Recommender",
-        "version": env!("CARGO_PKG_VERSION")
+        "version": env!("CARGO_PKG_VERSION"),
+        "indexed_jobs": idx.job_vectors.len(),
+        "index_build_micros": idx.build_time_micros
     }))
 }
 
@@ -52,11 +55,11 @@ async fn firebase_status(State(store): State<Arc<DataStore>>) -> Json<FirebaseSt
 
 async fn firebase_sync(
     State(store): State<Arc<DataStore>>,
-) -> Result<Json<FirebaseStatus>, (StatusCode, String)> {
+) -> Result<Json<FirebaseStatus>, (StatusCode, Json<serde_json::Value>)> {
     store.sync_all_to_firestore().await.map(Json).map_err(|e| {
         (
             StatusCode::BAD_GATEWAY,
-            format!("Sinkronisasi Firebase gagal: {e}"),
+            Json(json!({ "error": format!("Sinkronisasi Firebase gagal: {e}") })),
         )
     })
 }
@@ -67,13 +70,13 @@ async fn reset_data(State(store): State<Arc<DataStore>>) -> Json<FirebaseStatus>
 }
 
 async fn list_jobs(State(store): State<Arc<DataStore>>) -> Json<Vec<JobPosting>> {
-    let guard = store.state.read().await;
-    Json(guard.jobs.clone())
+    let snap = store.snapshot().await;
+    Json(snap.jobs.clone())
 }
 
 async fn list_users(State(store): State<Arc<DataStore>>) -> Json<Vec<UserProfile>> {
-    let guard = store.state.read().await;
-    Json(guard.users.clone())
+    let snap = store.snapshot().await;
+    Json(snap.users.clone())
 }
 
 #[derive(Debug, Deserialize)]
@@ -89,25 +92,32 @@ async fn update_user_preferences(
     Path(id): Path<String>,
     State(store): State<Arc<DataStore>>,
     Json(payload): Json<UpdatePreferencesPayload>,
-) -> Result<Json<UserProfile>, (StatusCode, String)> {
-    let updated_user = {
-        let mut guard = store.state.write().await;
-        let Some(u) = guard.users.iter_mut().find(|u| u.id == id) else {
-            return Err((StatusCode::NOT_FOUND, "Pengguna tidak ditemukan".into()));
-        };
-        u.preferred_skills = payload.preferred_skills;
-        u.preferred_categories = payload.preferred_categories;
-        u.experience_years = payload.experience_years;
-        u.weights = payload.weights.normalized();
-        u.constraints = payload.constraints;
-        u.clone()
+) -> Result<Json<UserProfile>, (StatusCode, Json<serde_json::Value>)> {
+    let updated_opt = store
+        .mutate_state(|st| {
+            let u = st.users.iter_mut().find(|u| u.id == id)?;
+            u.preferred_skills = payload.preferred_skills;
+            u.preferred_categories = payload.preferred_categories;
+            u.experience_years = payload.experience_years;
+            u.weights = payload.weights.normalized();
+            u.constraints = payload.constraints;
+            Some(u.clone())
+        })
+        .await;
+
+    let Some(updated_user) = updated_opt else {
+        return Err((
+            StatusCode::NOT_FOUND,
+            Json(json!({ "error": "Pengguna tidak ditemukan" })),
+        ));
     };
 
-    store.save_mirror().await;
     if let Ok(val) = serde_json::to_value(&updated_user) {
-        let _ = store
-            .upsert_firestore_doc("users", &updated_user.id, &val)
-            .await;
+        let store_bg = store.clone();
+        let uid = updated_user.id.clone();
+        tokio::spawn(async move {
+            let _ = store_bg.upsert_firestore_doc("users", &uid, &val).await;
+        });
     }
 
     Ok(Json(updated_user))
@@ -119,24 +129,30 @@ pub struct EnrichedInteraction {
     pub job_title: String,
     pub company: String,
     pub category: String,
+    pub location: String,
+    pub work_mode: String,
+    pub salary_idr_millions: f64,
 }
 
 async fn get_user_interactions(
     Path(id): Path<String>,
     State(store): State<Arc<DataStore>>,
 ) -> Json<Vec<EnrichedInteraction>> {
-    let guard = store.state.read().await;
-    let list: Vec<EnrichedInteraction> = guard
+    let snap = store.snapshot().await;
+    let list: Vec<EnrichedInteraction> = snap
         .interactions
         .iter()
         .filter(|it| it.user_id == id && it.split != "test")
         .filter_map(|it| {
-            let job = guard.jobs.iter().find(|j| j.id == it.job_id)?;
+            let job = snap.jobs.iter().find(|j| j.id == it.job_id)?;
             Some(EnrichedInteraction {
                 interaction: it.clone(),
                 job_title: job.title.clone(),
                 company: job.company.clone(),
                 category: job.category.clone(),
+                location: job.location.clone(),
+                work_mode: job.work_mode.clone(),
+                salary_idr_millions: job.salary_idr_millions,
             })
         })
         .collect();
@@ -155,39 +171,42 @@ async fn record_interaction(
     State(store): State<Arc<DataStore>>,
     Json(payload): Json<RecordInteractionPayload>,
 ) -> Json<UserInteraction> {
-    let new_int = {
-        let mut guard = store.state.write().await;
-        let rating = payload.rating.clamp(1.0, 5.0);
+    let new_int = store
+        .mutate_state(|st| {
+            let rating = payload.rating.clamp(1.0, 5.0);
+            if let Some(existing) = st
+                .interactions
+                .iter_mut()
+                .find(|i| i.user_id == payload.user_id && i.job_id == payload.job_id)
+            {
+                existing.rating = rating;
+                existing.action = payload.action.clone();
+                existing.split = "live".to_string();
+                existing.clone()
+            } else {
+                let created = UserInteraction {
+                    id: format!("INT-LIVE-{:04}", st.interactions.len() + 1),
+                    user_id: payload.user_id,
+                    job_id: payload.job_id,
+                    rating,
+                    action: payload.action,
+                    split: "live".to_string(),
+                    aspect_ratings: None,
+                };
+                st.interactions.push(created.clone());
+                created
+            }
+        })
+        .await;
 
-        if let Some(existing) = guard
-            .interactions
-            .iter_mut()
-            .find(|i| i.user_id == payload.user_id && i.job_id == payload.job_id)
-        {
-            existing.rating = rating;
-            existing.action = payload.action.clone();
-            existing.split = "live".to_string();
-            existing.clone()
-        } else {
-            let created = UserInteraction {
-                id: format!("INT-LIVE-{:04}", guard.interactions.len() + 1),
-                user_id: payload.user_id,
-                job_id: payload.job_id,
-                rating,
-                action: payload.action,
-                split: "live".to_string(),
-                aspect_ratings: None,
-            };
-            guard.interactions.push(created.clone());
-            created
-        }
-    };
-
-    store.save_mirror().await;
     if let Ok(val) = serde_json::to_value(&new_int) {
-        let _ = store
-            .upsert_firestore_doc("interactions", &new_int.id, &val)
-            .await;
+        let store_bg = store.clone();
+        let doc_id = new_int.id.clone();
+        tokio::spawn(async move {
+            let _ = store_bg
+                .upsert_firestore_doc("interactions", &doc_id, &val)
+                .await;
+        });
     }
 
     Json(new_int)
@@ -204,6 +223,8 @@ pub struct RecommendPayload {
     pub top_k: usize,
     #[serde(default = "default_true")]
     pub exclude_interacted: bool,
+    pub search_query: Option<String>,
+    pub category_filter: Option<String>,
     pub override_weights: Option<CriteriaWeights>,
     pub override_constraints: Option<HardConstraints>,
 }
@@ -212,21 +233,21 @@ fn default_true() -> bool {
     true
 }
 fn default_top_k() -> usize {
-    10
+    12
 }
 
 async fn run_recommendation(
     State(store): State<Arc<DataStore>>,
     Json(payload): Json<RecommendPayload>,
-) -> Result<Json<RecommendationResponse>, (StatusCode, String)> {
-    let snapshot = store.state.read().await.clone();
-    let Some(mut target_user) = snapshot
-        .users
-        .iter()
-        .find(|u| u.id == payload.user_id)
-        .cloned()
-    else {
-        return Err((StatusCode::NOT_FOUND, "User ID tidak ditemukan".into()));
+) -> Result<Json<RecommendationResponse>, (StatusCode, Json<serde_json::Value>)> {
+    let snap = store.snapshot().await;
+    let index = store.index().await;
+
+    let Some(mut target_user) = snap.users.iter().find(|u| u.id == payload.user_id).cloned() else {
+        return Err((
+            StatusCode::NOT_FOUND,
+            Json(json!({ "error": "Profil pencari kerja tidak ditemukan" })),
+        ));
     };
 
     if let Some(w) = payload.override_weights {
@@ -236,26 +257,30 @@ async fn run_recommendation(
         target_user.constraints = c;
     }
 
-    let resp = recommend_jobs(RecommenderRequest {
-        user: &target_user,
-        jobs: &snapshot.jobs,
-        all_users: &snapshot.users,
-        interactions: &snapshot.interactions,
-        mode: payload.mode,
-        apply_hard_constraints: payload.apply_hard_constraints,
-        top_k: payload.top_k.clamp(1, 30),
-        exclude_interacted_train: payload.exclude_interacted,
-        include_test_in_cf: false,
-    });
+    let resp = recommend_jobs_indexed(
+        RecommenderRequest {
+            user: &target_user,
+            jobs: &snap.jobs,
+            all_users: &snap.users,
+            interactions: &snap.interactions,
+            mode: payload.mode,
+            apply_hard_constraints: payload.apply_hard_constraints,
+            top_k: payload.top_k.clamp(1, 40),
+            exclude_interacted_train: payload.exclude_interacted,
+            include_test_in_cf: false,
+            search_query: payload.search_query.as_deref(),
+            category_filter: payload.category_filter.as_deref(),
+        },
+        &index,
+    );
 
-    // Catat log rekomendasi terakhir ke Firestore (non-blocking) sebagai jejak audit sistem AI
     let store_bg = store.clone();
     let log_doc_id = format!("REC-{}", resp.user_id);
     let top_titles: Vec<String> = resp
         .recommendations
         .iter()
         .take(3)
-        .map(|r| format!("{} ({:.1}%)", r.job.title, r.match_percentage))
+        .map(|r| format!("{} ({:.0}%)", r.job.title, r.match_percentage))
         .collect();
     let mode_str = format!("{:?}", resp.algorithm_mode);
     let latency = resp.execution_time_micros;
@@ -290,14 +315,14 @@ async fn get_cf_neighbors_summary(
     Path(user_id): Path<String>,
     State(store): State<Arc<DataStore>>,
 ) -> Json<Vec<NeighborOverview>> {
-    let snapshot = store.state.read().await;
-    let matrix = CollaborativeMatrix::build(&snapshot.users, &snapshot.interactions, false);
+    let snap = store.snapshot().await;
+    let index = store.index().await;
     let mut list = Vec::new();
-    for u in &snapshot.users {
+    for u in &snap.users {
         if u.id == user_id {
             continue;
         }
-        let (sim, shared) = matrix.user_similarity(&user_id, &u.id);
+        let (sim, shared) = index.cf_matrix_train.user_similarity(&user_id, &u.id);
         list.push(NeighborOverview {
             neighbor_id: u.id.clone(),
             neighbor_name: u.name.clone(),
@@ -325,10 +350,6 @@ async fn lecturer_case_study(Query(q): Query<CaseStudyQuery>) -> Json<LecturerSl
 }
 
 async fn evaluate_all_methods(State(store): State<Arc<DataStore>>) -> Json<EvaluationReport> {
-    let snapshot = store.state.read().await;
-    Json(run_full_evaluation(
-        &snapshot.users,
-        &snapshot.jobs,
-        &snapshot.interactions,
-    ))
+    let report = store.evaluation_report().await;
+    Json((*report).clone())
 }

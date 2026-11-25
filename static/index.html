@@ -3,343 +3,398 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KarirAI — Sistem Rekomendasi Lowongan Kerja (Rust + Firebase)</title>
+  <title>KarirAI: Pencarian &amp; Rekomendasi Lowongan Kerja</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230369a1'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='18' font-weight='700' fill='%23ffffff'%3EK%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    media="print"
+    onload="this.media='all'"
+  />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <div class="brand-mark">AI</div>
-        <div>
-          <div class="brand-kicker">MATA KULIAH ARTIFICIAL INTELLIGENCE • S1 TEKNIK INFORMATIKA</div>
-          <h1 class="brand-title">KarirAI — Sistem Rekomendasi Lowongan Kerja</h1>
-        </div>
+  <a href="#main-content" class="skip-link">Langsung ke daftar lowongan</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="#lowongan" class="wordmark" data-nav="view-jobs">
+          Karir<span>AI</span>
+        </a>
+        <nav class="primary-nav" aria-label="Navigasi utama">
+          <button type="button" class="nav-link active" data-view="view-jobs" aria-current="page">Lowongan</button>
+          <button type="button" class="nav-link" data-view="view-activity">Aktivitas</button>
+          <button type="button" class="nav-link" data-view="view-lab">Evaluasi AI</button>
+        </nav>
       </div>
 
-      <div class="topbar-actions">
-        <div id="firebase-badge" class="fb-badge" title="Status koneksi basis data Firebase">
-          <span class="dot"></span>
-          <span id="firebase-badge-text">Memeriksa Firebase...</span>
+      <div class="header-right">
+        <div class="persona-picker">
+          <label for="select-user" class="sr-only">Pilih profil pencari kerja</label>
+          <select id="select-user" aria-label="Pilih profil pencari kerja"></select>
         </div>
-        <button id="btn-theme" class="btn btn-ghost" type="button">Mode Gelap</button>
+
+        <button
+          id="btn-theme"
+          type="button"
+          class="icon-btn"
+          aria-label="Ubah ke mode gelap"
+          aria-pressed="false"
+          title="Ubah tema tampilan"
+        >
+          <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="icon-sun" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </div>
     </div>
-
-    <nav class="nav-tabs" aria-label="Navigasi Utama">
-      <button class="tab-btn active" data-tab="tab-recommend">1. Rekomendasi &amp; Bukti AI</button>
-      <button class="tab-btn" data-tab="tab-cf">2. Pola Pengguna (Collaborative)</button>
-      <button class="tab-btn" data-tab="tab-slides">3. Simulasi Materi PDF Dosen</button>
-      <button class="tab-btn" data-tab="tab-eval">4. Evaluasi Precision@K &amp; NDCG</button>
-      <button class="tab-btn" data-tab="tab-catalog">5. Katalog Dataset &amp; Firebase</button>
-    </nav>
   </header>
 
-  <main class="container">
-    <!-- TAB 1: REKOMENDASI UTAMA & INSPECTOR RUMUS -->
-    <section id="tab-recommend" class="tab-panel active">
-      <div class="layout-grid">
-        <!-- SIDEBAR KONTROL AI -->
-        <aside class="sidebar card">
-          <div class="section-head">
-            <span class="step-pill">PETUNJUK SISTEM (SLIDE 04)</span>
-            <h2>Profil &amp; Prioritas Pencari Kerja</h2>
+  <main id="main-content" class="page-main">
+    <!-- ==================== VIEW 1: CARI LOWONGAN ==================== -->
+    <section id="view-jobs" class="view-section active" aria-labelledby="jobs-heading">
+      <div class="search-band">
+        <div class="search-band-inner">
+          <div class="search-header">
+            <h1 id="jobs-heading">Temukan lowongan yang cocok dengan keahlian Anda</h1>
+            <p id="active-profile-line" class="profile-summary">Memuat profil pencari kerja...</p>
           </div>
 
-          <div class="field">
-            <label for="select-user">Pilih Persona Pencari Kerja</label>
-            <select id="select-user"></select>
-            <div id="persona-caption" class="caption-box"></div>
+          <form id="search-form" class="search-bar" role="search">
+            <div class="search-input-wrap">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <label for="inp-query" class="sr-only">Cari judul posisi, perusahaan, atau keahlian</label>
+              <input
+                type="search"
+                id="inp-query"
+                placeholder="Cari posisi, perusahaan, atau skill (mis. rust, python, cloud)..."
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="search-select-wrap">
+              <label for="sel-category" class="sr-only">Filter bidang pekerjaan</label>
+              <select id="sel-category">
+                <option value="">Semua bidang</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary search-submit">Cari lowongan</button>
+          </form>
+
+          <div class="quick-filter-row">
+            <div class="mode-pills" role="group" aria-label="Filter mode kerja cepat">
+              <button type="button" class="pill-btn active" data-quick-mode="all">Semua mode</button>
+              <button type="button" class="pill-btn" data-quick-mode="Remote">Remote</button>
+              <button type="button" class="pill-btn" data-quick-mode="Hybrid">Hybrid</button>
+              <button type="button" class="pill-btn" data-quick-mode="Onsite">Onsite</button>
+            </div>
+
+            <button type="button" id="btn-toggle-filters" class="btn btn-ghost mobile-filter-btn" aria-expanded="false" aria-controls="filter-panel">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+              Atur prioritas &amp; filter
+            </button>
           </div>
+        </div>
+      </div>
 
-          <div class="field">
-            <label for="select-mode">Metode Algoritma Rekomendasi (Slide 05–13)</label>
-            <select id="select-mode">
-              <option value="hybrid_multicriteria">Metode Usulan: Hybrid Multi-Criteria (CB + CF + MCRS)</option>
-              <option value="hybrid_classic">Hybrid Klasik: Content-Based + Collaborative (Slide 08)</option>
-              <option value="content_based">Cara 1: Content-Based Filtering — TF-IDF Cosine (Slide 05)</option>
-              <option value="collaborative">Cara 2: Collaborative Filtering — Pola Pengguna (Slide 06)</option>
-            </select>
-          </div>
+      <div class="workspace-shell">
+        <!-- FILTER RAIL -->
+        <aside id="filter-panel" class="filter-rail" aria-label="Filter dan prioritas pencarian">
+          <div class="filter-block">
+            <div class="filter-block-head">
+              <h2>Prioritas Anda</h2>
+              <span class="help-inline">Total 100%</span>
+            </div>
 
-          <div class="field check-row">
-            <input type="checkbox" id="chk-constraints" checked />
-            <label for="chk-constraints">
-              <strong>Aktifkan Filter Syarat Wajib</strong> (Hard Constraints — Slide 14)
-            </label>
-          </div>
+            <div id="weight-bar" class="weight-bar" aria-hidden="true"></div>
 
-          <hr class="divider" />
-
-          <div class="section-head">
-            <span class="step-pill">BOBOT MULTIKRITERIA (SLIDE 11–13)</span>
-            <h3>Tingkat Kepentingan Aspek</h3>
-          </div>
-
-          <!-- Visual Bar Proporsi Bobot seperti Slide 11 PDF Dosen -->
-          <div id="weight-visual-bar" class="weight-proportion-bar" title="Proporsi bobot ternormalisasi (total 100%)"></div>
-          <div id="weight-visual-legend" class="weight-legend"></div>
-
-          <div class="sliders-group">
-            <div class="slider-row">
-              <div class="slider-label">
-                <span>C1 • Kejelasan Peran &amp; Mentorship</span>
-                <strong id="lbl-w1">45%</strong>
+            <div class="slider-field">
+              <div class="slider-meta">
+                <label for="rng-w1">Kejelasan peran</label>
+                <span id="lbl-w1" class="num-val">45%</span>
               </div>
               <input type="range" id="rng-w1" min="0" max="100" step="5" value="45" />
             </div>
-            <div class="slider-row">
-              <div class="slider-label">
-                <span>C2 • Tantangan Teknis &amp; Proyek</span>
-                <strong id="lbl-w2">15%</strong>
+
+            <div class="slider-field">
+              <div class="slider-meta">
+                <label for="rng-w2">Tantangan teknis</label>
+                <span id="lbl-w2" class="num-val">15%</span>
               </div>
               <input type="range" id="rng-w2" min="0" max="100" step="5" value="15" />
             </div>
-            <div class="slider-row">
-              <div class="slider-label">
-                <span>C3 • Daya Tarik Kompensasi Gaji</span>
-                <strong id="lbl-w3">15%</strong>
+
+            <div class="slider-field">
+              <div class="slider-meta">
+                <label for="rng-w3">Kompensasi gaji</label>
+                <span id="lbl-w3" class="num-val">15%</span>
               </div>
               <input type="range" id="rng-w3" min="0" max="100" step="5" value="15" />
             </div>
-            <div class="slider-row">
-              <div class="slider-label">
-                <span>C4 • Fleksibilitas (Remote/Hybrid)</span>
-                <strong id="lbl-w4">25%</strong>
+
+            <div class="slider-field">
+              <div class="slider-meta">
+                <label for="rng-w4">Fleksibilitas kerja</label>
+                <span id="lbl-w4" class="num-val">25%</span>
               </div>
               <input type="range" id="rng-w4" min="0" max="100" step="5" value="25" />
             </div>
           </div>
 
-          <hr class="divider" />
+          <div class="filter-block">
+            <h2>Syarat wajib</h2>
+            <label class="checkbox-row">
+              <input type="checkbox" id="chk-constraints" checked />
+              <span>Saring lowongan yang tidak memenuhi syarat</span>
+            </label>
 
-          <div class="section-head">
-            <span class="step-pill">SYARAT WAJIB (SLIDE 14)</span>
-            <h3>Filter Sebelum Memilih</h3>
-          </div>
+            <div class="input-grid">
+              <div class="form-field">
+                <label for="inp-min-salary">Gaji min (Jt)</label>
+                <input type="number" id="inp-min-salary" min="0" max="60" step="0.5" value="8" />
+              </div>
+              <div class="form-field">
+                <label for="inp-max-exp">Pengalaman maks</label>
+                <input type="number" id="inp-max-exp" min="0" max="12" step="1" value="1" />
+              </div>
+            </div>
 
-          <div class="two-col">
-            <div class="field">
-              <label for="inp-min-salary">Gaji Min (Juta/bln)</label>
-              <input type="number" id="inp-min-salary" min="0" max="60" step="0.5" value="8.0" />
-            </div>
-            <div class="field">
-              <label for="inp-max-exp">Maks Syarat Pengalaman (Thn)</label>
-              <input type="number" id="inp-max-exp" min="0" max="12" step="1" value="1" />
-            </div>
-          </div>
-
-          <div class="two-col">
-            <div class="field">
-              <label for="inp-min-c1">Min Skor Kejelasan (1–5)</label>
-              <input type="number" id="inp-min-c1" min="0" max="5" step="0.5" value="4.0" />
-            </div>
-            <div class="field">
-              <label for="inp-min-c2">Min Skor Tantangan (1–5)</label>
-              <input type="number" id="inp-min-c2" min="0" max="5" step="0.5" value="0.0" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Mode Kerja yang Diizinkan</label>
-            <div class="chips-check">
-              <label><input type="checkbox" class="chk-mode" value="Remote" checked /> Remote</label>
-              <label><input type="checkbox" class="chk-mode" value="Hybrid" checked /> Hybrid</label>
-              <label><input type="checkbox" class="chk-mode" value="Onsite" /> Onsite</label>
+            <div class="input-grid">
+              <div class="form-field">
+                <label for="inp-min-c1">Min kejelasan (1-5)</label>
+                <input type="number" id="inp-min-c1" min="0" max="5" step="0.5" value="4" />
+              </div>
+              <div class="form-field">
+                <label for="inp-min-c2">Min tantangan (1-5)</label>
+                <input type="number" id="inp-min-c2" min="0" max="5" step="0.5" value="0" />
+              </div>
             </div>
           </div>
 
-          <div class="field">
-            <label for="inp-skills">Keahlian / Topik Pilihan (pisahkan koma)</label>
-            <input type="text" id="inp-skills" placeholder="rust, python, sql, firebase..." />
-          </div>
+          <div class="filter-block">
+            <h2>Keahlian &amp; metode</h2>
+            <div class="form-field">
+              <label for="inp-skills">Keahlian Anda (pisahkan koma)</label>
+              <input type="text" id="inp-skills" placeholder="python, rust, sql, firebase" />
+            </div>
 
-          <div class="btn-stack">
-            <button id="btn-save-prefs" class="btn btn-primary" type="button">
-              Hitung Ulang &amp; Simpan ke Firebase
-            </button>
-            <button id="btn-reset-demo" class="btn btn-outline" type="button">
-              Reset Data ke Awal
-            </button>
+            <div class="form-field">
+              <label for="select-mode">Metode pencocokan</label>
+              <select id="select-mode">
+                <option value="hybrid_multicriteria">Hybrid Multi-Criteria (Utama)</option>
+                <option value="hybrid_classic">Hybrid Klasik (Konten + Pola)</option>
+                <option value="content_based">Content-Based (TF-IDF)</option>
+                <option value="collaborative">Collaborative (Pola Pengguna)</option>
+              </select>
+            </div>
+
+            <div class="filter-actions">
+              <button type="button" id="btn-save-prefs" class="btn btn-primary full-width">Simpan preferensi</button>
+              <button type="button" id="btn-reset-demo" class="btn btn-text full-width">Kembalikan pengaturan awal</button>
+            </div>
           </div>
         </aside>
 
-        <!-- PANEL HASIL REKOMENDASI -->
-        <div class="main-col">
-          <div class="kpi-strip">
-            <div class="kpi-card">
-              <div class="kpi-label">Waktu Komputasi Rust</div>
-              <div id="kpi-latency" class="kpi-val">—</div>
-              <div class="kpi-sub">TF-IDF + Pearson + MCRS</div>
-            </div>
-            <div class="kpi-card">
-              <div class="kpi-label">Kandidat Lolos Filter</div>
-              <div id="kpi-passed" class="kpi-val">—</div>
-              <div class="kpi-sub" id="kpi-total-sub">dari 60 lowongan katalog</div>
-            </div>
-            <div class="kpi-card warn">
-              <div class="kpi-label">Gugur Syarat Wajib</div>
-              <div id="kpi-filtered" class="kpi-val">—</div>
-              <div class="kpi-sub">Tereliminasi Hard Filter</div>
-            </div>
-            <div class="kpi-card">
-              <div class="kpi-label">Riwayat Interaksi User</div>
-              <div id="kpi-interacted" class="kpi-val">—</div>
-              <div class="kpi-sub">Petunjuk minat tersimpan</div>
+        <!-- JOB FEED -->
+        <div class="feed-column">
+          <div class="feed-toolbar">
+            <p id="results-count" class="results-count" aria-live="polite">Memuat daftar lowongan...</p>
+            <div class="feed-meta">
+              <span id="latency-readout" class="meta-text"></span>
             </div>
           </div>
 
-          <div class="banner-info" id="active-formula-banner"></div>
-
-          <div class="results-header">
-            <div>
-              <h2>Daftar Pilihan Lowongan yang Cocok</h2>
-              <p class="muted" id="results-subtitle">Diurutkan berdasarkan skor kecocokan tertinggi untuk kebutuhan pengguna aktif.</p>
-            </div>
+          <div id="feed-error" class="alert-box hidden" role="alert">
+            <p id="feed-error-text">Gagal memuat rekomendasi lowongan.</p>
+            <button type="button" id="btn-retry-feed" class="btn btn-outline btn-sm">Coba lagi</button>
           </div>
 
-          <div id="recommendations-list" class="rec-list"></div>
+          <div id="feed-loading" class="loading-stack hidden" aria-busy="true" aria-label="Sedang menghitung rekomendasi">
+            <div class="loading-row"></div>
+            <div class="loading-row"></div>
+            <div class="loading-row"></div>
+          </div>
 
-          <!-- BUKTI SLIDE 14: ITEM SKOR TINGGI YANG GUGUR SYARAT WAJIB -->
-          <div id="filtered-section" class="filtered-panel card">
-            <div class="section-head">
-              <span class="step-pill warn">BUKTI SLIDE 14 PDF DOSEN • FILTER SEBELUM MEMILIH</span>
-              <h3>Lowongan Berskor Tinggi yang Gugur karena Tidak Memenuhi Syarat Wajib</h3>
-              <p class="muted">
-                <em>"Skor total tinggi belum cukup jika item tidak memenuhi syarat pengguna."</em> — Berikut kandidat yang memiliki kecocokan konten/pola tinggi namun otomatis dieliminasi oleh filter syarat wajib Anda:
-              </p>
+          <div id="jobs-list" class="jobs-list"></div>
+
+          <!-- BUKTI SLIDE 14: DISAJIKAN RAPI DALAM ACCORDION TANPA MENGOTORI FEED -->
+          <details id="filtered-drawer" class="filtered-drawer hidden">
+            <summary class="filtered-summary">
+              <span id="filtered-summary-label">Lowongan yang tidak memenuhi syarat wajib</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div id="filtered-out-list" class="filtered-items"></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: AKTIVITAS & POLA PENGGUNA ==================== -->
+    <section id="view-activity" class="view-section" aria-labelledby="activity-heading">
+      <div class="subpage-shell">
+        <div class="subpage-head">
+          <h2 id="activity-heading">Aktivitas Lamaran &amp; Pola Pengguna</h2>
+          <p class="muted-text">Riwayat lamaran dan simpanan Anda menjadi sinyal untuk pembaruan rekomendasi serta pencocokan pola pengguna serupa (Collaborative Filtering).</p>
+        </div>
+
+        <div class="activity-grid">
+          <div class="panel-card">
+            <div class="panel-head">
+              <h3>Riwayat interaksi Anda</h3>
+              <span id="history-count" class="count-label">0 aktivitas</span>
             </div>
-            <div id="filtered-out-list" class="filtered-list"></div>
+            <div id="user-history-wrap"></div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-head">
+              <h3>Pencari kerja dengan pola serupa</h3>
+              <span class="count-label">Korelasi Pearson</span>
+            </div>
+            <div id="cf-neighbors-wrap"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 2: COLLABORATIVE FILTERING & RIWAYAT INTERAKSI -->
-    <section id="tab-cf" class="tab-panel">
-      <div class="two-panel-grid">
-        <div class="card">
-          <div class="section-head">
-            <span class="step-pill">CARA 2 • COLLABORATIVE FILTERING (SLIDE 06)</span>
-            <h2>Pengguna dengan Pola Pilihan Serupa</h2>
-            <p class="muted">
-              Dihitung menggunakan <strong>Mean-Centered Pearson Correlation</strong> pada matriks rating Pengguna × Lowongan. Tetangga dengan kemiripan positif tertinggi menyumbangkan kandidat lowongan baru.
-            </p>
-          </div>
-          <div id="cf-neighbors-table-wrap"></div>
+    <!-- ==================== VIEW 3: LAB EVALUASI AI & DATASET ==================== -->
+    <section id="view-lab" class="view-section" aria-labelledby="lab-heading">
+      <div class="subpage-shell">
+        <div class="subpage-head">
+          <h2 id="lab-heading">Evaluasi Algoritma, Simulasi Materi &amp; Integrasi Firebase</h2>
+          <p class="muted-text">Verifikasi langsung studi kasus multikriteria (Slide 09-17), hasil pengujian ablasi Precision@K dan NDCG@K, serta sinkronisasi dokumen Cloud Firestore.</p>
         </div>
 
-        <div class="card">
-          <div class="section-head">
-            <span class="step-pill">DATA PETUNJUK PENGGUNA (SLIDE 04)</span>
-            <h2>Riwayat Rating &amp; Lowongan Dibuka</h2>
-            <p class="muted">
-              Setiap kali Anda memberi rating (1–5) atau melamar lowongan pada Tab 1, data otomatis ditambahkan ke sini dan disinkronkan ke koleksi <code>interactions</code> di Firebase Firestore.
-            </p>
-          </div>
-          <div id="user-history-wrap"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 3: SIMULASI LANGSUNG SLIDE PDF DOSEN -->
-    <section id="tab-slides" class="tab-panel">
-      <div class="card">
-        <div class="section-head">
-          <span class="step-pill">VERIFIKASI LANGSUNG • SLIDE 09 s.d. 17 PDF DOSEN</span>
-          <h2>Pembuktian Matematis Studi Kasus Dina vs Bima &amp; Filter Syarat Wajib</h2>
-          <p class="muted">
-            Modul ini mengeksekusi fungsi Rust <code>ai::multicriteria::verify_lecturer_slide_case()</code> secara langsung untuk membuktikan bagaimana katalog dengan rata-rata identik menghasilkan urutan rekomendasi yang berbeda saat prioritas dan syarat wajib berubah.
-          </p>
-        </div>
-
-        <div class="slide-comparison-grid" id="slide-static-cards"></div>
-
-        <hr class="divider" />
-
-        <div class="interactive-exercise">
-          <h3>Simulasi Interaktif Soal Latihan Slide 16 &amp; Diskusi Slide 13</h3>
-          <p class="muted">Geser bobot prioritas dan batas syarat minimal untuk melihat perubahan keputusan mesin AI secara langsung:</p>
-
-          <div class="exercise-controls">
-            <div class="field">
-              <label for="sim-w-clarity">Bobot Kejelasan Peran (<span id="sim-w-clarity-lbl">50%</span>) vs Tantangan/Latihan (<span id="sim-w-practice-lbl">50%</span>)</label>
-              <input type="range" id="sim-w-clarity" min="0" max="100" step="10" value="50" />
+        <div class="lab-stack">
+          <!-- 1. Evaluasi Ablasi -->
+          <div class="panel-card">
+            <div class="panel-head">
+              <h3>Perbandingan performa 5 metode rekomendasi</h3>
+              <span id="eval-meta" class="count-label"></span>
             </div>
-            <div class="field">
-              <label for="sim-min-practice">Syarat Wajib Minimal Skor Tantangan/Latihan: <strong id="sim-min-practice-lbl">4.0</strong></label>
-              <input type="range" id="sim-min-practice" min="1" max="5" step="0.5" value="4.0" />
+            <p id="eval-desc" class="muted-text mb-md"></p>
+            <div id="eval-bars" class="eval-bars"></div>
+            <div id="eval-table-wrap" class="table-scroll"></div>
+          </div>
+
+          <!-- 2. Simulasi Studi Kasus Dosen -->
+          <div class="panel-card">
+            <div class="panel-head">
+              <h3>Simulasi studi kasus multikriteria (Dina vs Bima)</h3>
+              <span class="count-label">Verifikasi langsung Rust</span>
+            </div>
+            <div id="slide-cards" class="case-grid"></div>
+            <div class="sim-box">
+              <div class="sim-controls">
+                <div class="slider-field">
+                  <div class="slider-meta">
+                    <label for="sim-w-clarity">Bobot Kejelasan (<span id="sim-w-clarity-lbl">50%</span>) vs Tantangan (<span id="sim-w-practice-lbl">50%</span>)</label>
+                  </div>
+                  <input type="range" id="sim-w-clarity" min="0" max="100" step="10" value="50" />
+                </div>
+                <div class="slider-field">
+                  <div class="slider-meta">
+                    <label for="sim-min-practice">Syarat minimal aspek Tantangan</label>
+                    <span id="sim-min-practice-lbl" class="num-val">4.0</span>
+                  </div>
+                  <input type="range" id="sim-min-practice" min="1" max="5" step="0.5" value="4.0" />
+                </div>
+              </div>
+              <div id="sim-result" class="sim-result"></div>
             </div>
           </div>
 
-          <div id="sim-exercise-result" class="exercise-result-box"></div>
-        </div>
-      </div>
-    </section>
+          <!-- 3. Firebase & Katalog Dataset -->
+          <div class="panel-card">
+            <div class="panel-head">
+              <h3>Status Firebase &amp; katalog dataset (60 lowongan)</h3>
+              <div class="inline-actions">
+                <button type="button" id="btn-sync-firebase" class="btn btn-outline btn-sm">Sinkronkan Firestore</button>
+                <a id="lnk-emulator-ui" href="http://127.0.0.1:4040" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Buka Emulator UI</a>
+              </div>
+            </div>
+            <div id="firebase-info-grid" class="info-grid"></div>
 
-    <!-- TAB 4: EVALUASI ILMIAH AI -->
-    <section id="tab-eval" class="tab-panel">
-      <div class="card">
-        <div class="section-head">
-          <span class="step-pill">EVALUASI SISTEM REKOMENDASI (SLIDE 15)</span>
-          <h2>Pengujian Ablasi: Precision@K, Recall@K, F1@K, NDCG@K &amp; Kecepatan Rust</h2>
-          <p class="muted" id="eval-desc"></p>
+            <div class="catalog-search-row">
+              <label for="inp-catalog-search" class="sr-only">Cari dalam katalog dataset</label>
+              <input type="search" id="inp-catalog-search" placeholder="Cari judul, perusahaan, atau sumber dataset..." />
+            </div>
+            <div id="catalog-table-wrap" class="table-scroll"></div>
+          </div>
         </div>
-
-        <div id="eval-bars-chart" class="eval-chart-box"></div>
-        <div id="eval-table-wrap" class="table-responsive"></div>
-      </div>
-    </section>
-
-    <!-- TAB 5: KATALOG DATASET RIIL & KONEKSI FIREBASE -->
-    <section id="tab-catalog" class="tab-panel">
-      <div class="card mb-lg">
-        <div class="section-head">
-          <span class="step-pill">ARSITEKTUR CLOUD &amp; PERSISTENSI</span>
-          <h2>Status Integrasi Google Firebase (Auth + Cloud Firestore)</h2>
-        </div>
-        <div id="firebase-detail-box" class="fb-detail-grid"></div>
-        <div class="fb-actions-row">
-          <button id="btn-sync-firebase" class="btn btn-primary" type="button">
-            Sinkronkan Koleksi ke Cloud Firestore Sekarang
-          </button>
-          <a id="lnk-emulator-ui" href="http://127.0.0.1:4040" target="_blank" rel="noopener" class="btn btn-outline">
-            Buka Dashboard Firebase Emulator (:4040)
-          </a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="section-head">
-          <span class="step-pill">SUMBER DATA RIIL TERKURASI (60 LOWONGAN)</span>
-          <h2>Eksplorasi Katalog Lowongan Kerja &amp; Skor 4 Kriteria</h2>
-        </div>
-        <div class="catalog-filters">
-          <input type="search" id="inp-search-catalog" placeholder="Cari judul lowongan, perusahaan, atau skill (mis. rust, python, cloud)..." />
-          <select id="sel-cat-filter">
-            <option value="">Semua Kategori Bidang</option>
-          </select>
-        </div>
-        <div id="catalog-table-wrap" class="table-responsive"></div>
       </div>
     </section>
   </main>
 
-  <!-- MODAL WHITE-BOX AI INSPECTOR -->
-  <div id="inspector-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <div class="modal-header">
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>KarirAI: Sistem Rekomendasi Lowongan Kerja (Rust &amp; Google Firebase)</span>
+      <span id="footer-fb-status" class="footer-status">Memeriksa penyimpanan...</span>
+    </div>
+  </footer>
+
+  <!-- MODAL DETAIL LOWONGAN & BUKTI RUMUS AI -->
+  <div id="detail-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-sheet">
+      <div class="modal-top">
         <div>
-          <span class="step-pill">WHITE-BOX EXPLAINABLE AI • BUKTI PERHITUNGAN LENGKAP</span>
-          <h2 id="modal-job-title">Rincian Perhitungan AI</h2>
+          <h2 id="modal-title">Detail Lowongan</h2>
+          <p id="modal-subtitle" class="muted-text"></p>
         </div>
-        <button id="btn-close-modal" class="btn btn-ghost" type="button">Tutup ✕</button>
+        <button type="button" id="btn-close-modal" class="icon-btn" aria-label="Tutup jendela detail">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
-      <div id="modal-body" class="modal-body"></div>
+
+      <div class="modal-tabs" role="tablist" aria-label="Bagian detail lowongan">
+        <button type="button" class="modal-tab active" role="tab" aria-selected="true" data-mtab="overview">Ringkasan lowongan</button>
+        <button type="button" class="modal-tab" role="tab" aria-selected="false" data-mtab="math">Rincian hitungan AI</button>
+      </div>
+
+      <div id="modal-panel-overview" class="modal-content" role="tabpanel"></div>
+      <div id="modal-panel-math" class="modal-content hidden" role="tabpanel"></div>
+
+      <div class="modal-foot">
+        <button type="button" id="btn-modal-bookmark" class="btn btn-outline">Simpan lowongan</button>
+        <button type="button" id="btn-modal-apply" class="btn btn-primary">Lamar sekarang</button>
+      </div>
     </div>
   </div>
 
-  <div id="toast" class="toast hidden"></div>
-  <script src="/app.js"></script>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
 </body>
 </html>
